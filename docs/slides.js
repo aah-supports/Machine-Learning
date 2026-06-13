@@ -4,8 +4,21 @@ const nextButton = document.querySelector("#nextSlide");
 const currentSlide = document.querySelector("#currentSlide");
 const totalSlides = document.querySelector("#totalSlides");
 const progressBar = document.querySelector("#progressBar");
+const menuToggle = document.querySelector("#menuToggle");
+const menuClose = document.querySelector("#menuClose");
+const slideMenu = document.querySelector("#slideMenu");
+const menuBackdrop = document.querySelector("#menuBackdrop");
+const menuSections = document.querySelector("#menuSections");
 
 let activeIndex = 0;
+let menuButtons = [];
+
+const courseSections = [
+  { title: "Introduction", start: 0, end: 3 },
+  { title: "Régression linéaire", start: 4, end: 13 },
+  { title: "KNN", start: 14, end: 26 },
+  { title: "Exercices", start: 27, end: 27 },
+];
 
 function clampIndex(index) {
   return Math.max(0, Math.min(index, slides.length - 1));
@@ -16,6 +29,12 @@ function showSlide(index, updateHash = true) {
 
   slides.forEach((slide, slideIndex) => {
     slide.classList.toggle("active", slideIndex === activeIndex);
+  });
+
+  menuButtons.forEach((button, buttonIndex) => {
+    const isActive = buttonIndex === activeIndex;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-current", isActive ? "true" : "false");
   });
 
   currentSlide.textContent = String(activeIndex + 1);
@@ -30,6 +49,70 @@ function showSlide(index, updateHash = true) {
   }
 }
 
+function openMenu() {
+  slideMenu.classList.add("open");
+  menuBackdrop.classList.add("open");
+  slideMenu.setAttribute("aria-hidden", "false");
+  menuToggle.setAttribute("aria-expanded", "true");
+}
+
+function closeMenu() {
+  slideMenu.classList.remove("open");
+  menuBackdrop.classList.remove("open");
+  slideMenu.setAttribute("aria-hidden", "true");
+  menuToggle.setAttribute("aria-expanded", "false");
+}
+
+function toggleMenu() {
+  if (slideMenu.classList.contains("open")) {
+    closeMenu();
+    return;
+  }
+
+  openMenu();
+}
+
+function buildMenu() {
+  menuSections.innerHTML = "";
+  menuButtons = [];
+
+  courseSections.forEach((section) => {
+    const group = document.createElement("section");
+    group.className = "menu-group";
+
+    const heading = document.createElement("h3");
+    heading.textContent = section.title;
+    group.append(heading);
+
+    const list = document.createElement("ol");
+
+    slides.slice(section.start, section.end + 1).forEach((slide, offset) => {
+      const slideIndex = section.start + offset;
+      const item = document.createElement("li");
+      const button = document.createElement("button");
+      const number = document.createElement("span");
+      const label = document.createElement("strong");
+
+      number.textContent = String(slideIndex + 1).padStart(2, "0");
+      label.textContent = slide.dataset.title || `Slide ${slideIndex + 1}`;
+
+      button.type = "button";
+      button.append(number, label);
+      button.addEventListener("click", () => {
+        showSlide(slideIndex);
+        closeMenu();
+      });
+
+      item.append(button);
+      list.append(item);
+      menuButtons[slideIndex] = button;
+    });
+
+    group.append(list);
+    menuSections.append(group);
+  });
+}
+
 function indexFromHash() {
   const match = window.location.hash.match(/^#slide-(\d+)$/);
   if (!match) return 0;
@@ -38,8 +121,20 @@ function indexFromHash() {
 
 previousButton.addEventListener("click", () => showSlide(activeIndex - 1));
 nextButton.addEventListener("click", () => showSlide(activeIndex + 1));
+menuToggle.addEventListener("click", toggleMenu);
+menuClose.addEventListener("click", closeMenu);
+menuBackdrop.addEventListener("click", closeMenu);
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeMenu();
+  }
+
+  if (event.key.toLowerCase() === "m") {
+    event.preventDefault();
+    toggleMenu();
+  }
+
   if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
     event.preventDefault();
     showSlide(activeIndex + 1);
@@ -63,4 +158,5 @@ document.addEventListener("keydown", (event) => {
 
 window.addEventListener("hashchange", () => showSlide(indexFromHash(), false));
 
+buildMenu();
 showSlide(indexFromHash(), false);

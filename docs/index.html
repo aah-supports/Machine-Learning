@@ -23,11 +23,26 @@
         <span>Introduction Machine Learning</span>
       </a>
       <nav class="controls" aria-label="Contrôles">
+        <button class="menu-button" id="menuToggle" type="button" aria-expanded="false" aria-controls="slideMenu">
+          Menu
+        </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
         <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">28</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
+
+    <aside class="slide-menu" id="slideMenu" aria-label="Menu du cours" aria-hidden="true">
+      <div class="slide-menu-header">
+        <div>
+          <p class="menu-kicker">Plan du cours</p>
+          <h2>Slides</h2>
+        </div>
+        <button class="icon-button" id="menuClose" type="button" aria-label="Fermer le menu">×</button>
+      </div>
+      <div class="menu-sections" id="menuSections"></div>
+    </aside>
+    <button class="menu-backdrop" id="menuBackdrop" type="button" aria-label="Fermer le menu"></button>
 
     <main class="deck" aria-live="polite">
       <section class="slide hero active" id="slide-1" data-title="Introduction">

@@ -110,7 +110,8 @@ button {
 }
 
 .icon-button,
-.button {
+.button,
+.menu-button {
   border: 1px solid var(--border);
   border-radius: 999px;
   background: rgba(24, 24, 27, 0.65);
@@ -127,8 +128,18 @@ button {
 
 .icon-button:hover,
 .button:hover,
+.menu-button:hover,
 .link-panel:hover {
   border-color: rgba(16, 185, 129, 0.7);
+}
+
+.menu-button {
+  min-height: 2.5rem;
+  padding: 0 0.95rem;
+  color: #d4d4d8;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 800;
 }
 
 .counter {
@@ -136,6 +147,134 @@ button {
   color: var(--muted);
   font-size: 0.85rem;
   text-align: center;
+}
+
+.slide-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  width: min(420px, calc(100vw - 1.5rem));
+  height: 100svh;
+  border-left: 1px solid rgba(39, 39, 42, 0.9);
+  background: rgba(9, 9, 11, 0.94);
+  box-shadow: -28px 0 70px -45px rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(24px);
+  transform: translateX(105%);
+  transition: transform 220ms ease;
+}
+
+.slide-menu.open {
+  transform: translateX(0);
+}
+
+.slide-menu-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-bottom: 1px solid rgba(39, 39, 42, 0.82);
+}
+
+.slide-menu-header h2 {
+  font-size: 1.8rem;
+  letter-spacing: 0;
+}
+
+.menu-kicker {
+  margin-bottom: 0.25rem;
+  color: var(--emerald-light);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.menu-sections {
+  display: grid;
+  gap: 1rem;
+  overflow: auto;
+  padding: 1rem;
+}
+
+.menu-group {
+  border: 1px solid rgba(39, 39, 42, 0.82);
+  border-radius: 1rem;
+  background: var(--surface-soft);
+  padding: 0.85rem;
+}
+
+.menu-group h3 {
+  margin: 0 0 0.65rem;
+  color: var(--emerald-light);
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.menu-group ol {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-group button {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 2.35rem 1fr;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.62rem 0.7rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.menu-group button:hover,
+.menu-group button.active {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.menu-group button span {
+  color: var(--subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+}
+
+.menu-group button strong {
+  overflow: hidden;
+  color: #e4e4e7;
+  font-size: 0.95rem;
+  font-weight: 750;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.menu-group button.active strong,
+.menu-group button.active span {
+  color: var(--emerald-light);
+}
+
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: none;
+  border: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.menu-backdrop.open {
+  display: block;
 }
 
 .deck {
