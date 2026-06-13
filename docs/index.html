@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Introduction au Machine Learning</title>
+    <meta
+      name="description"
+      content="Slides d'introduction au Machine Learning, régression linéaire, train/test split et suivi de modèle."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar" aria-label="Navigation des slides">
+      <a class="brand" href="#slide-1" aria-label="Retour à la première slide">
+        <span class="brand-mark">ML</span>
+        <span>Introduction Machine Learning</span>
+      </a>
+      <nav class="controls" aria-label="Contrôles">
+        <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">28</span></span>
+        <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
+      </nav>
+    </header>
+
+    <main class="deck" aria-live="polite">
+      <section class="slide hero active" id="slide-1" data-title="Introduction">
+        <div class="slide-inner hero-grid">
+          <div>
+            <p class="pill">Cours ML · AIA 1er</p>
+            <h1>Introduction au Machine Learning</h1>
+            <p class="lead">
+              Comprendre ce qu'un modèle apprend, comment il prédit, comment on l'évalue
+              et pourquoi il faut le surveiller dans le temps.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="../introduction.md">Cours Markdown</a>
+              <a class="button ghost" href="../notebooks/01_regression_lineaire_enonce.ipynb">Notebook 01</a>
+            </div>
+          </div>
+          <div class="terminal-card" aria-label="Exemple de prédiction">
+            <div class="terminal-dots"><span></span><span></span><span></span></div>
+            <pre><code>from sklearn.linear_model import LinearRegression
+
+modele = LinearRegression()
+modele.fit(X_train, y_train)
+
+nouveau_logement = pd.DataFrame({"surface": [75]})
+prix = modele.predict(nouveau_logement)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-2" data-title="ML vs classique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Idée clé</p>
+            <h2>Programmation classique vs Machine Learning</h2>
+            <p>
+              En programmation classique, on écrit les règles. En Machine Learning, on fournit
+              des exemples et le modèle apprend une relation à partir des données.
+            </p>
+          </div>
+          <div class="compare-grid">
+            <article class="panel">
+              <h3>Classique</h3>
+              <p class="flow">Règles + Données → Programme → Résultat</p>
+              <code>if temperature &gt; 30: print("Chaud")</code>
+            </article>
+            <article class="panel accent">
+              <h3>Machine Learning</h3>
+              <p class="flow">Données + Réponses → Algorithme → Modèle</p>
+              <code>modele.fit(X_train, y_train)</code>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-3" data-title="Vocabulaire">
+        <div class="slide-inner">
+          <p class="pill">Vocabulaire</p>
+          <h2>Les mots à maîtriser</h2>
+          <div class="cards three">
+            <article class="panel">
+              <h3>Feature</h3>
+              <p>Variable utilisée pour prédire.</p>
+              <strong>Surface, pièces, ville</strong>
+            </article>
+            <article class="panel">
+              <h3>Label</h3>
+              <p>Valeur que le modèle doit prédire.</p>
+              <strong>Prix du logement</strong>
+            </article>
+            <article class="panel">
+              <h3>Modèle</h3>
+              <p>Objet mathématique appris à partir des données.</p>
+              <strong>Régression, KNN, arbre</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-4" data-title="Supervisé">
+        <div class="slide-inner">
+          <p class="pill">Familles ML</p>
+          <h2>Apprentissage supervisé</h2>
+          <p class="lead">On possède les données et les bonnes réponses.</p>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr><th>Surface</th><th>Pièces</th><th>Prix</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>50</td><td>2</td><td>200 000 €</td></tr>
+                <tr><td>80</td><td>3</td><td>320 000 €</td></tr>
+                <tr><td>100</td><td>4</td><td>400 000 €</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">Le modèle apprend la relation entre les caractéristiques et la réponse.</p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-5" data-title="Régression">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Premier modèle</p>
+            <h2>Régression linéaire</h2>
+            <p>
+              La régression linéaire cherche une droite qui explique au mieux la relation
+              entre une entrée et une valeur numérique.
+            </p>
+          </div>
+          <div class="formula-card">
+            <span>y = ax + b</span>
+            <p>prix = coefficient × surface + intercept</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-6" data-title="Outils">
+        <div class="slide-inner">
+          <p class="pill">Boîte à outils</p>
+          <h2>Modules Python utilisés</h2>
+          <div class="cards three">
+            <article class="panel">
+              <h3>pandas</h3>
+              <p>Manipuler les données sous forme de tableau.</p>
+              <code>import pandas as pd</code>
+            </article>
+            <article class="panel accent">
+              <h3>scikit-learn</h3>
+              <p>Découper, entraîner et évaluer les modèles.</p>
+              <code>train_test_split · LinearRegression</code>
+            </article>
+            <article class="panel">
+              <h3>matplotlib</h3>
+              <p>Visualiser les points et la droite apprise.</p>
+              <code>import matplotlib.pyplot as plt</code>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-7" data-title="Apprendre">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Point important</p>
+            <h2>“Apprendre” n'est pas magique</h2>
+            <p>
+              Pour une régression linéaire classique, le modèle ne lance pas un réseau de
+              neurones. Il calcule les paramètres de la droite.
+            </p>
+          </div>
+          <div class="panel large">
+            <h3>Ce que calcule le modèle</h3>
+            <pre><code>coefficient = covariance(surface, prix) / variance(surface)
+
+intercept = moyenne(prix)
+          - coefficient × moyenne(surface)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-8" data-title="fit">
+        <div class="slide-inner">
+          <p class="pill">Entraînement</p>
+          <h2>Que fait <code>fit(X_train, y_train)</code> ?</h2>
+          <div class="pipeline">
+            <div><strong>X</strong><span>features</span></div>
+            <div><strong>y</strong><span>label</span></div>
+            <div><strong>split</strong><span>train / test</span></div>
+            <div><strong>fit</strong><span>apprentissage</span></div>
+            <div><strong>modèle</strong><span>droite apprise</span></div>
+          </div>
+          <pre class="code-block"><code>X = data[["surface"]]
+y = data["prix"]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+modele.fit(X_train, y_train)</code></pre>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-9" data-title="predict">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Prédiction</p>
+            <h2>Que fait <code>predict(...)</code> ?</h2>
+            <p>
+              Le modèle utilise la relation apprise pour estimer une valeur sur une nouvelle donnée.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>nouveau_logement = pd.DataFrame({
+    "surface": [75]
+})
+
+prix = modele.predict(nouveau_logement)</code></pre>
+            <p class="result">75 m² → environ 300 000 €</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-10" data-title="Train test">
+        <div class="slide-inner">
+          <p class="pill">Évaluation</p>
+          <h2>Train / test split</h2>
+          <p class="lead">
+            Après l'entraînement, le train ne suffit plus à juger le modèle : il a déjà vu ces données.
+          </p>
+          <div class="split">
+            <article>
+              <span>80%</span>
+              <h3>Train</h3>
+              <p>sert à apprendre</p>
+            </article>
+            <article>
+              <span>20%</span>
+              <h3>Test</h3>
+              <p>sert à vérifier sur du jamais vu</p>
+            </article>
+          </div>
+          <p class="note">
+            80/20 est une convention pratique : assez de données pour apprendre, assez de données
+            jamais vues pour évaluer. Ce n'est pas une règle fixe.
+          </p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-11" data-title="MAE">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mesure d'erreur</p>
+            <h2>MAE : Erreur Absolue Moyenne</h2>
+            <p>
+              La MAE test indique de combien le modèle se trompe en moyenne sur des données
+              qu'il n'a pas utilisées pour apprendre.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>predictions_test = modele.predict(X_test)
+
+mae_test = mean_absolute_error(
+    y_test,
+    predictions_test
+)</code></pre>
+            <p class="result">Le modèle se trompe en moyenne de 10 000 €.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-12" data-title="Réalité">
+        <div class="slide-inner">
+          <p class="pill">Après le test</p>
+          <h2>Le modèle peut se décaler de la réalité</h2>
+          <div class="cards three">
+            <article class="panel"><h3>Marché</h3><p>Prix, taux, demande ou quartier changent.</p></article>
+            <article class="panel"><h3>Données</h3><p>Les logements récents ne ressemblent plus au dataset initial.</p></article>
+            <article class="panel"><h3>Erreur</h3><p>La MAE réelle devient plus grande que la MAE test.</p></article>
+          </div>
+          <p class="note">Une prédiction seule ne prouve rien : il faut la comparer à une vraie valeur.</p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-13" data-title="Monitoring">
+        <div class="slide-inner">
+          <p class="pill">Automatisation</p>
+          <h2>Surveiller automatiquement le modèle</h2>
+          <div class="monitor-flow">
+            <span>Prédiction</span>
+            <span>Stockage</span>
+            <span>Vrai prix</span>
+            <span>Erreur</span>
+            <span>MAE récente</span>
+            <span>Alerte</span>
+          </div>
+          <pre class="code-block"><code>if mae_recente &lt; 1.5 * mae_test:
+    decision = "Modèle acceptable"
+elif mae_recente &lt; 3 * mae_test:
+    decision = "Modèle à surveiller"
+else:
+    decision = "Modèle à réentraîner"</code></pre>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-14" data-title="Justification">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Pourquoi faire ?</p>
+            <h2>Justifier l'utilisation d'un modèle</h2>
+            <p>
+              Un modèle n'est pas une vérité définitive. C'est une estimation rapide, cohérente
+              et mesurable à partir des données historiques.
+            </p>
+          </div>
+          <div class="panel large">
+            <ul class="checklist">
+              <li>Estimation rapide</li>
+              <li>Même logique pour tous les logements</li>
+              <li>Erreur moyenne connue</li>
+              <li>Amélioration possible avec de nouvelles données</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-15" data-title="KNN">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Nouvelle partie</p>
+            <h2>KNN : raisonner par voisinage</h2>
+            <p>
+              La question centrale de KNN est concrète : à quels exemples déjà connus
+              ma nouvelle donnée ressemble-t-elle le plus ?
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Nouvelle fleur
+  ↓
+chercher les 5 fleurs les plus proches
+  ↓
+voter pour l'espèce la plus fréquente</code></pre>
+            <p class="result">KNN = K plus proches voisins</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-16" data-title="Intuition">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Intuition</p>
+            <h2>Un algorithme proche du bon sens</h2>
+            <p>
+              KNN part d'une idée simple : les choses qui se ressemblent ont tendance
+              à appartenir à la même catégorie ou à avoir un comportement proche.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Chats :  ● ● ● ● ●
+              ●
+              ?
+
+Chiens :             ▲ ▲ ▲ ▲ ▲</code></pre>
+            <p class="note">Si le point ? est au milieu des chats, il est probablement un chat.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-17" data-title="Espace">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Maths</p>
+            <h2>Chaque ligne devient un vecteur</h2>
+            <p>
+              KNN place les individus dans un espace de données. Chaque variable devient
+              une dimension de cet espace.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>x = (x1, x2, ..., xn)
+
+logement = (
+  surface,
+  pieces,
+  revenu_quartier
+)
+
+x = (76, 3, 49000)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-18" data-title="Hypothèse">
+        <div class="slide-inner">
+          <p class="pill">Hypothèse</p>
+          <h2>Régularité locale</h2>
+          <p class="lead">
+            KNN suppose que deux points proches dans l'espace des variables ont probablement
+            des labels proches.
+          </p>
+          <div class="cards three">
+            <article class="panel">
+              <h3>Logements proches</h3>
+              <p>Surfaces, pièces et quartiers proches.</p>
+            </article>
+            <article class="panel accent">
+              <h3>Comportement proche</h3>
+              <p>Prix probablement proches.</p>
+            </article>
+            <article class="panel">
+              <h3>Risque</h3>
+              <p>Si des voisins ont des labels très différents, KNN devient fragile.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-19" data-title="Proche">
+        <div class="slide-inner">
+          <p class="pill">Question clé</p>
+          <h2>Que veut dire “proche” ?</h2>
+          <p class="lead">
+            KNN transforme une intuition en calcul : deux lignes sont proches si leurs variables
+            ont des valeurs proches.
+          </p>
+          <div class="table-card">
+            <table>
+              <thead><tr><th>Logement</th><th>Surface</th><th>Pièces</th><th>Lecture</th></tr></thead>
+              <tbody>
+                <tr><td>A</td><td>76</td><td>3</td><td>logement à prédire</td></tr>
+                <tr><td>B</td><td>75</td><td>3</td><td>très proche</td></tr>
+                <tr><td>C</td><td>130</td><td>6</td><td>plus éloigné</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-20" data-title="Distance">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Distance</p>
+            <h2>La proximité devient un nombre</h2>
+            <p>
+              KNN calcule une distance entre la nouvelle ligne et chaque ligne du train.
+              Plus la distance est petite, plus le voisin est proche.
+            </p>
+          </div>
+          <div class="formula-card">
+            <span>d</span>
+            <p>√((surface₁ - surface₂)² + (pièces₁ - pièces₂)²)</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-21" data-title="Classification">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Classification</p>
+            <h2>KNN vote</h2>
+            <p>
+              Pour prédire une catégorie, KNN regarde les classes des voisins les plus proches.
+              La classe majoritaire gagne.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>5 voisins :
+versicolor
+versicolor
+virginica
+versicolor
+virginica
+
+résultat = versicolor</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-22" data-title="Régression KNN">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Régression</p>
+            <h2>KNN fait une moyenne</h2>
+            <p>
+              Pour prédire une valeur numérique, KNN peut prendre la moyenne des labels
+              des voisins les plus proches.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>3 voisins :
+250 000 €
+270 000 €
+310 000 €
+
+prédiction = 276 666 €</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-23" data-title="Non paramétrique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Nature du modèle</p>
+            <h2>KNN ne construit pas une équation</h2>
+            <p>
+              Une régression linéaire produit une formule. KNN garde les exemples
+              et raisonne par comparaison avec les voisins.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Régression linéaire :
+y = ax + b
+
+KNN :
+chercher les cas similaires
+puis voter ou moyenner</code></pre>
+            <p class="note">On parle de méthode non paramétrique.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-24" data-title="Normalisation">
+        <div class="slide-inner">
+          <p class="pill">Préparation</p>
+          <h2>Normalisation : pourquoi ?</h2>
+          <p class="lead">
+            Certains modèles utilisent des distances ou des coefficients. Une colonne avec de grands
+            nombres peut dominer les calculs.
+          </p>
+          <div class="table-card">
+            <table>
+              <thead><tr><th>Variable</th><th>Écart brut</th></tr></thead>
+              <tbody>
+                <tr><td>surface</td><td>5</td></tr>
+                <tr><td>pièces</td><td>1</td></tr>
+                <tr><td>revenu_quartier</td><td>15 000</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-25" data-title="Scaler">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Règle importante</p>
+            <h2>Normaliser sans tricher</h2>
+            <p>
+              Le scaler apprend la moyenne et l'écart-type sur le train. Le test doit rester
+              une donnée non vue.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>scaler = StandardScaler()
+
+X_train_norm = scaler.fit_transform(X_train)
+X_test_norm = scaler.transform(X_test)</code></pre>
+            <p class="note">Jamais <code>fit_transform</code> sur le test.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-26" data-title="Choisir k">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Recette</p>
+            <h2>Comment choisir k ?</h2>
+            <p>
+              k est la taille du voisinage, pas le nombre de critères. On teste plusieurs valeurs,
+              puis on garde une valeur qui fonctionne bien sur validation ou test.
+            </p>
+            <div class="cards three">
+              <article class="panel">
+                <h3>k petit</h3>
+                <p>Très local, sensible au bruit.</p>
+              </article>
+              <article class="panel accent">
+                <h3>k moyen</h3>
+                <p>Compromis souvent utile.</p>
+              </article>
+              <article class="panel">
+                <h3>k grand</h3>
+                <p>Plus lissé, parfois trop général.</p>
+              </article>
+            </div>
+          </div>
+          <div class="panel large">
+            <pre><code>for k in [1, 3, 5, 7, 9, 11]:
+    modele = KNeighborsClassifier(
+        n_neighbors=k
+    )
+    modele.fit(X_train, y_train)
+    print(k, modele.score(X_test, y_test))</code></pre>
+            <p class="note">En classification binaire, les k impairs limitent les égalités de vote.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-27" data-title="Mémoire vectorielle">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Ouverture</p>
+            <h2>Une idée encore très actuelle</h2>
+            <p>
+              Les embeddings, la recherche vectorielle et le RAG utilisent encore cette idée :
+              les objets qui se ressemblent sont proches dans un espace mathématique.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>question utilisateur
+  ↓
+vecteur embedding
+  ↓
+documents les plus proches
+  ↓
+réponse augmentée</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-28" data-title="Exercices">
+        <div class="slide-inner">
+          <p class="pill">Mise en pratique</p>
+          <h2>Exercices notebooks</h2>
+          <div class="cards three">
+            <a class="panel link-panel" href="../notebooks/01_regression_lineaire_enonce.ipynb">
+              <h3>01 · Régression linéaire</h3>
+              <p>split, fit, predict, MAE test.</p>
+            </a>
+            <a class="panel link-panel" href="../notebooks/02_train_test_split_enonce.ipynb">
+              <h3>02 · Train / test split</h3>
+              <p>score, MAE, suivi de modèle.</p>
+            </a>
+            <a class="panel link-panel" href="../notebooks/03_knn_iris_enonce.ipynb">
+              <h3>03 · KNN Iris</h3>
+              <p>voisins, distances et vote.</p>
+            </a>
+            <a class="panel link-panel" href="../notebooks/04_knn_k_normalisation_enonce.ipynb">
+              <h3>04 · k et scaler</h3>
+              <p>recette pour k et normalisation.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="progress" aria-hidden="true">
+      <span id="progressBar"></span>
+    </footer>
+
+    <script src="slides.js"></script>
+  </body>
+</html>

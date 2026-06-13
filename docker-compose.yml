@@ -1,0 +1,12 @@
+services:
+  jupyterlab:
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter
+    container_name: ml-jupyterlab
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./notebooks:/workspace
+    working_dir: /workspace
+    restart: unless-stopped
