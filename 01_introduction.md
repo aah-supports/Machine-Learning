@@ -559,9 +559,9 @@ Exercice pratique :
 - [Énoncé : nettoyage de données](notebooks/00_nettoyage_donnees_enonce.ipynb)
 - [Énoncé : régression linéaire](notebooks/01_regression_lineaire_enonce.ipynb)
 - [Énoncé : train / test split](notebooks/02_train_test_split_enonce.ipynb)
-- [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
 - [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
 - [Énoncé : KNN, k et normalisation](notebooks/04_knn_k_normalisation_enonce.ipynb)
+- [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
 
 ---
 

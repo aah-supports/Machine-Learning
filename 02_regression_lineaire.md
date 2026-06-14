@@ -919,9 +919,9 @@ La régression linéaire permet de comprendre les bases :
 - erreur ;
 - interprétation du modèle.
 
-Le chapitre suivant peut introduire deux notions importantes :
+Le chapitre suivant peut introduire une autre famille de modèles :
 
-1. **Classification** : prédire une catégorie plutôt qu'une valeur numérique.
-2. **Probabilité** : prédire une chance d'appartenir à une classe.
+1. **KNN** : raisonner par voisinage ;
+2. **classification** : prédire une catégorie plutôt qu'une valeur numérique.
 
-La suite logique est donc la **régression logistique**.
+La suite logique est donc **KNN**.

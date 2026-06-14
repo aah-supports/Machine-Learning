@@ -1,4 +1,4 @@
-# Chapitre 5 : KNN, voisins et normalisation
+# Chapitre 4 : KNN, voisins et normalisation
 
 ## 1. Objectif du chapitre
 
@@ -8,7 +8,6 @@ Dans les chapitres précédents, nous avons vu :
 - comment séparer train et test ;
 - comment entraîner un modèle ;
 - comment mesurer une erreur ou un score sur des données non vues.
-- comment faire une première classification avec la régression logistique.
 
 Dans ce chapitre, on étudie un nouveau modèle : **KNN**.
 

@@ -1,4 +1,4 @@
-# Chapitre 4 : Régression logistique
+# Chapitre 5 : Régression logistique
 
 ## 1. Objectif du chapitre
 

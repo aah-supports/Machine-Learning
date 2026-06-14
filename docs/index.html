@@ -566,107 +566,6 @@ else:
         </div>
       </section>
 
-      <section class="slide" id="slide-reglog-intro" data-title="Régression logistique">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Classification</p>
-            <h2>Régression logistique : prédire une classe</h2>
-            <p>
-              Après une valeur numérique, on veut maintenant prédire une réponse binaire :
-              un étudiant valide ou ne valide pas son examen.
-            </p>
-          </div>
-          <div class="table-card">
-            <table>
-              <thead><tr><th>Révision</th><th>Présence</th><th>Projet</th><th>Valide</th></tr></thead>
-              <tbody>
-                <tr><td>2 h</td><td>45%</td><td>non</td><td>0</td></tr>
-                <tr><td>8 h</td><td>75%</td><td>oui</td><td>1</td></tr>
-                <tr><td>15 h</td><td>92%</td><td>oui</td><td>1</td></tr>
-              </tbody>
-            </table>
-            <p class="note">Le label n'est plus un prix : c'est une classe 0 ou 1.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-proba" data-title="Probabilité">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Idée clé</p>
-            <h2>Le modèle prédit une probabilité</h2>
-            <p>
-              Une régression linéaire peut produire des valeurs comme -0.2 ou 1.4.
-              La régression logistique transforme le score en probabilité entre 0 et 1.
-            </p>
-          </div>
-          <div class="formula-card">
-            <span>0.82</span>
-            <p>82% de probabilité que l'étudiant valide</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-seuil" data-title="Seuil">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Décision</p>
-            <h2>Transformer une probabilité en classe</h2>
-            <p>
-              On choisit un seuil. Avec le seuil courant de 0.5, une probabilité supérieure
-              ou égale à 0.5 devient la classe 1.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>proba_valider = 0.82
-
-if proba_valider &gt;= 0.5:
-    prediction = 1
-else:
-    prediction = 0</code></pre>
-            <p class="note">Le seuil peut être adapté selon le contexte métier.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-evaluer" data-title="Évaluer">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Évaluation</p>
-            <h2>Accuracy et matrice de confusion</h2>
-            <p>
-              L'accuracy donne le pourcentage de bonnes réponses. La matrice de confusion
-              montre le détail des erreurs : faux positifs et faux négatifs.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>modele = LogisticRegression()
-modele.fit(X_train, y_train)
-
-predictions = modele.predict(X_test)
-accuracy_score(y_test, predictions)
-confusion_matrix(y_test, predictions)</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-exo-reglog" data-title="Exercice logistique">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Mise en pratique</p>
-            <h2>Exercice : prédire la validation d'un étudiant</h2>
-            <p>
-              Vous utilisez la régression logistique pour prédire une classe, lire une probabilité
-              et interpréter la matrice de confusion.
-            </p>
-          </div>
-          <div class="panel large exercise-links">
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le notebook</a>
-            <p class="note">On travaille ici sur un problème binaire : valide ou non.</p>
-          </div>
-        </div>
-      </section>
-
       <section class="slide" id="slide-15" data-title="KNN">
         <div class="slide-inner two-cols">
           <div>
@@ -984,6 +883,107 @@ réponse augmentée</code></pre>
         </div>
       </section>
 
+      <section class="slide" id="slide-reglog-intro" data-title="Régression logistique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Classification</p>
+            <h2>Régression logistique : prédire une classe</h2>
+            <p>
+              Après le raisonnement par voisinage de KNN, on étudie une autre méthode de
+              classification binaire : un étudiant valide ou ne valide pas son examen.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead><tr><th>Révision</th><th>Présence</th><th>Projet</th><th>Valide</th></tr></thead>
+              <tbody>
+                <tr><td>2 h</td><td>45%</td><td>non</td><td>0</td></tr>
+                <tr><td>8 h</td><td>75%</td><td>oui</td><td>1</td></tr>
+                <tr><td>15 h</td><td>92%</td><td>oui</td><td>1</td></tr>
+              </tbody>
+            </table>
+            <p class="note">Le label n'est plus un prix : c'est une classe 0 ou 1.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-proba" data-title="Probabilité">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Idée clé</p>
+            <h2>Le modèle prédit une probabilité</h2>
+            <p>
+              Une régression linéaire peut produire des valeurs comme -0.2 ou 1.4.
+              La régression logistique transforme le score en probabilité entre 0 et 1.
+            </p>
+          </div>
+          <div class="formula-card">
+            <span>0.82</span>
+            <p>82% de probabilité que l'étudiant valide</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-seuil" data-title="Seuil">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Décision</p>
+            <h2>Transformer une probabilité en classe</h2>
+            <p>
+              On choisit un seuil. Avec le seuil courant de 0.5, une probabilité supérieure
+              ou égale à 0.5 devient la classe 1.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>proba_valider = 0.82
+
+if proba_valider &gt;= 0.5:
+    prediction = 1
+else:
+    prediction = 0</code></pre>
+            <p class="note">Le seuil peut être adapté selon le contexte métier.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-evaluer" data-title="Évaluer">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Évaluation</p>
+            <h2>Accuracy et matrice de confusion</h2>
+            <p>
+              L'accuracy donne le pourcentage de bonnes réponses. La matrice de confusion
+              montre le détail des erreurs : faux positifs et faux négatifs.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>modele = LogisticRegression()
+modele.fit(X_train, y_train)
+
+predictions = modele.predict(X_test)
+accuracy_score(y_test, predictions)
+confusion_matrix(y_test, predictions)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-exo-reglog" data-title="Exercice logistique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : prédire la validation d'un étudiant</h2>
+            <p>
+              Vous utilisez la régression logistique pour prédire une classe, lire une probabilité
+              et interpréter la matrice de confusion.
+            </p>
+          </div>
+          <div class="panel large exercise-links">
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le notebook</a>
+            <p class="note">On travaille ici sur un problème binaire : valide ou non.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" id="slide-28" data-title="Exercices">
         <div class="slide-inner">
           <p class="pill">Mise en pratique</p>
@@ -1001,17 +1001,17 @@ réponse augmentée</code></pre>
               <h3>02 · Train / test split</h3>
               <p>score, MAE, suivi de modèle.</p>
             </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
-              <h3>03 · Régression logistique</h3>
-              <p>probabilité, seuil, matrice de confusion.</p>
-            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">
-              <h3>04 · KNN Iris</h3>
+              <h3>03 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">
-              <h3>05 · k et scaler</h3>
+              <h3>04 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
+            </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
+              <h3>05 · Régression logistique</h3>
+              <p>probabilité, seuil, matrice de confusion.</p>
             </a>
           </div>
         </div>

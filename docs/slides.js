@@ -16,9 +16,9 @@ let menuButtons = [];
 const courseSections = [
   { title: "Introduction", start: 0, end: 6 },
   { title: "Préparer les données", start: 7, end: 10 },
-  { title: "Régression linéaire", start: 11, end: 22 },
-  { title: "Régression logistique", start: 23, end: 27 },
-  { title: "KNN", start: 28, end: 40 },
+  { title: "Régression linéaire", start: 11, end: 21 },
+  { title: "KNN", start: 22, end: 35 },
+  { title: "Régression logistique", start: 36, end: 40 },
   { title: "Exercices", start: 41, end: 41 },
 ];
 
