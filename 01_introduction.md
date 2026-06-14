@@ -70,20 +70,29 @@ Nous allons apprendre les bases :
 
 L'IA n'est pas née avec ChatGPT.
 
-Quelques dates clés :
+Quelques dates clés, avec le contexte :
 
-| Date | Repère |
-| ---- | ------ |
-| 1950 | Alan Turing propose une question fondatrice : une machine peut-elle imiter une conversation humaine ? |
-| 1956 | Conférence de Dartmouth : le terme **Intelligence Artificielle** est popularisé. |
-| 1958 | Frank Rosenblatt présente le **perceptron**, un ancêtre des réseaux de neurones. |
-| Années 1970-1980 | Développement des **systèmes experts**, fondés sur des règles écrites par des spécialistes. |
-| 1986 | Retour important des réseaux de neurones avec la diffusion de la **rétropropagation**. |
-| Années 1990-2000 | Essor du **Machine Learning statistique** : arbres, SVM, forêts aléatoires, méthodes d'évaluation. |
-| 2012 | AlexNet marque un tournant du **deep learning** en vision par ordinateur. |
-| 2017 | Architecture **Transformer**, base technique de nombreux grands modèles de langage. |
-| 2020 | GPT-3 rend visibles les capacités des grands modèles de langage à grande échelle. |
-| 2022 | ChatGPT popularise massivement les usages des LLM auprès du grand public. |
+| Date | Repère | Contexte rapide |
+| ---- | ------ | --------------- |
+| 1950 | Alan Turing publie une question fondatrice. | Il ne demande pas seulement si une machine "pense", mais si elle peut imiter une conversation humaine de manière crédible. |
+| 1956 | Conférence de Dartmouth. | Le terme **Intelligence Artificielle** est popularisé. L'IA devient un champ de recherche identifié. |
+| 1958 | Frank Rosenblatt présente le **perceptron**. | C'est un ancêtre des réseaux de neurones : une machine apprend à séparer des exemples simples. |
+| Années 1970-1980 | Développement des **systèmes experts**. | L'IA repose surtout sur des règles écrites par des spécialistes : "si symptôme A et symptôme B, alors diagnostic C". |
+| 1986 | Diffusion de la **rétropropagation**. | Les réseaux de neurones redeviennent intéressants, car on sait mieux ajuster leurs paramètres à partir des erreurs. |
+| Années 1990-2000 | Essor du **Machine Learning statistique**. | Les modèles apprennent davantage à partir des données : arbres, SVM, forêts aléatoires, méthodes d'évaluation. |
+| 2012 | AlexNet gagne une compétition majeure de vision par ordinateur. | Le deep learning montre sa puissance avec beaucoup de données, des cartes graphiques et des réseaux plus profonds. |
+| 2017 | Publication de l'architecture **Transformer**. | Cette architecture devient la base de nombreux grands modèles de langage modernes. |
+| 2020 | GPT-3 montre les capacités des modèles de langage à grande échelle. | Les LLM deviennent capables de produire du texte, répondre à des questions et généraliser à de nombreuses tâches. |
+| 2022 | ChatGPT popularise les LLM auprès du grand public. | L'IA générative devient un outil visible dans le travail, l'éducation, le code et la création de contenu. |
+
+On peut résumer l'évolution ainsi :
+
+```text
+IA symbolique      → écrire des règles
+Machine Learning   → apprendre depuis des données
+Deep Learning      → apprendre avec de grands réseaux de neurones
+LLM                → grands réseaux spécialisés dans le langage
+```
 
 Ce cours se place principalement dans l'étape **Machine Learning statistique**.
 

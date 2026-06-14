@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">37</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">42</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -115,13 +115,38 @@ prix = modele.predict(nouveau_logement)</code></pre>
             </p>
           </div>
           <div class="timeline-card" aria-label="Repères historiques IA">
-            <article><strong>1956</strong><span>terme Intelligence Artificielle</span></article>
-            <article><strong>1958</strong><span>perceptron, ancêtre des réseaux de neurones</span></article>
-            <article><strong>1990-2000</strong><span>essor du Machine Learning statistique</span></article>
-            <article><strong>2012</strong><span>tournant deep learning avec AlexNet</span></article>
-            <article><strong>2017</strong><span>architecture Transformer</span></article>
-            <article><strong>2022</strong><span>ChatGPT popularise les LLM</span></article>
+            <article><strong>1950</strong><span>Turing pose la question de l'imitation de l'intelligence.</span></article>
+            <article><strong>1956</strong><span>Dartmouth popularise le terme Intelligence Artificielle.</span></article>
+            <article><strong>1958</strong><span>Le perceptron annonce les premiers réseaux de neurones.</span></article>
+            <article><strong>1990-2000</strong><span>Le Machine Learning statistique s'impose avec l'évaluation des modèles.</span></article>
+            <article><strong>2012</strong><span>AlexNet marque le tournant du deep learning moderne.</span></article>
+            <article><strong>2017-2022</strong><span>Transformers, GPT-3 puis ChatGPT rendent les LLM visibles.</span></article>
           </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-histoire-synthese" data-title="Trois périodes">
+        <div class="slide-inner">
+          <p class="pill">Lecture historique</p>
+          <h2>Trois manières de faire de l'IA</h2>
+          <div class="cards three">
+            <article class="panel">
+              <h3>Règles</h3>
+              <p>On encode explicitement le raisonnement humain.</p>
+              <strong>IA symbolique</strong>
+            </article>
+            <article class="panel accent">
+              <h3>Données</h3>
+              <p>Le modèle apprend une relation à partir d'exemples.</p>
+              <strong>Machine Learning</strong>
+            </article>
+            <article class="panel">
+              <h3>Échelle</h3>
+              <p>De grands réseaux apprennent sur de très grands volumes.</p>
+              <strong>Deep learning · LLM</strong>
+            </article>
+          </div>
+          <p class="note">Dans ce cours, on travaille surtout la période "données" : préparer, entraîner, tester, mesurer.</p>
         </div>
       </section>
 
@@ -261,6 +286,23 @@ data_clean = pd.get_dummies(data_clean)
 
 X = data_clean.drop(columns=["prix"])
 y = data_clean["prix"]</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-exo-nettoyage" data-title="Exercice nettoyage">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : nettoyer un dataset avant le modèle</h2>
+            <p>
+              Vous allez corriger un dataset sale, traiter les valeurs manquantes,
+              supprimer les doublons et préparer `X` et `y`.
+            </p>
+          </div>
+          <div class="panel large exercise-links">
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">Ouvrir le notebook</a>
+            <p class="note">Objectif : repérer les incohérences avant d'entraîner un modèle.</p>
           </div>
         </div>
       </section>
@@ -494,6 +536,24 @@ else:
         </div>
       </section>
 
+      <section class="slide" id="slide-exo-regression" data-title="Exercice régression">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : régression linéaire et évaluation</h2>
+            <p>
+              Vous entraînez un modèle sur un prix de logement, puis vous mesurez sa performance
+              avec le split train/test et la MAE.
+            </p>
+          </div>
+          <div class="panel large exercise-links">
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">Régression linéaire</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/02_train_test_split_enonce.ipynb">Train / test split</a>
+            <p class="note">L'objectif est de relier préparation, entraînement et évaluation.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" id="slide-reglog-intro" data-title="Régression logistique">
         <div class="slide-inner two-cols">
           <div>
@@ -574,6 +634,23 @@ modele.fit(X_train, y_train)
 predictions = modele.predict(X_test)
 accuracy_score(y_test, predictions)
 confusion_matrix(y_test, predictions)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-exo-reglog" data-title="Exercice logistique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : prédire la validation d'un étudiant</h2>
+            <p>
+              Vous utilisez la régression logistique pour prédire une classe, lire une probabilité
+              et interpréter la matrice de confusion.
+            </p>
+          </div>
+          <div class="panel large exercise-links">
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le notebook</a>
+            <p class="note">On travaille ici sur un problème binaire : valide ou non.</p>
           </div>
         </div>
       </section>
@@ -873,6 +950,24 @@ vecteur embedding
 documents les plus proches
   ↓
 réponse augmentée</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-exo-knn" data-title="Exercice KNN">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : comparer les voisins et normaliser</h2>
+            <p>
+              Vous appliquez KNN sur Iris, puis vous observez l'effet de la normalisation
+              et du choix de `k` sur les résultats.
+            </p>
+          </div>
+          <div class="panel large exercise-links">
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">KNN Iris</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">k et normalisation</a>
+            <p class="note">Le but est de voir comment les voisins changent selon les données et l'échelle.</p>
           </div>
         </div>
       </section>
