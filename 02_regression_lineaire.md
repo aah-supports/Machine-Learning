@@ -1,8 +1,8 @@
-# Chapitre 2 : Régression linéaire
+# Chapitre 3 : Régression linéaire
 
 ## 1. Objectif du chapitre
 
-Dans l'introduction, nous avons vu qu'un modèle de Machine Learning apprend à partir de données.
+Dans les chapitres précédents, nous avons vu qu'un modèle de Machine Learning apprend à partir de données et qu'un dataset doit être préparé avant l'entraînement.
 
 Dans ce chapitre, nous allons construire un premier modèle complet avec la **régression linéaire**.
 

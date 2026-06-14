@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">29</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">32</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -56,7 +56,7 @@
             </p>
             <div class="hero-actions">
               <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_introduction.md">Cours Markdown</a>
-              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">Notebook 01</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">Notebook 00</a>
             </div>
           </div>
           <div class="terminal-card hero-terminal" aria-label="Exemple de prédiction">
@@ -172,6 +172,76 @@ prix = modele.predict(nouveau_logement)</code></pre>
             </table>
           </div>
           <p class="note">Le modèle apprend la relation entre les caractéristiques et la réponse.</p>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-preparation-donnees" data-title="Données réelles">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Avant le modèle</p>
+            <h2>Les données réelles sont rarement propres</h2>
+            <p>
+              Avant d'entraîner un modèle, on doit vérifier que les lignes et les colonnes
+              ont du sens. Un modèle apprend aussi les erreurs présentes dans le dataset.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead><tr><th>surface</th><th>pièces</th><th>quartier</th><th>prix</th></tr></thead>
+              <tbody>
+                <tr><td>70</td><td>3</td><td>centre</td><td>350 000</td></tr>
+                <tr><td>?</td><td>4</td><td>nord</td><td>420 000</td></tr>
+                <tr><td>85 m2</td><td>3</td><td>centre</td><td>390 000</td></tr>
+                <tr><td>-10</td><td>2</td><td>sud</td><td>180 000</td></tr>
+              </tbody>
+            </table>
+            <p class="note">Valeurs manquantes, texte, doublons et valeurs impossibles doivent être traités.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-bonnes-pratiques-donnees" data-title="Bonnes pratiques">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Métier</p>
+            <h2>Bonnes pratiques de préparation</h2>
+            <p>
+              Nettoyer une donnée n'est pas seulement une opération technique. Chaque correction
+              doit rester justifiable métier.
+            </p>
+          </div>
+          <ul class="compact-points">
+            <li><strong>Brut</strong><span>garder une version originale du dataset</span></li>
+            <li><strong>Justifier</strong><span>documenter les suppressions et remplacements</span></li>
+            <li><strong>Métier</strong><span>repérer les valeurs impossibles</span></li>
+            <li><strong>Fuite</strong><span>retirer les colonnes inconnues au moment de prédire</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-nettoyage-python" data-title="Nettoyer">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">pandas</p>
+            <h2>Préparer le dataset avant X et y</h2>
+            <p>
+              On inspecte, on corrige les types, on traite les valeurs manquantes,
+              puis on transforme les catégories en colonnes numériques.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>data_clean = data.copy()
+
+data_clean = data_clean.drop_duplicates()
+data_clean["surface"] = pd.to_numeric(...)
+data_clean["surface"] = data_clean["surface"].fillna(
+    data_clean["surface"].median()
+)
+data_clean = pd.get_dummies(data_clean)
+
+X = data_clean.drop(columns=["prix"])
+y = data_clean["prix"]</code></pre>
+          </div>
         </div>
       </section>
 
@@ -707,7 +777,11 @@ réponse augmentée</code></pre>
         <div class="slide-inner">
           <p class="pill">Mise en pratique</p>
           <h2>Exercices notebooks</h2>
-          <div class="cards three">
+          <div class="cards exercise-grid">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">
+              <h3>00 · Nettoyage</h3>
+              <p>types, valeurs manquantes, doublons.</p>
+            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">
               <h3>01 · Régression linéaire</h3>
               <p>split, fit, predict, MAE test.</p>

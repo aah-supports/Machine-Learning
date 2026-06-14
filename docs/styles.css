@@ -572,6 +572,23 @@ p {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.exercise-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.exercise-grid .panel {
+  padding: 1rem;
+}
+
+.exercise-grid h3 {
+  font-size: 1rem;
+}
+
+.exercise-grid p {
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
 .panel {
   padding: clamp(1.1rem, 2.4vw, 1.7rem);
 }
@@ -937,6 +954,7 @@ td {
   .hero-grid,
   .two-cols,
   .cards.three,
+  .exercise-grid,
   .pipeline,
   .split,
   .monitor-flow {

@@ -15,9 +15,10 @@ let menuButtons = [];
 
 const courseSections = [
   { title: "Introduction", start: 0, end: 4 },
-  { title: "Régression linéaire", start: 5, end: 14 },
-  { title: "KNN", start: 15, end: 27 },
-  { title: "Exercices", start: 28, end: 28 },
+  { title: "Préparer les données", start: 5, end: 7 },
+  { title: "Régression linéaire", start: 8, end: 17 },
+  { title: "KNN", start: 18, end: 30 },
+  { title: "Exercices", start: 31, end: 31 },
 ];
 
 function clampIndex(index) {

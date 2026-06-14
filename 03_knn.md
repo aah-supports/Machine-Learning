@@ -1,4 +1,4 @@
-# Chapitre 3 : KNN, voisins et normalisation
+# Chapitre 4 : KNN, voisins et normalisation
 
 ## 1. Objectif du chapitre
 
