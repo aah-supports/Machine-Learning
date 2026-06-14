@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">32</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">37</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -73,34 +73,54 @@ prix = modele.predict(nouveau_logement)</code></pre>
       </section>
 
       <section class="slide" id="slide-cadrage-ia-ml" data-title="IA, ML, LLM">
-        <div class="slide-inner two-cols wide-right">
+        <div class="slide-inner two-cols">
           <div>
             <p class="pill">Cadrage</p>
             <h2>Où se situe le Machine Learning ?</h2>
             <p>
-              L'IA est le domaine général. Le Machine Learning est une manière de faire de l'IA
-              en apprenant à partir de données. Les réseaux de neurones sont une famille de modèles
-              ML, et les LLM sont de très grands réseaux spécialisés dans le langage.
+              Ces mots ne désignent pas la même chose. Dans ce cours, on travaille surtout
+              la partie Machine Learning classique.
             </p>
           </div>
           <div class="ai-map" aria-label="Carte IA Machine Learning LLM">
             <article>
-              <strong>Intelligence Artificielle</strong>
-              <span>Systèmes capables de réaliser des tâches complexes : décider, reconnaître, prédire, générer.</span>
+              <strong>IA</strong>
+              <span>domaine général</span>
             </article>
             <article>
               <strong>Machine Learning</strong>
-              <span>Une partie de l'IA : le modèle apprend une relation à partir des données.</span>
+              <span>apprendre à partir de données</span>
             </article>
             <article>
               <strong>Réseaux de neurones</strong>
-              <span>Une famille de modèles ML, très utilisée pour l'image, le son et le texte.</span>
+              <span>une famille de modèles ML</span>
             </article>
             <article>
               <strong>LLM</strong>
-              <span>De grands réseaux de neurones entraînés sur du texte. ChatGPT en est un exemple.</span>
+              <span>grands modèles de langage</span>
             </article>
-            <p class="note">Dans ce cours, nous faisons du Machine Learning classique : régression, KNN, train/test, erreur.</p>
+            <p class="note">Ici : régression, KNN, préparation des données, train/test, erreur.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reperes-historiques" data-title="Repères historiques">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Repères</p>
+            <h2>L'IA n'est pas née avec ChatGPT</h2>
+            <p>
+              Les LLM sont récents dans leurs usages grand public, mais ils s'inscrivent dans
+              une histoire plus longue de l'IA, du Machine Learning et des réseaux de neurones.
+            </p>
+          </div>
+          <div class="timeline-card" aria-label="Repères historiques IA">
+            <article><strong>1956</strong><span>terme Intelligence Artificielle</span></article>
+            <article><strong>1958</strong><span>perceptron, ancêtre des réseaux de neurones</span></article>
+            <article><strong>1990-2000</strong><span>essor du Machine Learning statistique</span></article>
+            <article><strong>2012</strong><span>tournant deep learning avec AlexNet</span></article>
+            <article><strong>2017</strong><span>architecture Transformer</span></article>
+            <article><strong>2022</strong><span>ChatGPT popularise les LLM</span></article>
           </div>
         </div>
       </section>
@@ -474,6 +494,90 @@ else:
         </div>
       </section>
 
+      <section class="slide" id="slide-reglog-intro" data-title="Régression logistique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Classification</p>
+            <h2>Régression logistique : prédire une classe</h2>
+            <p>
+              Après une valeur numérique, on veut maintenant prédire une réponse binaire :
+              un étudiant valide ou ne valide pas son examen.
+            </p>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead><tr><th>Révision</th><th>Présence</th><th>Projet</th><th>Valide</th></tr></thead>
+              <tbody>
+                <tr><td>2 h</td><td>45%</td><td>non</td><td>0</td></tr>
+                <tr><td>8 h</td><td>75%</td><td>oui</td><td>1</td></tr>
+                <tr><td>15 h</td><td>92%</td><td>oui</td><td>1</td></tr>
+              </tbody>
+            </table>
+            <p class="note">Le label n'est plus un prix : c'est une classe 0 ou 1.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-proba" data-title="Probabilité">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Idée clé</p>
+            <h2>Le modèle prédit une probabilité</h2>
+            <p>
+              Une régression linéaire peut produire des valeurs comme -0.2 ou 1.4.
+              La régression logistique transforme le score en probabilité entre 0 et 1.
+            </p>
+          </div>
+          <div class="formula-card">
+            <span>0.82</span>
+            <p>82% de probabilité que l'étudiant valide</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-seuil" data-title="Seuil">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Décision</p>
+            <h2>Transformer une probabilité en classe</h2>
+            <p>
+              On choisit un seuil. Avec le seuil courant de 0.5, une probabilité supérieure
+              ou égale à 0.5 devient la classe 1.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>proba_valider = 0.82
+
+if proba_valider &gt;= 0.5:
+    prediction = 1
+else:
+    prediction = 0</code></pre>
+            <p class="note">Le seuil peut être adapté selon le contexte métier.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-reglog-evaluer" data-title="Évaluer">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Évaluation</p>
+            <h2>Accuracy et matrice de confusion</h2>
+            <p>
+              L'accuracy donne le pourcentage de bonnes réponses. La matrice de confusion
+              montre le détail des erreurs : faux positifs et faux négatifs.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>modele = LogisticRegression()
+modele.fit(X_train, y_train)
+
+predictions = modele.predict(X_test)
+accuracy_score(y_test, predictions)
+confusion_matrix(y_test, predictions)</code></pre>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" id="slide-15" data-title="KNN">
         <div class="slide-inner two-cols">
           <div>
@@ -790,12 +894,16 @@ réponse augmentée</code></pre>
               <h3>02 · Train / test split</h3>
               <p>score, MAE, suivi de modèle.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
+              <h3>03 · Régression logistique</h3>
+              <p>probabilité, seuil, matrice de confusion.</p>
+            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">
-              <h3>03 · KNN Iris</h3>
+              <h3>04 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">
-              <h3>04 · k et scaler</h3>
+              <h3>05 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
           </div>

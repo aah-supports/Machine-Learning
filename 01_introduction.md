@@ -70,15 +70,20 @@ Nous allons apprendre les bases :
 
 L'IA n'est pas née avec ChatGPT.
 
-Quelques repères :
+Quelques dates clés :
 
-| Période | Idée importante |
-| ------- | --------------- |
-| Années 1950 | naissance du terme Intelligence Artificielle |
-| Années 1960-1980 | règles expertes, premiers algorithmes d'apprentissage |
-| Années 1990-2000 | essor du Machine Learning statistique |
-| Années 2010 | progrès rapides du deep learning |
-| Années 2020 | diffusion massive des LLM et IA génératives |
+| Date | Repère |
+| ---- | ------ |
+| 1950 | Alan Turing propose une question fondatrice : une machine peut-elle imiter une conversation humaine ? |
+| 1956 | Conférence de Dartmouth : le terme **Intelligence Artificielle** est popularisé. |
+| 1958 | Frank Rosenblatt présente le **perceptron**, un ancêtre des réseaux de neurones. |
+| Années 1970-1980 | Développement des **systèmes experts**, fondés sur des règles écrites par des spécialistes. |
+| 1986 | Retour important des réseaux de neurones avec la diffusion de la **rétropropagation**. |
+| Années 1990-2000 | Essor du **Machine Learning statistique** : arbres, SVM, forêts aléatoires, méthodes d'évaluation. |
+| 2012 | AlexNet marque un tournant du **deep learning** en vision par ordinateur. |
+| 2017 | Architecture **Transformer**, base technique de nombreux grands modèles de langage. |
+| 2020 | GPT-3 rend visibles les capacités des grands modèles de langage à grande échelle. |
+| 2022 | ChatGPT popularise massivement les usages des LLM auprès du grand public. |
 
 Ce cours se place principalement dans l'étape **Machine Learning statistique**.
 
@@ -542,12 +547,12 @@ Donc résumé :
 
 Exercice pratique :
 
+- [Énoncé : nettoyage de données](notebooks/00_nettoyage_donnees_enonce.ipynb)
 - [Énoncé : régression linéaire](notebooks/01_regression_lineaire_enonce.ipynb)
-- [Correction : régression linéaire](notebooks/01_regression_lineaire_correction.ipynb)
 - [Énoncé : train / test split](notebooks/02_train_test_split_enonce.ipynb)
-- [Correction : train / test split](notebooks/02_train_test_split_correction.ipynb)
-- [Énoncé : KNN et normalisation](notebooks/03_knn_normalisation_enonce.ipynb)
-- [Correction : KNN et normalisation](notebooks/03_knn_normalisation_correction.ipynb)
+- [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
+- [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
+- [Énoncé : KNN, k et normalisation](notebooks/04_knn_k_normalisation_enonce.ipynb)
 
 ---
 
@@ -732,12 +737,11 @@ Erreur = Valeur\ réelle - Valeur\ prédite
 
 Après cette introduction, le prochain chapitre conseillé est :
 
-- [Chapitre 2 : Régression linéaire](02_regression_lineaire.md)
+- [Chapitre 2 : Préparer et nettoyer les données](02_preparation_donnees.md)
 
-Ce chapitre permet de construire un premier modèle complet avec :
+Cette étape permet de comprendre ce qui vient avant le modèle :
 
-- un dataset simple ;
-- `fit` pour entraîner ;
-- `predict` pour prédire ;
-- `coef_` et `intercept_` pour comprendre ce que le modèle a appris ;
-- une première mesure d'erreur.
+- inspecter un dataset ;
+- corriger les valeurs incohérentes ;
+- préparer les variables ;
+- éviter les erreurs métier avant l'entraînement.

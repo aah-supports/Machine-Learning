@@ -573,7 +573,7 @@ p {
 }
 
 .exercise-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .exercise-grid .panel {
@@ -671,31 +671,69 @@ p {
 
 .ai-map {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.6rem;
 }
 
 .ai-map article {
+  position: relative;
   border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: 0.85rem;
   background: rgba(9, 9, 11, 0.58);
-  padding: 0.9rem 1rem;
+  padding: 0.85rem 1rem;
+}
+
+.ai-map article:nth-child(2) {
+  margin-left: 1.5rem;
+}
+
+.ai-map article:nth-child(3) {
+  margin-left: 3rem;
+}
+
+.ai-map article:nth-child(4) {
+  margin-left: 4.5rem;
 }
 
 .ai-map strong {
   display: block;
   color: var(--emerald-light);
-  font-size: 1.05rem;
-  margin-bottom: 0.35rem;
+  font-size: 1.08rem;
+  margin-bottom: 0.2rem;
 }
 
 .ai-map span {
   display: block;
   color: #d4d4d8;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .ai-map .note {
-  margin-top: 0.25rem;
+  margin-top: 0.55rem;
+  max-width: 460px;
+}
+
+.timeline-card {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.timeline-card article {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(63, 63, 70, 0.72);
+}
+
+.timeline-card strong {
+  color: var(--emerald-light);
+  font-size: 1.15rem;
+}
+
+.timeline-card span {
+  color: #d4d4d8;
+  line-height: 1.4;
 }
 
 .formula-panel {

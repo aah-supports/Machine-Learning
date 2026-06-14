@@ -14,11 +14,12 @@ let activeIndex = 0;
 let menuButtons = [];
 
 const courseSections = [
-  { title: "Introduction", start: 0, end: 4 },
-  { title: "Préparer les données", start: 5, end: 7 },
-  { title: "Régression linéaire", start: 8, end: 17 },
-  { title: "KNN", start: 18, end: 30 },
-  { title: "Exercices", start: 31, end: 31 },
+  { title: "Introduction", start: 0, end: 5 },
+  { title: "Préparer les données", start: 6, end: 8 },
+  { title: "Régression linéaire", start: 9, end: 18 },
+  { title: "Régression logistique", start: 19, end: 22 },
+  { title: "KNN", start: 23, end: 35 },
+  { title: "Exercices", start: 36, end: 36 },
 ];
 
 function clampIndex(index) {

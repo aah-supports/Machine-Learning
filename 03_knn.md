@@ -1,4 +1,4 @@
-# Chapitre 4 : KNN, voisins et normalisation
+# Chapitre 5 : KNN, voisins et normalisation
 
 ## 1. Objectif du chapitre
 
@@ -8,6 +8,7 @@ Dans les chapitres précédents, nous avons vu :
 - comment séparer train et test ;
 - comment entraîner un modèle ;
 - comment mesurer une erreur ou un score sur des données non vues.
+- comment faire une première classification avec la régression logistique.
 
 Dans ce chapitre, on étudie un nouveau modèle : **KNN**.
 
@@ -816,7 +817,4 @@ Les choses qui se ressemblent sont proches dans un espace mathématique.
 Notebooks :
 
 - [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
-- [Correction : KNN avec Iris](notebooks/corrections/03_knn_iris_correction.ipynb)
-
 - [Énoncé : choisir k et normaliser](notebooks/04_knn_k_normalisation_enonce.ipynb)
-- [Correction : choisir k et normaliser](notebooks/corrections/04_knn_k_normalisation_correction.ipynb)

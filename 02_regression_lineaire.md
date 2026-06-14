@@ -882,16 +882,9 @@ Notebook à faire :
 
 - [Énoncé : régression linéaire](notebooks/01_regression_lineaire_enonce.ipynb)
 
-Correction :
-
-- [Correction : régression linéaire](notebooks/corrections/01_regression_lineaire_correction.ipynb)
-
 Exercice complémentaire sur l'évaluation :
 
 - [Énoncé : train / test split](notebooks/02_train_test_split_enonce.ipynb)
-- [Correction : train / test split](notebooks/corrections/02_train_test_split_correction.ipynb)
-- [Énoncé : Iris classification](notebooks/04_iris_classification_enonce.ipynb)
-- [Correction : Iris classification](notebooks/corrections/04_iris_classification_correction.ipynb)
 
 ---
 
@@ -908,5 +901,7 @@ La régression linéaire permet de comprendre les bases :
 
 Le chapitre suivant peut introduire deux notions importantes :
 
-1. **Train / test split** : séparer les données d'entraînement et les données de test.
-2. **Évaluation d'un modèle** : mesurer si le modèle généralise sur des données jamais vues.
+1. **Classification** : prédire une catégorie plutôt qu'une valeur numérique.
+2. **Probabilité** : prédire une chance d'appartenir à une classe.
+
+La suite logique est donc la **régression logistique**.
