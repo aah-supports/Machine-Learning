@@ -88,7 +88,6 @@ Statistiques :
 df.describe()
 ```
 
-([GitHub][3])
 
 ---
 
@@ -139,7 +138,6 @@ df[
 ]
 ```
 
-([GitHub][3])
 
 ---
 
@@ -544,6 +542,3 @@ str.title()
 loc[]
 mean()
 ```
-
-
-
