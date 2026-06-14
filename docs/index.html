@@ -161,22 +161,26 @@ prix = modele.predict(nouveau_logement)</code></pre>
 
       <section class="slide" id="slide-6" data-title="Outils">
         <div class="slide-inner">
-          <p class="pill">Boîte à outils</p>
-          <h2>Modules Python utilisés</h2>
+          <p class="pill">Avant de coder</p>
+          <h2>Nous allons utiliser trois outils Python</h2>
+          <p class="lead">
+            Chacun a un rôle précis dans le cours : préparer les données, entraîner le modèle,
+            puis visualiser les résultats.
+          </p>
           <div class="cards three">
             <article class="panel">
               <h3>pandas</h3>
-              <p>Manipuler les données sous forme de tableau.</p>
+              <p>Créer et manipuler le dataset.</p>
               <code>import pandas as pd</code>
             </article>
             <article class="panel accent">
               <h3>scikit-learn</h3>
-              <p>Découper, entraîner et évaluer les modèles.</p>
+              <p>Séparer, entraîner, prédire et mesurer.</p>
               <code>train_test_split · LinearRegression</code>
             </article>
             <article class="panel">
               <h3>matplotlib</h3>
-              <p>Visualiser les points et la droite apprise.</p>
+              <p>Afficher les points et la droite.</p>
               <code>import matplotlib.pyplot as plt</code>
             </article>
           </div>
@@ -184,37 +188,55 @@ prix = modele.predict(nouveau_logement)</code></pre>
       </section>
 
       <section class="slide" id="slide-7" data-title="Apprendre">
-        <div class="slide-inner two-cols">
-          <div>
+        <div class="slide-inner stacked-slide">
+          <div class="slide-heading">
             <p class="pill">Point important</p>
             <h2>“Apprendre” n'est pas magique</h2>
-            <p>
-              Pour une régression linéaire classique, le modèle ne lance pas un réseau de
-              neurones. Il calcule les paramètres de la droite.
-            </p>
           </div>
-          <div class="panel large">
-            <h3>Ce que calcule le modèle</h3>
-            <pre><code>coefficient = covariance(surface, prix) / variance(surface)
-
-intercept = moyenne(prix)
-          - coefficient × moyenne(surface)</code></pre>
+          <div class="two-cols wide-right">
+            <div>
+              <p>
+                Pour une régression linéaire classique, le modèle ne lance pas un réseau de
+                neurones. Il calcule les paramètres de la droite.
+              </p>
+            </div>
+            <div class="panel large formula-panel">
+              <p>La régression linéaire cherche les paramètres de la droite.</p>
+              <div class="learned-line">prix = coefficient × surface + intercept</div>
+              <div class="formula-steps">
+                <article>
+                  <span>coefficient</span>
+                  <code>covariance(surface, prix) / variance(surface)</code>
+                </article>
+                <article>
+                  <span>intercept</span>
+                  <code>moyenne(prix) - coefficient × moyenne(surface)</code>
+                </article>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section class="slide" id="slide-8" data-title="fit">
-        <div class="slide-inner">
+      <section class="slide compact-title" id="slide-8" data-title="fit">
+        <div class="slide-inner stacked-slide">
           <p class="pill">Entraînement</p>
           <h2>Que fait <code>fit(X_train, y_train)</code> ?</h2>
-          <div class="pipeline">
-            <div><strong>X</strong><span>features</span></div>
-            <div><strong>y</strong><span>label</span></div>
-            <div><strong>split</strong><span>train / test</span></div>
-            <div><strong>fit</strong><span>apprentissage</span></div>
-            <div><strong>modèle</strong><span>droite apprise</span></div>
-          </div>
-          <pre class="code-block"><code>X = data[["surface"]]
+          <div class="two-cols fit-layout">
+            <div>
+              <p>
+                <code>fit</code> entraîne le modèle uniquement avec les données d'entraînement.
+                Les données de test restent de côté pour l'évaluation.
+              </p>
+              <div class="pipeline compact">
+                <div><strong>X</strong><span>features</span></div>
+                <div><strong>y</strong><span>label</span></div>
+                <div><strong>split</strong><span>train / test</span></div>
+                <div><strong>fit</strong><span>apprentissage</span></div>
+                <div><strong>modèle</strong><span>droite apprise</span></div>
+              </div>
+            </div>
+            <pre class="code-block"><code>X = data[["surface"]]
 y = data["prix"]
 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -222,6 +244,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 modele.fit(X_train, y_train)</code></pre>
+          </div>
         </div>
       </section>
 
