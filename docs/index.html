@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">38</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">39</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -602,6 +602,32 @@ else:
         </div>
       </section>
 
+      <section class="slide" id="slide-perceptron" data-title="Perceptron">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Pont vers les réseaux</p>
+            <h2>Le perceptron apprend aussi par mise à jour de poids</h2>
+            <p>
+              Ici, on passe d'une droite à un neurone simple : un score linéaire, une probabilité,
+              puis une correction des poids par descente de gradient.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>z = w1 * x1 + w2 * x2 + b
+p = sigmoid(z)
+
+si la prédiction est mauvaise :
+    on corrige w1, w2 et b
+    avec la descente de gradient</code></pre>
+            <p class="note">TP associé : perceptron binaire sur la validation d'un étudiant.</p>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/04_perceptron_enonce.ipynb">Ouvrir le TP</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Corrections/04_perceptron_correction.ipynb">Correction</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="slide" id="slide-15" data-title="KNN">
         <div class="slide-inner two-cols">
           <div>
@@ -947,12 +973,16 @@ réponse augmentée</code></pre>
               <h3>03 · Descente de gradient</h3>
               <p>coût, pente, mise à jour du poids.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/04_perceptron_enonce.ipynb">
+              <h3>04 · Perceptron</h3>
+              <p>neurone, sigmoïde, gradient descent.</p>
+            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">
-              <h3>04 · KNN Iris</h3>
+              <h3>05 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">
-              <h3>05 · k et scaler</h3>
+              <h3>06 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
           </div>
