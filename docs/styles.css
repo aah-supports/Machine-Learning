@@ -490,6 +490,50 @@ p {
   margin-top: 1.5rem;
 }
 
+.hero-plan {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.35rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(63, 63, 70, 0.7);
+  max-width: 620px;
+}
+
+.hero-plan > span {
+  color: var(--emerald-light);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-plan ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-plan li {
+  position: relative;
+  padding-left: 1rem;
+  color: #d4d4d8;
+  line-height: 1.35;
+}
+
+.hero-plan li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--emerald-light);
+}
+
 .button {
   display: inline-flex;
   align-items: center;
