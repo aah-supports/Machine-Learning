@@ -48,7 +48,7 @@ Résultat :
 2  Charlie   21  Marseille
 ```
 
-Un DataFrame ressemble à une feuille Excel. ([Pandas][1])
+Un DataFrame ressemble à une feuille Excel. 
 
 ---
 
@@ -58,7 +58,7 @@ Un DataFrame ressemble à une feuille Excel. ([Pandas][1])
 df = pd.read_csv("students.csv")
 ```
 
-Les données sont automatiquement chargées dans un DataFrame. ([Melanie Walsh][2])
+Les données sont automatiquement chargées dans un DataFrame.
 
 ---
 
