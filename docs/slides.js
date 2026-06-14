@@ -14,10 +14,10 @@ let activeIndex = 0;
 let menuButtons = [];
 
 const courseSections = [
-  { title: "Introduction", start: 0, end: 3 },
-  { title: "Régression linéaire", start: 4, end: 13 },
-  { title: "KNN", start: 14, end: 26 },
-  { title: "Exercices", start: 27, end: 27 },
+  { title: "Introduction", start: 0, end: 4 },
+  { title: "Régression linéaire", start: 5, end: 14 },
+  { title: "KNN", start: 15, end: 27 },
+  { title: "Exercices", start: 28, end: 28 },
 ];
 
 function clampIndex(index) {
@@ -45,7 +45,7 @@ function showSlide(index, updateHash = true) {
   nextButton.disabled = activeIndex === slides.length - 1;
 
   if (updateHash) {
-    history.replaceState(null, "", `#slide-${activeIndex + 1}`);
+    history.replaceState(null, "", `#${slides[activeIndex].id}`);
   }
 }
 
@@ -114,7 +114,13 @@ function buildMenu() {
 }
 
 function indexFromHash() {
-  const match = window.location.hash.match(/^#slide-(\d+)$/);
+  const hash = window.location.hash.slice(1);
+  if (!hash) return 0;
+
+  const idIndex = slides.findIndex((slide) => slide.id === hash);
+  if (idIndex >= 0) return idIndex;
+
+  const match = hash.match(/^slide-(\d+)$/);
   if (!match) return 0;
   return clampIndex(Number(match[1]) - 1);
 }

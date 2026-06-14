@@ -360,6 +360,37 @@ button {
   margin-top: 0;
 }
 
+.hero .hero-grid {
+  grid-template-columns: minmax(0, 1.28fr) minmax(300px, 0.72fr);
+  gap: clamp(1.5rem, 4vw, 4.5rem);
+}
+
+.hero-copy {
+  max-width: 780px;
+}
+
+.hero h1 {
+  max-width: 760px;
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.hero .lead {
+  max-width: 650px;
+  margin-top: 1.25rem;
+}
+
+.hero-terminal {
+  align-self: center;
+  opacity: 0.86;
+}
+
+.hero-terminal pre {
+  font-size: clamp(0.72rem, 1.05vw, 0.88rem);
+  line-height: 1.55;
+}
+
 .fit-layout {
   grid-template-columns: minmax(300px, 0.88fr) minmax(420px, 1.12fr);
   align-items: start;
@@ -619,6 +650,35 @@ p {
 
 .compact-points span {
   color: #d4d4d8;
+}
+
+.ai-map {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ai-map article {
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 0.85rem;
+  background: rgba(9, 9, 11, 0.58);
+  padding: 0.9rem 1rem;
+}
+
+.ai-map strong {
+  display: block;
+  color: var(--emerald-light);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.ai-map span {
+  display: block;
+  color: #d4d4d8;
+  line-height: 1.45;
+}
+
+.ai-map .note {
+  margin-top: 0.25rem;
 }
 
 .formula-panel {

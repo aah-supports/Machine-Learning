@@ -1,6 +1,99 @@
 # Introduction au Machine Learning
 
-## 1. Qu'est-ce que le Machine Learning ?
+## 1. Situer l'IA, le Machine Learning, les réseaux de neurones et les LLM
+
+Avant de commencer, il faut distinguer plusieurs termes souvent mélangés.
+
+L'**Intelligence Artificielle (IA)** est le domaine le plus large.
+
+Son objectif est de construire des systèmes capables de réaliser des tâches que l'on associe habituellement à l'intelligence humaine :
+
+- reconnaître une image ;
+- comprendre un texte ;
+- prendre une décision ;
+- recommander un contenu ;
+- prédire une valeur.
+
+Le **Machine Learning (ML)** est une partie de l'IA.
+
+L'idée centrale du ML est simple :
+
+```text
+au lieu d'écrire toutes les règles à la main,
+on apprend un modèle à partir de données.
+```
+
+Les **réseaux de neurones** sont une famille particulière de modèles de Machine Learning.
+
+Ils sont composés de couches de calcul qui apprennent progressivement des représentations utiles dans les données.
+
+Ils sont très utilisés pour :
+
+- les images ;
+- le son ;
+- le texte ;
+- les grands volumes de données.
+
+Les **LLM** (*Large Language Models*) sont des grands modèles de langage.
+
+Ils reposent sur des réseaux de neurones très grands, entraînés sur d'immenses quantités de textes.
+
+ChatGPT, Claude, Gemini ou Mistral appartiennent à cette famille.
+
+On peut donc retenir cette carte :
+
+```text
+Intelligence Artificielle
+└── Machine Learning
+    ├── Régression linéaire
+    ├── KNN
+    ├── Arbres de décision
+    └── Réseaux de neurones
+        └── LLM
+```
+
+Dans ce cours, nous ne faisons pas encore des LLM.
+
+Nous faisons du **Machine Learning classique**.
+
+Nous allons apprendre les bases :
+
+- préparer des données ;
+- entraîner un modèle ;
+- faire une prédiction ;
+- mesurer l'erreur ;
+- comprendre pourquoi un modèle peut se tromper.
+
+---
+
+## 2. Repère historique rapide
+
+L'IA n'est pas née avec ChatGPT.
+
+Quelques repères :
+
+| Période | Idée importante |
+| ------- | --------------- |
+| Années 1950 | naissance du terme Intelligence Artificielle |
+| Années 1960-1980 | règles expertes, premiers algorithmes d'apprentissage |
+| Années 1990-2000 | essor du Machine Learning statistique |
+| Années 2010 | progrès rapides du deep learning |
+| Années 2020 | diffusion massive des LLM et IA génératives |
+
+Ce cours se place principalement dans l'étape **Machine Learning statistique**.
+
+On commence par des modèles simples, car ils permettent de comprendre les principes qui restent valables ensuite :
+
+- données d'entraînement ;
+- généralisation ;
+- test ;
+- erreur ;
+- choix des variables ;
+- limites du modèle.
+
+---
+
+## 3. Qu'est-ce que le Machine Learning ?
 
 Le **Machine Learning (ML)** est une branche de l'Intelligence Artificielle qui permet à une machine d'apprendre à partir de données sans être explicitement programmée pour chaque cas.
 
@@ -51,7 +144,7 @@ Il apprend la relation entre surface et prix.
 
 ---
 
-## 2. Vocabulaire essentiel
+## 4. Vocabulaire essentiel
 
 ### Donnée (Data)
 
@@ -115,7 +208,7 @@ prix = modele.predict([70])
 
 ---
 
-## 3. Les grandes familles de Machine Learning
+## 5. Les grandes familles de Machine Learning
 
 ### 1. Apprentissage supervisé
 
@@ -170,7 +263,7 @@ Exemple :
 
 ---
 
-## 4. Régression et Classification
+## 6. Régression et Classification
 
 ### Régression
 
@@ -208,7 +301,7 @@ Classe = Chat
 
 ---
 
-## 5. Le cycle complet d'un projet ML
+## 7. Le cycle complet d'un projet ML
 
 ### Étape 1 : Collecte des données
 
@@ -498,7 +591,7 @@ Modèle ML
 
 ---
 
-## 6. Exemple concret : Prédiction du prix d'un logement
+## 8. Exemple concret : Prédiction du prix d'un logement
 
 Dataset :
 
@@ -532,7 +625,7 @@ Résultat :
 
 ---
 
-## 7. Algorithmes à connaître
+## 9. Algorithmes à connaître
 
 ### Régression
 
@@ -562,7 +655,7 @@ Résultat :
 
 ---
 
-## 8. Outils Python incontournables
+## 10. Outils Python incontournables
 
 ### NumPy
 
@@ -620,7 +713,7 @@ import torch
 
 ---
 
-## 9. Pourquoi les mathématiques sont importantes ?
+## 11. Pourquoi les mathématiques sont importantes ?
 
 Le Machine Learning repose principalement sur :
 
@@ -635,7 +728,7 @@ Erreur = Valeur\ réelle - Valeur\ prédite
 
 ---
 
-## 10. Suite du cours
+## 12. Suite du cours
 
 Après cette introduction, le prochain chapitre conseillé est :
 

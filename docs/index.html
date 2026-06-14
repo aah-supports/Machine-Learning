@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">28</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">29</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -47,7 +47,7 @@
     <main class="deck" aria-live="polite">
       <section class="slide hero active" id="slide-1" data-title="Introduction">
         <div class="slide-inner hero-grid">
-          <div>
+          <div class="hero-copy">
             <p class="pill">Cours ML · AIA 1er</p>
             <h1>Introduction au Machine Learning</h1>
             <p class="lead">
@@ -59,7 +59,7 @@
               <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">Notebook 01</a>
             </div>
           </div>
-          <div class="terminal-card" aria-label="Exemple de prédiction">
+          <div class="terminal-card hero-terminal" aria-label="Exemple de prédiction">
             <div class="terminal-dots"><span></span><span></span><span></span></div>
             <pre><code>from sklearn.linear_model import LinearRegression
 
@@ -68,6 +68,39 @@ modele.fit(X_train, y_train)
 
 nouveau_logement = pd.DataFrame({"surface": [75]})
 prix = modele.predict(nouveau_logement)</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-cadrage-ia-ml" data-title="IA, ML, LLM">
+        <div class="slide-inner two-cols wide-right">
+          <div>
+            <p class="pill">Cadrage</p>
+            <h2>Où se situe le Machine Learning ?</h2>
+            <p>
+              L'IA est le domaine général. Le Machine Learning est une manière de faire de l'IA
+              en apprenant à partir de données. Les réseaux de neurones sont une famille de modèles
+              ML, et les LLM sont de très grands réseaux spécialisés dans le langage.
+            </p>
+          </div>
+          <div class="ai-map" aria-label="Carte IA Machine Learning LLM">
+            <article>
+              <strong>Intelligence Artificielle</strong>
+              <span>Systèmes capables de réaliser des tâches complexes : décider, reconnaître, prédire, générer.</span>
+            </article>
+            <article>
+              <strong>Machine Learning</strong>
+              <span>Une partie de l'IA : le modèle apprend une relation à partir des données.</span>
+            </article>
+            <article>
+              <strong>Réseaux de neurones</strong>
+              <span>Une famille de modèles ML, très utilisée pour l'image, le son et le texte.</span>
+            </article>
+            <article>
+              <strong>LLM</strong>
+              <span>De grands réseaux de neurones entraînés sur du texte. ChatGPT en est un exemple.</span>
+            </article>
+            <p class="note">Dans ce cours, nous faisons du Machine Learning classique : régression, KNN, train/test, erreur.</p>
           </div>
         </div>
       </section>
