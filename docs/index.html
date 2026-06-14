@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">37</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">38</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -392,6 +392,31 @@ y = data_clean["prix"]</code></pre>
         </div>
       </section>
 
+      <section class="slide" id="slide-gradient-descent" data-title="Descente de gradient">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Optimisation</p>
+            <h2>Descente de gradient : suivre la pente</h2>
+            <p>
+              Au lieu de deviner les nouveaux poids, on calcule mathématiquement la direction
+              qui fait baisser l'erreur. C'est une idée centrale pour les réseaux de neurones.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>w = 1
+J(w) = (100 - 50w)^2
+
+J'(1) = -5000
+
+w_nouveau = w - η J'(w)
+η = 0.0001
+
+w_nouveau = 1.5</code></pre>
+            <p class="note">Le signe de la dérivée indique dans quel sens déplacer le poids.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="slide compact-title" id="slide-8" data-title="fit">
         <div class="slide-inner stacked-slide">
           <p class="pill">Entraînement</p>
@@ -570,6 +595,8 @@ else:
           <div class="panel large exercise-links">
             <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/02_regression_lineaire_exercice.md">Régression linéaire</a>
             <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Corrections/02_regression_lineaire_exercice_correction.md">Correction</a>
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">TP descente de gradient</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Corrections/03_descente_gradient_correction.ipynb">Correction TP</a>
             <p class="note">L'objectif est de relier préparation, entraînement et évaluation.</p>
           </div>
         </div>
@@ -916,12 +943,16 @@ réponse augmentée</code></pre>
               <h3>02 · Régression linéaire</h3>
               <p>split, fit, predict, MAE test.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">
+              <h3>03 · Descente de gradient</h3>
+              <p>coût, pente, mise à jour du poids.</p>
+            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">
-              <h3>03 · KNN Iris</h3>
+              <h3>04 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">
-              <h3>04 · k et scaler</h3>
+              <h3>05 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
           </div>
