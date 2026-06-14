@@ -391,31 +391,6 @@ y = data_clean["prix"]</code></pre>
         </div>
       </section>
 
-      <section class="slide" id="slide-gradient-descent" data-title="Descente de gradient">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Optimisation</p>
-            <h2>Descente de gradient : suivre la pente</h2>
-            <p>
-              Au lieu de deviner les nouveaux poids, on calcule mathématiquement la direction
-              qui fait baisser l'erreur. C'est une idée centrale pour les réseaux de neurones.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>w = 1
-J(w) = (100 - 50w)^2
-
-J'(1) = -5000
-
-w_nouveau = w - η J'(w)
-η = 0.0001
-
-w_nouveau = 1.5</code></pre>
-            <p class="note">Le signe de la dérivée indique dans quel sens déplacer le poids.</p>
-          </div>
-        </div>
-      </section>
-
       <section class="slide compact-title" id="slide-8" data-title="fit">
         <div class="slide-inner stacked-slide">
           <p class="pill">Entraînement</p>
@@ -593,33 +568,7 @@ else:
           </div>
           <div class="panel large exercise-links">
             <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/02_regression_lineaire_exercice.md">Régression linéaire</a>
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">TP descente de gradient</a>
             <p class="note">L'objectif est de relier préparation, entraînement et évaluation.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-perceptron" data-title="Perceptron">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Pont vers les réseaux</p>
-            <h2>Le perceptron apprend aussi par mise à jour de poids</h2>
-            <p>
-              Ici, on passe d'une droite à un neurone simple : un score linéaire, une probabilité,
-              puis une correction des poids par descente de gradient.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>z = w1 * x1 + w2 * x2 + b
-p = sigmoid(z)
-
-si la prédiction est mauvaise :
-    on corrige w1, w2 et b
-    avec la descente de gradient</code></pre>
-            <p class="note">TP associé : perceptron binaire sur la validation d'un étudiant.</p>
-            <div class="hero-actions" style="margin-top: 1rem;">
-              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/04_perceptron_enonce.ipynb">Ouvrir le TP</a>
-            </div>
           </div>
         </div>
       </section>
@@ -963,22 +912,67 @@ réponse augmentée</code></pre>
               <h3>02 · Régression linéaire</h3>
               <p>split, fit, predict, MAE test.</p>
             </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">
-              <h3>03 · Descente de gradient</h3>
-              <p>coût, pente, mise à jour du poids.</p>
-            </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/04_perceptron_enonce.ipynb">
-              <h3>04 · Perceptron</h3>
-              <p>neurone, sigmoïde, gradient descent.</p>
-            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">
-              <h3>05 · KNN Iris</h3>
+              <h3>03 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">
-              <h3>06 · k et scaler</h3>
+              <h3>04 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-gradient-descent" data-title="Descente de gradient">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Fin de parcours</p>
+            <h2>Descente de gradient : suivre la pente</h2>
+            <p>
+              Au lieu de deviner les nouveaux poids, on calcule mathématiquement la direction
+              qui fait baisser l'erreur. C'est une idée centrale pour les réseaux de neurones.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>w = 1
+J(w) = (100 - 50w)^2
+
+J'(1) = -5000
+
+w_nouveau = w - η J'(w)
+η = 0.0001
+
+w_nouveau = 1.5</code></pre>
+            <p class="note">Le signe de la dérivée indique dans quel sens déplacer le poids.</p>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">Ouvrir le TP</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-perceptron" data-title="Perceptron">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Pont vers les réseaux</p>
+            <h2>Le perceptron apprend aussi par mise à jour de poids</h2>
+            <p>
+              Ici, on passe d'une droite à un neurone simple : un score linéaire, une probabilité,
+              puis une correction des poids par descente de gradient.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>z = w1 * x1 + w2 * x2 + b
+p = sigmoid(z)
+
+si la prédiction est mauvaise :
+    on corrige w1, w2 et b
+    avec la descente de gradient</code></pre>
+            <p class="note">TP associé : perceptron binaire sur la validation d'un étudiant.</p>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/04_perceptron_enonce.ipynb">Ouvrir le TP</a>
+            </div>
           </div>
         </div>
       </section>
