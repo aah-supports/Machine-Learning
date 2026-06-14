@@ -1,5 +1,10 @@
 # Chapitre 4 : KNN, voisins et normalisation
 
+Dans KNN, il faut distinguer :
+
+les variables explicatives (les caractéristiques du vecteur X)
+le label (la réponse y)
+
 ## 1. Objectif du chapitre
 
 Dans les chapitres précédents, nous avons vu :
@@ -58,7 +63,7 @@ Puis il utilise ces voisins pour prédire.
 
 ---
 
-## 3. L'intuition humaine derrière KNN
+## 3. L'intuition derrière KNN
 
 KNN est probablement l'un des algorithmes de Machine Learning les plus proches du bon sens humain.
 
@@ -147,6 +152,17 @@ KNN fonctionne bien quand cette hypothèse est raisonnable.
 
 Il fonctionne moins bien si des points proches dans les variables peuvent avoir des labels très différents.
 
+Deux individus très semblables peuvent parfois produire des résultats très différents. Par exemple, deux étudiants ayant effectué un nombre d'heures de travail équivalent peuvent obtenir des notes très différentes. Dans ce cas, la proximité des variables n'implique pas nécessairement une proximité des résultats, ce qui limite l'efficacité de KNN.
+
+| Heures | Résultat (label) |
+| ------ | -------- |
+| 5      | Réussite |
+| 5.1    | Échec    |
+| 5.2    | Réussite |
+| 5.3    | Échec    |
+
+Des élèves très proches ont des résultats opposés.
+
 ---
 
 ## 6. Pourquoi ce n'est pas seulement une recette ?
@@ -196,19 +212,32 @@ On parle souvent de méthode **non paramétrique**.
 
 Cela ne veut pas dire qu'il n'y a aucun réglage.
 
-Il y a bien des paramètres comme `k`.
-
-Mais KNN ne résume pas le phénomène dans une équation simple comme :
-
-```text
-y = ax + b
-```
-
 Il raisonne surtout par comparaison avec les exemples gardés en mémoire.
+
+### Exercice 
+
+Pour `k=1`, puis pour `k=3`, décidez à quel statut appartient Alan ? 
+
+```python
+import pandas as pd
+
+students = pd.DataFrame({
+    "name": ["Alice", "Bob", "Charlie", "David", "Emma"],
+    "math": [15, 8, 12, 18, 10],
+    "python": [14, 10, 15, 17, 9],
+    "status": [1, 0, 1, 1, 0]
+})
+
+alan = {
+    "math": 11,
+    "python": 10
+}
+
+```
 
 ---
 
-## 8. Exemple central : Iris
+## 8. Exemple (vrais données)  : Iris
 
 Le dataset **Iris** est un grand classique du Machine Learning.
 
@@ -496,7 +525,25 @@ Est-ce que je veux vraiment que la colonne avec les plus grands nombres décide 
 
 Souvent, la réponse est non.
 
+
+### Exercice 
+
+Avec la méthode du min/max retrouvez la colonne normalisée
+
+| Variable | Valeur initiale | Min    | Max     | Valeur normalisée |
+| -------- | --------------- | ------ | ------- | ----------------- |
+| Surface  | 100             | 50     | 200     | 0.333             |
+| Pièces   | 4               | 1      | 8       | 0.429             |
+| Revenu   | 50 000          | 20 000 | 100 000 | 0.375             |
+
+
+```txt
+x = (x-min)/(max-min)
+```
+
 ---
+
+
 
 ## 15. StandardScaler
 

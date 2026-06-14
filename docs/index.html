@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">42</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">37</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -56,7 +56,7 @@
             </p>
             <div class="hero-actions">
               <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_introduction.md">Cours Markdown</a>
-              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">Notebook 00</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_preparation_data/Exercices/02_nettoyage_donnees_enonce.ipynb">Notebook 00</a>
             </div>
             <div class="hero-plan" aria-label="Plan du cours">
               <span>Plan</span>
@@ -64,7 +64,6 @@
                 <li>Préparer les données</li>
                 <li>Régression linéaire</li>
                 <li>KNN</li>
-                <li>Régression logistique</li>
               </ol>
             </div>
           </div>
@@ -310,7 +309,8 @@ y = data_clean["prix"]</code></pre>
             </p>
           </div>
           <div class="panel large exercise-links">
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">Ouvrir le notebook</a>
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_preparation_data/Exercices/02_nettoyage_donnees_enonce.ipynb">Ouvrir le notebook</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_preparation_data/Corrections/02_nettoyage_donnees_correction.ipynb">Correction</a>
             <p class="note">Objectif : repérer les incohérences avant d'entraîner un modèle.</p>
           </div>
         </div>
@@ -568,8 +568,8 @@ else:
             </p>
           </div>
           <div class="panel large exercise-links">
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">Régression linéaire</a>
-            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/02_train_test_split_enonce.ipynb">Train / test split</a>
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/02_regression_lineaire_exercice.md">Régression linéaire</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Corrections/02_regression_lineaire_exercice_correction.md">Correction</a>
             <p class="note">L'objectif est de relier préparation, entraînement et évaluation.</p>
           </div>
         </div>
@@ -825,7 +825,7 @@ X_test_norm = scaler.transform(X_test)</code></pre>
       </section>
 
       <section class="slide" id="slide-26" data-title="Choisir k">
-        <div class="slide-inner two-cols">
+        <div class="slide-inner two-cols wide-right">
           <div>
             <p class="pill">Recette</p>
             <h2>Comment choisir k ?</h2>
@@ -834,11 +834,20 @@ X_test_norm = scaler.transform(X_test)</code></pre>
               puis on garde une valeur qui fonctionne bien sur validation. Dans un exercice,
               on observe parfois le test pour comprendre le mécanisme.
             </p>
-            <ul class="compact-points">
-              <li><strong>k petit</strong><span>très local, sensible au bruit</span></li>
-              <li><strong>k moyen</strong><span>compromis souvent utile</span></li>
-              <li><strong>k grand</strong><span>plus lissé, parfois trop général</span></li>
-            </ul>
+            <div class="k-choice-cards" aria-label="Effet du choix de k">
+              <article>
+                <strong>k petit</strong>
+                <span>Très local, sensible au bruit.</span>
+              </article>
+              <article>
+                <strong>k moyen</strong>
+                <span>Compromis souvent utile.</span>
+              </article>
+              <article>
+                <strong>k grand</strong>
+                <span>Plus lissé, parfois trop général.</span>
+              </article>
+            </div>
           </div>
           <div class="panel large">
             <pre><code>for k in [1, 3, 5, 7, 9, 11]:
@@ -885,110 +894,11 @@ réponse augmentée</code></pre>
             </p>
           </div>
           <div class="panel large exercise-links">
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">KNN Iris</a>
-            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">k et normalisation</a>
+            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">KNN Iris</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Corrections/01_knn_iris_correction.ipynb">Correction Iris</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">k et normalisation</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Corrections/02_knn_k_normalisation_correction.ipynb">Correction k</a>
             <p class="note">Le but est de voir comment les voisins changent selon les données et l'échelle.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-intro" data-title="Régression logistique">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Classification</p>
-            <h2>Régression logistique : prédire une classe</h2>
-            <p>
-              Après le raisonnement par voisinage de KNN, on étudie une autre méthode de
-              classification binaire : un étudiant valide ou ne valide pas son examen.
-            </p>
-          </div>
-          <div class="table-card">
-            <table>
-              <thead><tr><th>Révision</th><th>Présence</th><th>Projet</th><th>Valide</th></tr></thead>
-              <tbody>
-                <tr><td>2 h</td><td>45%</td><td>non</td><td>0</td></tr>
-                <tr><td>8 h</td><td>75%</td><td>oui</td><td>1</td></tr>
-                <tr><td>15 h</td><td>92%</td><td>oui</td><td>1</td></tr>
-              </tbody>
-            </table>
-            <p class="note">Le label n'est plus un prix : c'est une classe 0 ou 1.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-proba" data-title="Probabilité">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Idée clé</p>
-            <h2>Le modèle prédit une probabilité</h2>
-            <p>
-              Une régression linéaire peut produire des valeurs comme -0.2 ou 1.4.
-              La régression logistique transforme le score en probabilité entre 0 et 1.
-            </p>
-          </div>
-          <div class="formula-card">
-            <span>0.82</span>
-            <p>82% de probabilité que l'étudiant valide</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-seuil" data-title="Seuil">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Décision</p>
-            <h2>Transformer une probabilité en classe</h2>
-            <p>
-              On choisit un seuil. Avec le seuil courant de 0.5, une probabilité supérieure
-              ou égale à 0.5 devient la classe 1.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>proba_valider = 0.82
-
-if proba_valider &gt;= 0.5:
-    prediction = 1
-else:
-    prediction = 0</code></pre>
-            <p class="note">Le seuil peut être adapté selon le contexte métier.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-reglog-evaluer" data-title="Évaluer">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Évaluation</p>
-            <h2>Accuracy et matrice de confusion</h2>
-            <p>
-              L'accuracy donne le pourcentage de bonnes réponses. La matrice de confusion
-              montre le détail des erreurs : faux positifs et faux négatifs.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>modele = LogisticRegression()
-modele.fit(X_train, y_train)
-
-predictions = modele.predict(X_test)
-accuracy_score(y_test, predictions)
-confusion_matrix(y_test, predictions)</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-exo-reglog" data-title="Exercice logistique">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Mise en pratique</p>
-            <h2>Exercice : prédire la validation d'un étudiant</h2>
-            <p>
-              Vous utilisez la régression logistique pour prédire une classe, lire une probabilité
-              et interpréter la matrice de confusion.
-            </p>
-          </div>
-          <div class="panel large exercise-links">
-            <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le notebook</a>
-            <p class="note">On travaille ici sur un problème binaire : valide ou non.</p>
           </div>
         </div>
       </section>
@@ -998,29 +908,21 @@ confusion_matrix(y_test, predictions)</code></pre>
           <p class="pill">Mise en pratique</p>
           <h2>Exercices notebooks</h2>
           <div class="cards exercise-grid">
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/00_nettoyage_donnees_enonce.ipynb">
-              <h3>00 · Nettoyage</h3>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_preparation_data/Exercices/02_nettoyage_donnees_enonce.ipynb">
+              <h3>01 · Nettoyage</h3>
               <p>types, valeurs manquantes, doublons.</p>
             </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">
-              <h3>01 · Régression linéaire</h3>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/02_regression_lineaire_exercice.md">
+              <h3>02 · Régression linéaire</h3>
               <p>split, fit, predict, MAE test.</p>
             </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/02_train_test_split_enonce.ipynb">
-              <h3>02 · Train / test split</h3>
-              <p>score, MAE, suivi de modèle.</p>
-            </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">
               <h3>03 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">
               <h3>04 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
-            </a>
-            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
-              <h3>05 · Régression logistique</h3>
-              <p>probabilité, seuil, matrice de confusion.</p>
             </a>
           </div>
         </div>

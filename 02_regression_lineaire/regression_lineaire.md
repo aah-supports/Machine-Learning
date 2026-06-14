@@ -1,4 +1,4 @@
-# Chapitre 3 : Régression linéaire
+#  Régression linéaire
 
 ## 1. Objectif du chapitre
 

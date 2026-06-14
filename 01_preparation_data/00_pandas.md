@@ -5,7 +5,7 @@
 Pandas est la bibliothèque Python de référence pour manipuler des données tabulaires (CSV, Excel, bases de données, etc.). Les deux structures principales sont :
 
 * **Series** : une colonne de données.
-* **DataFrame** : un tableau de données avec lignes et colonnes. ([Pandas][1])
+* **DataFrame** : un tableau de données avec lignes et colonnes.
 
 ---
 

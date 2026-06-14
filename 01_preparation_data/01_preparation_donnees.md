@@ -1,4 +1,4 @@
-# Chapitre 2 : Préparer et nettoyer les données
+# Préparer et nettoyer les données
 
 ## 1. Objectif du chapitre
 
