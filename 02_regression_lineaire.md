@@ -467,7 +467,13 @@ mae_test = mean_absolute_error(y_test, predictions_test)
 print(mae_test)
 ```
 
-La MAE test répond à la question :
+Pour interpréter ce nombre, on regarde chaque ligne du jeu de test :
+
+```text
+erreur = |prix réel - prix prédit|
+```
+
+La MAE est la moyenne de ces erreurs. Elle répond donc à la question :
 
 ```text
 En moyenne, de combien le modèle se trompe-t-il sur des données non vues ?
@@ -476,7 +482,7 @@ En moyenne, de combien le modèle se trompe-t-il sur des données non vues ?
 Si la MAE test vaut `12000`, cela signifie :
 
 ```text
-Sur les logements de test, le modèle se trompe en moyenne d'environ 12000 €.
+Sur les logements de test, l'erreur typique du modèle est d'environ 12000 €.
 ```
 
 Pourquoi ne pas mesurer seulement sur le train ?
@@ -570,10 +576,10 @@ mae_test = mean_absolute_error(y_test, prix_predits_test)
 print(mae_test)
 ```
 
-Si la MAE vaut `5000`, cela signifie :
+Pour l'interpréter, on lit `5000` comme un ordre de grandeur de l'erreur :
 
 ```text
-En moyenne, le modèle se trompe de 5000 €.
+Sur les données de test, les prédictions sont en moyenne éloignées de 5000 € du prix réel.
 ```
 
 On privilégie la MAE calculée sur le test, car elle mesure l'erreur sur des données non utilisées pour l'entraînement.

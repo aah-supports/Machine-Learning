@@ -208,66 +208,163 @@ Il raisonne surtout par comparaison avec les exemples gardés en mémoire.
 
 ---
 
-## 8. Que veut dire "proche" ?
+## 8. Exemple central : Iris
 
-Pour savoir si deux lignes sont proches, KNN calcule une distance.
+Le dataset **Iris** est un grand classique du Machine Learning.
 
-Exemple avec deux logements :
+Il a été utilisé par Ronald Fisher en 1936.
 
-| Logement | Surface | Pièces |
-| -------- | ------- | ------ |
-| A        | 75      | 3      |
-| B        | 80      | 3      |
-
-Ils sont proches :
-
-```text
-surface proche
-nombre de pièces identique
-```
-
-Autre exemple :
-
-| Logement | Surface | Pièces |
-| -------- | ------- | ------ |
-| A        | 75      | 3      |
-| C        | 130     | 6      |
-
-Ils sont moins proches.
-
-KNN transforme cette intuition en calcul numérique.
-
----
-
-## 9. Distance euclidienne
-
-La distance la plus courante est la distance euclidienne.
-
-Avec deux variables :
-
-```text
-distance = √((surface_a - surface_b)² + (pieces_a - pieces_b)²)
-```
-
-Idée :
-
-```text
-Plus la distance est petite, plus les lignes sont proches.
-```
-
-KNN classe ensuite les lignes par distance croissante.
-
----
-
-## 10. KNN pour classification
-
-En classification, le label est une catégorie.
-
-Exemple Iris :
+Le problème :
 
 ```text
 mesures d'une fleur → espèce
 ```
+
+On a trois espèces :
+
+- Iris Setosa ;
+- Iris Versicolor ;
+- Iris Virginica.
+
+Pour chaque fleur, on mesure :
+
+| Variable     | Signification      |
+| ------------ | ------------------ |
+| Sepal Length | Longueur du sépale |
+| Sepal Width  | Largeur du sépale  |
+| Petal Length | Longueur du pétale |
+| Petal Width  | Largeur du pétale  |
+
+Exemples de fleurs connues :
+
+| Sepal L | Sepal W | Petal L | Petal W | Espèce     |
+| ------- | ------- | ------- | ------- | ---------- |
+| 5.1     | 3.5     | 1.4     | 0.2     | Setosa     |
+| 4.9     | 3.0     | 1.4     | 0.2     | Setosa     |
+| 6.0     | 2.9     | 4.5     | 1.5     | Versicolor |
+| 6.5     | 3.0     | 5.8     | 2.2     | Virginica  |
+
+Chaque fleur devient donc un point dans un espace à 4 dimensions :
+
+```text
+(longueur sépale, largeur sépale, longueur pétale, largeur pétale)
+```
+
+---
+
+## 9. Nouvelle fleur à classer
+
+On reçoit une nouvelle fleur :
+
+| Sepal L | Sepal W | Petal L | Petal W |
+| ------- | ------- | ------- | ------- |
+| 5.9     | 3.0     | 4.2     | 1.5     |
+
+Sous forme de vecteur :
+
+```text
+(5.9, 3.0, 4.2, 1.5)
+```
+
+On ne connaît pas son espèce.
+
+KNN doit la prédire en comparant cette fleur aux fleurs connues du train.
+
+---
+
+## 10. Calculer les distances
+
+On compare la nouvelle fleur avec quelques fleurs connues.
+
+### Fleur A : Setosa
+
+```text
+(5.1, 3.5, 1.4, 0.2)
+```
+
+Différences avec la nouvelle fleur :
+
+```text
+0.8, 0.5, 2.8, 1.3
+```
+
+Distance :
+
+```text
+≈ 3.20
+```
+
+### Fleur B : Versicolor
+
+```text
+(6.0, 2.9, 4.5, 1.5)
+```
+
+Différences :
+
+```text
+0.1, 0.1, 0.3, 0.0
+```
+
+Distance :
+
+```text
+≈ 0.33
+```
+
+### Fleur C : Virginica
+
+```text
+(6.5, 3.0, 5.8, 2.2)
+```
+
+Différences :
+
+```text
+0.6, 0.0, 1.6, 0.7
+```
+
+Distance :
+
+```text
+≈ 1.85
+```
+
+La formule générale de distance a déjà été donnée plus haut.
+
+Ici, on l'applique aux 4 mesures de la fleur.
+
+---
+
+## 11. Trouver les voisins
+
+On classe les fleurs par distance croissante.
+
+| Fleur | Espèce     | Distance |
+| ----- | ---------- | -------- |
+| B     | Versicolor | 0.33     |
+| C     | Virginica  | 1.85     |
+| A     | Setosa     | 3.20     |
+
+Le plus proche voisin est :
+
+```text
+Versicolor
+```
+
+Si `k = 1`, KNN prend seulement ce voisin.
+
+La prédiction est donc :
+
+```text
+Versicolor
+```
+
+---
+
+## 12. KNN pour classification
+
+En classification, le label est une catégorie.
 
 Si `k = 5`, KNN regarde les 5 fleurs les plus proches.
 
@@ -298,9 +395,25 @@ modele = KNeighborsClassifier(n_neighbors=5)
 modele.fit(X_train, y_train)
 ```
 
+KNN ne connaît rien à la botanique.
+
+Il applique simplement :
+
+1. calculer les distances ;
+2. trouver les `k` voisins les plus proches ;
+3. faire voter les voisins ;
+4. retourner la classe majoritaire.
+
+Question qu'il se pose :
+
+```text
+Parmi toutes les fleurs que j'ai déjà vues,
+lesquelles ressemblent le plus à celle-ci ?
+```
+
 ---
 
-## 11. KNN pour régression
+## 13. KNN pour régression
 
 En régression, le label est une valeur numérique.
 
@@ -339,7 +452,7 @@ modele.fit(X_train, y_train)
 
 ---
 
-## 12. Pourquoi normaliser ?
+## 14. Pourquoi normaliser ?
 
 KNN utilise des distances.
 
@@ -357,6 +470,24 @@ Si on calcule une distance brute, `revenu_quartier` peut dominer.
 
 Le modèle risque alors de choisir les voisins surtout parce qu'ils ont un revenu de quartier proche, même si la surface ou le nombre de pièces sont différents.
 
+Exemple simplifié avec deux logements :
+
+| Variable        | Logement A | Logement B | Écart |
+| --------------- | ---------- | ---------- | ----- |
+| surface         | 80         | 85         | 5     |
+| pièces          | 3          | 4          | 1     |
+| revenu_quartier | 45000      | 60000      | 15000 |
+
+Dans une distance brute, l'écart `15000` pèse beaucoup plus que `5` ou `1`.
+
+La distance risque donc de répondre surtout à cette question :
+
+```text
+Les revenus de quartier sont-ils proches ?
+```
+
+Alors que l'on voulait comparer plusieurs aspects du logement.
+
 Question pratique :
 
 ```text
@@ -367,7 +498,7 @@ Souvent, la réponse est non.
 
 ---
 
-## 13. StandardScaler
+## 15. StandardScaler
 
 Pour éviter qu'une variable domine uniquement à cause de son échelle, on normalise.
 
@@ -388,11 +519,15 @@ X_train_normalise = scaler.fit_transform(X_train)
 X_test_normalise = scaler.transform(X_test)
 ```
 
-Règle importante :
+Ce que fait le code :
 
 ```text
-fit_transform sur le train
-transform sur le test
+fit_transform(X_train)
+→ calcule la moyenne et l'écart-type du train
+→ transforme le train avec ces valeurs
+
+transform(X_test)
+→ transforme le test avec la même moyenne et le même écart-type
 ```
 
 Pourquoi ?
@@ -401,9 +536,26 @@ Parce que le test doit rester une donnée non vue.
 
 On ne doit pas utiliser les informations du test pour préparer l'entraînement.
 
+Exemple concret :
+
+```text
+surface_train = [80, 100, 120]
+moyenne_train = 100
+```
+
+Si une surface de test vaut `110`, on la normalise avec la moyenne du train :
+
+```text
+110 - 100 = 10
+```
+
+On ne recalcule pas une nouvelle moyenne avec les surfaces du test.
+
+Sinon, le test participe indirectement à la préparation du modèle. L'évaluation devient moins honnête.
+
 ---
 
-## 14. Choisir k
+## 16. Choisir k
 
 `k` est le nombre de voisins utilisés.
 
@@ -464,6 +616,10 @@ On ne devine pas `k` parfaitement à l'avance.
 
 On teste plusieurs valeurs, puis on compare les performances.
 
+Dans un vrai projet, on choisit idéalement `k` avec un jeu de validation ou une validation croisée.
+
+Dans ce cours d'introduction, on observe parfois le score test pour comprendre le mécanisme, mais il faut retenir que le test final sert surtout à confirmer la performance du modèle choisi.
+
 Exemple :
 
 ```python
@@ -476,7 +632,7 @@ for k in [1, 3, 5, 7, 9, 11]:
     print(k, score_test)
 ```
 
-Puis on choisit une valeur de `k` qui donne un bon score test.
+Dans l'exercice, ce tableau permet de voir concrètement que `k` change le résultat.
 
 En classification binaire, on utilise souvent un nombre impair :
 
@@ -497,7 +653,7 @@ assez grand pour ne pas dépendre d'un seul voisin
 
 ---
 
-## 15. Évaluer KNN
+## 17. Évaluer KNN
 
 Comme pour la régression linéaire, on sépare train et test.
 
@@ -534,7 +690,7 @@ On peut aussi utiliser :
 
 ---
 
-## 16. Pipeline conseillé
+## 18. Pipeline conseillé
 
 Quand on combine normalisation et KNN, l'ordre des étapes compte.
 
@@ -560,7 +716,7 @@ Ce pipeline évite de mélanger les données de test avec les données d'entraî
 
 ---
 
-## 17. Limites de KNN
+## 19. Limites de KNN
 
 KNN est simple à comprendre, mais il a des limites.
 
@@ -588,7 +744,7 @@ Il faut tester plusieurs valeurs.
 
 ---
 
-## 18. Analogie : raisonner par cas similaires
+## 20. Analogie : raisonner par cas similaires
 
 On peut comparer deux approches.
 
@@ -615,7 +771,7 @@ KNN représente une forme très pure de raisonnement par cas similaires.
 
 ---
 
-## 19. Lien avec les systèmes modernes
+## 21. Lien avec les systèmes modernes
 
 L'idée de KNN reste très actuelle.
 
@@ -640,7 +796,7 @@ Les choses qui se ressemblent sont proches dans un espace mathématique.
 
 ---
 
-## 20. Règles pratiques
+## 22. Règles pratiques
 
 À retenir :
 
@@ -650,12 +806,12 @@ Les choses qui se ressemblent sont proches dans un espace mathématique.
 - Pour KNN, `StandardScaler` est souvent utile.
 - On entraîne sur le train.
 - On évalue sur le test.
-- On ne normalise jamais le test avec `fit_transform`.
+- La normalisation apprend ses paramètres sur le train, puis les applique au test.
 - `k` doit être choisi expérimentalement.
 
 ---
 
-## 21. Exercice pratique
+## 23. Exercice pratique
 
 Notebooks :
 

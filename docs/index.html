@@ -55,8 +55,8 @@
               et pourquoi il faut le surveiller dans le temps.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="../introduction.md">Cours Markdown</a>
-              <a class="button ghost" href="../notebooks/01_regression_lineaire_enonce.ipynb">Notebook 01</a>
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/01_introduction.md">Cours Markdown</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">Notebook 01</a>
             </div>
           </div>
           <div class="terminal-card" aria-label="Exemple de prédiction">
@@ -300,8 +300,8 @@ prix = modele.predict(nouveau_logement)</code></pre>
             <p class="pill">Mesure d'erreur</p>
             <h2>MAE : Erreur Absolue Moyenne</h2>
             <p>
-              La MAE test indique de combien le modèle se trompe en moyenne sur des données
-              qu'il n'a pas utilisées pour apprendre.
+              On compare chaque prix réel avec le prix prédit, puis on calcule la moyenne
+              des écarts absolus sur le jeu de test.
             </p>
           </div>
           <div class="panel large">
@@ -311,7 +311,7 @@ mae_test = mean_absolute_error(
     y_test,
     predictions_test
 )</code></pre>
-            <p class="result">Le modèle se trompe en moyenne de 10 000 €.</p>
+            <p class="result">MAE = 10 000 € : sur le test, l'erreur typique est d'environ 10 000 €.</p>
           </div>
         </div>
       </section>
@@ -464,19 +464,19 @@ x = (76, 3, 49000)</code></pre>
 
       <section class="slide" id="slide-19" data-title="Proche">
         <div class="slide-inner">
-          <p class="pill">Question clé</p>
-          <h2>Que veut dire “proche” ?</h2>
+          <p class="pill">Exemple Iris</p>
+          <h2>Une fleur devient un point à 4 dimensions</h2>
           <p class="lead">
-            KNN transforme une intuition en calcul : deux lignes sont proches si leurs variables
-            ont des valeurs proches.
+            Chaque fleur est décrite par quatre mesures. KNN compare ces mesures pour trouver
+            les fleurs les plus ressemblantes.
           </p>
           <div class="table-card">
             <table>
-              <thead><tr><th>Logement</th><th>Surface</th><th>Pièces</th><th>Lecture</th></tr></thead>
+              <thead><tr><th>Sepal L</th><th>Sepal W</th><th>Petal L</th><th>Petal W</th><th>Espèce</th></tr></thead>
               <tbody>
-                <tr><td>A</td><td>76</td><td>3</td><td>logement à prédire</td></tr>
-                <tr><td>B</td><td>75</td><td>3</td><td>très proche</td></tr>
-                <tr><td>C</td><td>130</td><td>6</td><td>plus éloigné</td></tr>
+                <tr><td>5.1</td><td>3.5</td><td>1.4</td><td>0.2</td><td>Setosa</td></tr>
+                <tr><td>6.0</td><td>2.9</td><td>4.5</td><td>1.5</td><td>Versicolor</td></tr>
+                <tr><td>6.5</td><td>3.0</td><td>5.8</td><td>2.2</td><td>Virginica</td></tr>
               </tbody>
             </table>
           </div>
@@ -487,15 +487,19 @@ x = (76, 3, 49000)</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Distance</p>
-            <h2>La proximité devient un nombre</h2>
+            <h2>Nouvelle fleur : qui est le plus proche ?</h2>
             <p>
-              KNN calcule une distance entre la nouvelle ligne et chaque ligne du train.
-              Plus la distance est petite, plus le voisin est proche.
+              Pour la fleur inconnue <code>(5.9, 3.0, 4.2, 1.5)</code>, KNN calcule
+              une distance avec les fleurs connues du train.
             </p>
           </div>
-          <div class="formula-card">
-            <span>d</span>
-            <p>√((surface₁ - surface₂)² + (pièces₁ - pièces₂)²)</p>
+          <div class="panel large">
+            <div class="distance-list">
+              <article><span>Versicolor</span><strong>0.33</strong></article>
+              <article><span>Virginica</span><strong>1.85</strong></article>
+              <article><span>Setosa</span><strong>3.20</strong></article>
+            </div>
+            <p class="note">La plus petite distance indique le voisin le plus proche.</p>
           </div>
         </div>
       </section>
@@ -511,12 +515,15 @@ x = (76, 3, 49000)</code></pre>
             </p>
           </div>
           <div class="panel large">
-            <pre><code>5 voisins :
-versicolor
-versicolor
-virginica
-versicolor
-virginica
+            <pre><code>k = 3
+
+voisin 1 : versicolor
+voisin 2 : versicolor
+voisin 3 : virginica
+
+vote :
+versicolor = 2
+virginica  = 1
 
 résultat = versicolor</code></pre>
           </div>
@@ -567,34 +574,37 @@ puis voter ou moyenner</code></pre>
       </section>
 
       <section class="slide" id="slide-24" data-title="Normalisation">
-        <div class="slide-inner">
-          <p class="pill">Préparation</p>
-          <h2>Normalisation : pourquoi ?</h2>
-          <p class="lead">
-            Certains modèles utilisent des distances ou des coefficients. Une colonne avec de grands
-            nombres peut dominer les calculs.
-          </p>
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Préparation</p>
+            <h2>Normalisation : pourquoi ?</h2>
+            <p>
+              KNN calcule des distances. Si une colonne contient de très grands nombres,
+              elle peut peser presque seule dans la distance.
+            </p>
+          </div>
           <div class="table-card">
             <table>
-              <thead><tr><th>Variable</th><th>Écart brut</th></tr></thead>
+              <thead><tr><th>Variable</th><th>Écart entre 2 logements</th></tr></thead>
               <tbody>
                 <tr><td>surface</td><td>5</td></tr>
                 <tr><td>pièces</td><td>1</td></tr>
                 <tr><td>revenu_quartier</td><td>15 000</td></tr>
               </tbody>
             </table>
+            <p class="note">Sans normalisation, 15 000 écrase presque le reste du calcul.</p>
           </div>
         </div>
       </section>
 
       <section class="slide" id="slide-25" data-title="Scaler">
-        <div class="slide-inner two-cols">
+        <div class="slide-inner two-cols wide-right">
           <div>
             <p class="pill">Règle importante</p>
             <h2>Normaliser sans tricher</h2>
             <p>
-              Le scaler apprend la moyenne et l'écart-type sur le train. Le test doit rester
-              une donnée non vue.
+              <code>fit_transform</code> calcule la règle de normalisation sur le train :
+              moyenne et écart-type. Le test reçoit ensuite la même règle, sans recalcul.
             </p>
           </div>
           <div class="panel large">
@@ -602,7 +612,10 @@ puis voter ou moyenner</code></pre>
 
 X_train_norm = scaler.fit_transform(X_train)
 X_test_norm = scaler.transform(X_test)</code></pre>
-            <p class="note">Jamais <code>fit_transform</code> sur le test.</p>
+            <p class="note">
+              Exemple : si la moyenne train vaut 100, on utilise 100 aussi pour convertir le test.
+              Sinon, le test participe à la préparation du modèle.
+            </p>
           </div>
         </div>
       </section>
@@ -614,22 +627,14 @@ X_test_norm = scaler.transform(X_test)</code></pre>
             <h2>Comment choisir k ?</h2>
             <p>
               k est la taille du voisinage, pas le nombre de critères. On teste plusieurs valeurs,
-              puis on garde une valeur qui fonctionne bien sur validation ou test.
+              puis on garde une valeur qui fonctionne bien sur validation. Dans un exercice,
+              on observe parfois le test pour comprendre le mécanisme.
             </p>
-            <div class="cards three">
-              <article class="panel">
-                <h3>k petit</h3>
-                <p>Très local, sensible au bruit.</p>
-              </article>
-              <article class="panel accent">
-                <h3>k moyen</h3>
-                <p>Compromis souvent utile.</p>
-              </article>
-              <article class="panel">
-                <h3>k grand</h3>
-                <p>Plus lissé, parfois trop général.</p>
-              </article>
-            </div>
+            <ul class="compact-points">
+              <li><strong>k petit</strong><span>très local, sensible au bruit</span></li>
+              <li><strong>k moyen</strong><span>compromis souvent utile</span></li>
+              <li><strong>k grand</strong><span>plus lissé, parfois trop général</span></li>
+            </ul>
           </div>
           <div class="panel large">
             <pre><code>for k in [1, 3, 5, 7, 9, 11]:
@@ -638,7 +643,7 @@ X_test_norm = scaler.transform(X_test)</code></pre>
     )
     modele.fit(X_train, y_train)
     print(k, modele.score(X_test, y_test))</code></pre>
-            <p class="note">En classification binaire, les k impairs limitent les égalités de vote.</p>
+            <p class="note">En vrai projet, le test final sert surtout à confirmer le choix.</p>
           </div>
         </div>
       </section>
@@ -670,19 +675,19 @@ réponse augmentée</code></pre>
           <p class="pill">Mise en pratique</p>
           <h2>Exercices notebooks</h2>
           <div class="cards three">
-            <a class="panel link-panel" href="../notebooks/01_regression_lineaire_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/01_regression_lineaire_enonce.ipynb">
               <h3>01 · Régression linéaire</h3>
               <p>split, fit, predict, MAE test.</p>
             </a>
-            <a class="panel link-panel" href="../notebooks/02_train_test_split_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/02_train_test_split_enonce.ipynb">
               <h3>02 · Train / test split</h3>
               <p>score, MAE, suivi de modèle.</p>
             </a>
-            <a class="panel link-panel" href="../notebooks/03_knn_iris_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_knn_iris_enonce.ipynb">
               <h3>03 · KNN Iris</h3>
               <p>voisins, distances et vote.</p>
             </a>
-            <a class="panel link-panel" href="../notebooks/04_knn_k_normalisation_enonce.ipynb">
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/04_knn_k_normalisation_enonce.ipynb">
               <h3>04 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
