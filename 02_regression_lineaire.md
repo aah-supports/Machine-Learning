@@ -482,7 +482,27 @@ En moyenne, de combien le modèle se trompe-t-il sur des données non vues ?
 Si la MAE test vaut `12000`, cela signifie :
 
 ```text
-Sur les logements de test, l'erreur typique du modèle est d'environ 12000 €.
+Sur les logements de test, l'erreur moyenne du modèle est d'environ 12000 €.
+```
+
+Exemple concret :
+
+| Prix réel | Prix prédit | Erreur |
+| --------- | ----------- | ------ |
+| 200000 € | 190000 € | 10000 € |
+| 320000 € | 330000 € | 10000 € |
+| 400000 € | 395000 € | 5000 € |
+
+Ici, la moyenne des erreurs vaut :
+
+```text
+(10000 + 10000 + 5000) / 3 = 8333 €
+```
+
+Donc `MAE = 8333 €` signifie :
+
+```text
+sur ces données de test, les prédictions sont en moyenne à 8333 € du vrai prix.
 ```
 
 Pourquoi ne pas mesurer seulement sur le train ?

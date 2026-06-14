@@ -468,6 +468,18 @@ prix = modele.predict(nouveau_logement)</code></pre>
               On compare chaque prix réel avec le prix prédit, puis on calcule la moyenne
               des écarts absolus sur le jeu de test.
             </p>
+            <div class="table-card compact-table">
+              <table>
+                <thead>
+                  <tr><th>Prix réel</th><th>Prix prédit</th><th>Erreur</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>200 000 €</td><td>190 000 €</td><td>10 000 €</td></tr>
+                  <tr><td>320 000 €</td><td>330 000 €</td><td>10 000 €</td></tr>
+                  <tr><td>400 000 €</td><td>395 000 €</td><td>5 000 €</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="panel large">
             <pre><code>predictions_test = modele.predict(X_test)
@@ -476,7 +488,7 @@ mae_test = mean_absolute_error(
     y_test,
     predictions_test
 )</code></pre>
-            <p class="result">MAE = 10 000 € : sur le test, l'erreur typique est d'environ 10 000 €.</p>
+            <p class="result">MAE = 10 000 € : l'erreur moyenne sur le test est d'environ 10 000 €.</p>
           </div>
         </div>
       </section>
