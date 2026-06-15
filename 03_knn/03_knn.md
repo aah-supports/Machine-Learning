@@ -399,6 +399,15 @@ Si `k = 5`, KNN regarde les 5 fleurs les plus proches.
 
 Puis il fait un vote.
 
+Déroulé complet :
+
+1. Une nouvelle fleur arrive.
+2. On calcule sa distance avec toutes les fleurs connues du train.
+3. On trie toutes les fleurs connues de la plus proche à la plus éloignée.
+4. On garde seulement les `k` plus proches.
+5. On regarde les catégories de ces `k` voisins.
+6. La catégorie majoritaire gagne.
+
 Exemple :
 
 | Voisin | Espèce     |
