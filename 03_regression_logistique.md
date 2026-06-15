@@ -289,7 +289,77 @@ La régression logistique prépare donc naturellement le passage vers :
 
 ---
 
-## 11. Exercice pratique
+## 11. Mini-exercice : prédire une validation
+
+On dispose d'un petit dataset d'étudiants.
+
+```python
+import pandas as pd
+
+df = pd.DataFrame({
+    "heures_revision": [1, 2, 3, 4, 5, 6, 7, 8],
+    "presence": [30, 35, 45, 50, 60, 70, 80, 90],
+    "valide": [0, 0, 0, 0, 1, 1, 1, 1]
+})
+```
+
+Objectif :
+
+```text
+Prédire si un étudiant valide le module.
+```
+
+### Étape 1 - Séparer X et y
+
+Créer :
+
+```python
+X = df[["heures_revision", "presence"]]
+y = df["valide"]
+```
+
+### Étape 2 - Entraîner le modèle
+
+Compléter :
+
+```python
+from sklearn.linear_model import LogisticRegression
+
+modele = ...
+modele.fit(..., ...)
+```
+
+### Étape 3 - Tester un nouvel étudiant
+
+On veut prédire le résultat d'un étudiant qui a :
+
+```text
+6 heures de révision
+65 % de présence
+```
+
+Compléter :
+
+```python
+nouvel_etudiant = pd.DataFrame({
+    "heures_revision": [6],
+    "presence": [65]
+})
+
+classe = ...
+probabilites = ...
+```
+
+### Questions
+
+1. Quelle classe le modèle prédit-il ?
+2. Quelle est la probabilité associée à la classe `1` ?
+3. Si cette probabilité est supérieure à `0.5`, quelle classe choisit-on ?
+4. Pourquoi `predict_proba` donne-t-il plus d'information que `predict` ?
+
+---
+
+## 12. Exercice pratique
 
 Notebook :
 
