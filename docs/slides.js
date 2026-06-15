@@ -17,10 +17,10 @@ const courseSections = [
   { title: "Introduction", start: 0, end: 6 },
   { title: "Préparer les données", start: 7, end: 10 },
   { title: "Régression linéaire", start: 11, end: 21 },
-  { title: "KNN", start: 22, end: 35 },
-  { title: "Exercices", start: 36, end: 36 },
-  { title: "Régression logistique", start: 37, end: 42 },
-  { title: "Optimisation", start: 43, end: 44 },
+  { title: "KNN", start: 22, end: 34 },
+  { title: "Exercices", start: 35, end: 35 },
+  { title: "Régression logistique", start: 36, end: 41 },
+  { title: "Optimisation", start: 42, end: 43 },
 ];
 
 function clampIndex(index) {

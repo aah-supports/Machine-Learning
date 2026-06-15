@@ -203,29 +203,47 @@ Avec deux variables, cette séparation peut être représentée par une droite.
 
 Avec plus de variables, on parle d'hyperplan.
 
-La différence avec la régression linéaire est la sortie :
+Attention : la régression logistique n'est pas une régression linéaire qui prédirait un prix ou une quantité.
+
+Elle réutilise une formule linéaire pour calculer un score `z`.
+
+Ce score indique de quel côté de la frontière se trouve l'exemple.
+
+La différence avec la régression linéaire est donc l'objectif :
 
 ```text
 Régression linéaire :
-score linéaire -> valeur numérique
+surface -> prix prédit
+sortie possible : 280000
 
 Régression logistique :
-score linéaire -> sigmoïde -> probabilité
+heures, présence -> score z
+z négatif -> plutôt classe 0
+z positif -> plutôt classe 1
 ```
 
-On peut retenir :
+Ensuite seulement, la sigmoïde transforme ce score en probabilité :
 
 ```text
-Régression linéaire
-        +
-Transformation sigmoïde
-        =
-Probabilité entre 0 et 1
+score z -> sigmoïde -> probabilité entre 0 et 1
 ```
 
-C'est pour cela qu'elle est souvent enseignée juste après la régression linéaire.
+Exemple :
 
-Mathématiquement, elle prolonge l'idée de la droite, mais pour résoudre un problème de classification.
+```text
+p = 0.82
+```
+
+Cela signifie que le modèle estime une forte probabilité pour la classe `1`.
+
+Puis on applique un seuil :
+
+```text
+si p >= 0.5 -> classe 1
+si p < 0.5  -> classe 0
+```
+
+C'est pour cela qu'elle est souvent enseignée après la régression linéaire : elle garde l'idée d'une formule avec des poids et un biais, mais elle l'utilise pour classifier.
 
 ---
 
@@ -276,4 +294,3 @@ La régression logistique prépare donc naturellement le passage vers :
 Notebook :
 
 - [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
-

@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">45</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">44</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -748,17 +748,25 @@ résultat = versicolor</code></pre>
             <p class="pill">Régression</p>
             <h2>KNN fait une moyenne</h2>
             <p>
-              Pour prédire une valeur numérique, KNN peut prendre la moyenne des labels
-              des voisins les plus proches.
+              Pour prédire une valeur numérique, KNN cherche les logements les plus proches,
+              puis fait la moyenne de leurs prix.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>3 voisins :
-250 000 €
-270 000 €
-310 000 €
+            <pre><code>Nouveau logement :
+surface = 75 m²
+pièces  = 3
 
-prédiction = 276 666 €</code></pre>
+k = 3
+
+voisins les plus proches :
+1. 72 m², 3 pièces -> 250 000 €
+2. 78 m², 3 pièces -> 270 000 €
+3. 80 m², 4 pièces -> 310 000 €
+
+prédiction =
+(250 000 + 270 000 + 310 000) / 3
+= 276 666 €</code></pre>
           </div>
         </div>
       </section>
@@ -813,21 +821,35 @@ puis voter ou moyenner</code></pre>
         <div class="slide-inner two-cols wide-right">
           <div>
             <p class="pill">Règle importante</p>
-            <h2>Normaliser sans tricher</h2>
+            <h2>Normaliser change les voisins</h2>
             <p>
-              <code>fit_transform</code> calcule la règle de normalisation sur le train :
-              moyenne et écart-type. Le test reçoit ensuite la même règle, sans recalcul.
+              Sans normalisation, la variable avec les plus grands nombres peut décider presque seule.
+              Après normalisation, chaque variable peut compter dans la distance.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>scaler = StandardScaler()
+            <pre><code>Nouveau logement :
+surface = 80 m²
+pièces  = 3
+revenu  = 50 000
 
-X_train_norm = scaler.fit_transform(X_train)
-X_test_norm = scaler.transform(X_test)</code></pre>
-            <p class="note">
-              Exemple : si la moyenne train vaut 100, on utilise 100 aussi pour convertir le test.
-              Sinon, le test participe à la préparation du modèle.
-            </p>
+Voisin A :
+surface = 82 m²
+pièces  = 3
+revenu  = 90 000
+
+Voisin B :
+surface = 120 m²
+pièces  = 6
+revenu  = 51 000
+
+Distance brute :
+A est pénalisé par 40 000 de revenu
+KNN choisit souvent B
+
+Après normalisation :
+A redevient proche en surface et pièces</code></pre>
+            <p class="note">En pratique : <code>fit_transform</code> sur le train, puis <code>transform</code> sur le test.</p>
           </div>
         </div>
       </section>
@@ -865,28 +887,6 @@ X_test_norm = scaler.transform(X_test)</code></pre>
     modele.fit(X_train, y_train)
     print(k, modele.score(X_test, y_test))</code></pre>
             <p class="note">En vrai projet, le test final sert surtout à confirmer le choix.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="slide" id="slide-27" data-title="Mémoire vectorielle">
-        <div class="slide-inner two-cols">
-          <div>
-            <p class="pill">Ouverture</p>
-            <h2>Une idée encore très actuelle</h2>
-            <p>
-              Les embeddings, la recherche vectorielle et le RAG utilisent encore cette idée :
-              les objets qui se ressemblent sont proches dans un espace mathématique.
-            </p>
-          </div>
-          <div class="panel large">
-            <pre><code>question utilisateur
-  ↓
-vecteur embedding
-  ↓
-documents les plus proches
-  ↓
-réponse augmentée</code></pre>
           </div>
         </div>
       </section>
@@ -1059,18 +1059,27 @@ p = 0.5</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Géométrie</p>
-            <h2>Une droite de séparation</h2>
+            <h2>Pas une valeur, mais une frontière</h2>
             <p>
-              La régression logistique cherche une droite, ou un hyperplan, qui sépare les classes.
-              Elle transforme ensuite la position par rapport à cette séparation en probabilité.
+              La régression linéaire prédit directement un nombre. La régression logistique
+              utilise une formule linéaire seulement pour savoir de quel côté de la frontière
+              se trouve l'exemple, puis transforme ce score en probabilité.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>Régression linéaire
-        +
-Transformation sigmoïde
-        =
-Probabilité entre 0 et 1</code></pre>
+            <pre><code>Régression linéaire :
+surface -> prix prédit
+sortie possible : 280 000
+
+Régression logistique :
+heures, présence -> score z
+z négatif -> plutôt classe 0
+z positif -> plutôt classe 1
+
+sigmoïde(z) -> probabilité
+exemple : p = 0.82
+
+si p >= 0.5 -> classe 1</code></pre>
             <div class="hero-actions" style="margin-top: 1rem;">
               <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_regression_logistique.md">Ouvrir le cours</a>
               <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le TP</a>
