@@ -1061,29 +1061,22 @@ p = 0.5</code></pre>
             <p class="pill">Géométrie</p>
             <h2>Pas une valeur, mais une frontière</h2>
             <p>
-              La régression linéaire prédit directement un nombre. La régression logistique
-              utilise une formule linéaire seulement pour savoir de quel côté de la frontière
-              se trouve l'exemple, puis transforme ce score en probabilité.
+              La régression logistique ne prédit pas directement une quantité.
+              Elle calcule un score, le transforme en probabilité, puis choisit une classe.
             </p>
           </div>
           <div class="panel large">
             <pre><code>Régression linéaire :
-surface -> prix prédit
-sortie possible : 280 000
+entrée -> nombre
+exemple : prix = 280 000
 
 Régression logistique :
-heures, présence -> score z
-z négatif -> plutôt classe 0
-z positif -> plutôt classe 1
+entrée -> score z
+z < 0 : plutôt classe 0
+z > 0 : plutôt classe 1
 
 sigmoïde(z) -> probabilité
-exemple : p = 0.82
-
-si p >= 0.5 -> classe 1</code></pre>
-            <div class="hero-actions" style="margin-top: 1rem;">
-              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_regression_logistique.md">Ouvrir le cours</a>
-              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le TP</a>
-            </div>
+p = 0.82 -> classe 1</code></pre>
           </div>
         </div>
       </section>
