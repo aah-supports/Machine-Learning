@@ -27,7 +27,7 @@
           Menu
         </button>
         <button class="icon-button" id="prevSlide" type="button" aria-label="Slide précédente">←</button>
-        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">39</span></span>
+        <span class="counter"><span id="currentSlide">1</span>/<span id="totalSlides">45</span></span>
         <button class="icon-button" id="nextSlide" type="button" aria-label="Slide suivante">→</button>
       </nav>
     </header>
@@ -927,6 +927,147 @@ réponse augmentée</code></pre>
               <h3>04 · k et scaler</h3>
               <p>recette pour k et normalisation.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
+              <h3>05 · Régression logistique</h3>
+              <p>sigmoïde, probabilité et frontière.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-intro" data-title="Régression logistique">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Après KNN</p>
+            <h2>Régression logistique : classer avec une probabilité</h2>
+            <p>
+              KNN classe par proximité. La régression logistique apprend une séparation,
+              puis transforme un score en probabilité entre 0 et 1.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>0 = ne valide pas
+1 = valide
+
+heures de révision
+présence
+exercices rendus
+        ↓
+probabilité de validation</code></pre>
+            <p class="note">On passe d'un vote de voisins à une probabilité interprétable.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-score" data-title="Score linéaire">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Étape 1</p>
+            <h2>On commence par une droite</h2>
+            <p>
+              La régression logistique calcule d'abord un score linéaire avec des poids
+              et un biais, comme une régression linéaire.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>z = w1 * x1 + w2 * x2 + ... + b
+
+x1 = heures de révision
+x2 = taux de présence
+
+z = score linéaire</code></pre>
+            <p class="note">À ce stade, z n'est pas encore une probabilité.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-sigmoide" data-title="Sigmoïde">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Étape 2</p>
+            <h2>La sigmoïde transforme le score</h2>
+            <p>
+              Une droite peut produire des valeurs négatives ou supérieures à 1. La sigmoïde
+              écrase le score pour obtenir une probabilité.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>p = 1 / (1 + e^(-z))
+
+z très négatif  -> proche de 0
+z = 0           -> 0.5
+z très positif  -> proche de 1</code></pre>
+            <p class="result">p est toujours entre 0 et 1.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-intuition" data-title="Intuition sigmoïde">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Intuition</p>
+            <h2>La transition est progressive</h2>
+            <p>
+              Pour des heures de révision, la probabilité de réussite ne passe pas brutalement
+              de 0 à 1. Elle augmente progressivement.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Probabilité
+
+1.0 |                     *********
+    |                 ****
+0.5 |-------------****
+    |         ****
+0.0 |********
+    +-------------------------
+         heures de révision</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-seuil" data-title="Seuil 0.5">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Décision</p>
+            <h2>0.5 est la frontière de décision</h2>
+            <p>
+              Quand z vaut 0, la sigmoïde vaut 0.5. C'est le point où le modèle hésite
+              entre les deux classes.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>si p >= 0.5 -> classe 1
+si p < 0.5  -> classe 0
+
+z = 0
+p = 1 / (1 + e^0)
+p = 1 / 2
+p = 0.5</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-logistique-geometrie" data-title="Frontière">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Géométrie</p>
+            <h2>Une droite de séparation</h2>
+            <p>
+              La régression logistique cherche une droite, ou un hyperplan, qui sépare les classes.
+              Elle transforme ensuite la position par rapport à cette séparation en probabilité.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Régression linéaire
+        +
+Transformation sigmoïde
+        =
+Probabilité entre 0 et 1</code></pre>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_regression_logistique.md">Ouvrir le cours</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">Ouvrir le TP</a>
+            </div>
           </div>
         </div>
       </section>

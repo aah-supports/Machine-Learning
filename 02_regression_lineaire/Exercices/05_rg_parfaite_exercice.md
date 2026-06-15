@@ -10,19 +10,7 @@ Dans cet exercice, on travaille avec des données synthétiques : elles sont gé
 
 ## Partie 1 - Droite presque parfaite
 
-Créer un dataset immobilier synthétique avec :
-
-- une variable `surface` ;
-- une cible `prix`.
-
-Contraintes :
-
-- générer 500 surfaces entre 20 et 200 ;
-- fixer la graine aléatoire avec `np.random.seed(42)` ;
-- générer le prix avec une formule linéaire ;
-- ajouter un bruit aléatoire faible.
-
-Structure attendue :
+On donne le dataset immobilier synthétique suivant :
 
 ```python
 import numpy as np
@@ -30,15 +18,21 @@ import pandas as pd
 
 np.random.seed(42)
 
-surface = ...
+surface = np.random.randint(20, 200, 500)
 
-prix = ...
+prix = 3000 * surface + np.random.normal(0, 10000, 500)
 
 df = pd.DataFrame({
     "surface": surface,
     "prix": prix
 })
 ```
+
+Ce dataset contient :
+
+- une variable `surface` ;
+- une cible `prix` ;
+- une relation presque linéaire entre les deux.
 
 ### Questions
 
@@ -145,4 +139,3 @@ Puis entraîner une nouvelle régression linéaire et afficher le R².
 2. Pourquoi le modèle retrouve-t-il presque parfaitement la relation ?
 3. Pourquoi les vrais datasets dépassent-ils rarement 0.8 avec une simple régression linéaire ?
 4. À quoi sert un dataset synthétique dans un cours de Machine Learning ?
-

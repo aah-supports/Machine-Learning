@@ -19,7 +19,8 @@ const courseSections = [
   { title: "Régression linéaire", start: 11, end: 21 },
   { title: "KNN", start: 22, end: 35 },
   { title: "Exercices", start: 36, end: 36 },
-  { title: "Optimisation", start: 37, end: 38 },
+  { title: "Régression logistique", start: 37, end: 42 },
+  { title: "Optimisation", start: 43, end: 44 },
 ];
 
 function clampIndex(index) {

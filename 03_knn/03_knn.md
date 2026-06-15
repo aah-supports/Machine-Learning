@@ -864,3 +864,18 @@ Notebooks :
 
 - [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
 - [Énoncé : choisir k et normaliser](notebooks/04_knn_k_normalisation_enonce.ipynb)
+
+---
+
+## 24. Transition vers la régression logistique
+
+KNN classe une nouvelle observation en regardant les voisins les plus proches.
+
+La régression logistique va proposer une autre logique :
+
+```text
+apprendre une séparation
+puis transformer le score en probabilité
+```
+
+Elle garde l'idée de classification, mais elle introduit les notions de poids, biais et sigmoïde.
