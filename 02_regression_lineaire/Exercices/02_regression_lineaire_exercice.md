@@ -1,17 +1,28 @@
-# TP : Première régression avec Scikit-Learn
+# TP : Régression linéaire simple avec BMI
 
 ## Objectif
 
-Construire un premier modèle de Machine Learning capable de prédire la progression d'un diabète à partir d'informations médicales.
+Construire une première régression linéaire avec Scikit-Learn pour prédire la progression du diabète à partir d'une seule variable médicale : l'IMC, appelé `bmi` dans le dataset.
+
+Question centrale :
+
+> Le BMI permet-il d'expliquer une partie de la progression du diabète ?
 
 ---
 
-# Étape 1 - Charger le dataset
+## Étape 1 - Charger le dataset
+
+Importer :
 
 ```python
 from sklearn.datasets import load_diabetes
+import pandas as pd
+```
 
-data = load_diabetes(as_frame=True)
+Charger les données :
+
+```python
+data = load_diabetes(as_frame=True, scaled=False)
 
 X = data.data
 y = data.target
@@ -26,189 +37,142 @@ y = data.target
 
 ---
 
-# Étape 2 - Explorer les données
+## Étape 2 - Sélectionner la variable BMI
 
-Afficher :
-
-```python
-X.info()
-```
-
-Puis :
+On ne garde qu'une seule variable explicative :
 
 ```python
-X.describe()
+X_bmi = X[["bmi"]]
 ```
 
 ### Questions
 
-1. Y a-t-il des valeurs manquantes ?
-2. Quelle est la moyenne de la variable `bmi` ?
-3. Quelle est la valeur maximale de `bp` ?
+1. Pourquoi utilise-t-on deux crochets autour de `"bmi"` ?
+2. Quelle est la variable utilisée pour prédire ?
+3. Quelle est la valeur à prédire ?
 
 ---
 
-# Étape 3 - Séparer les données
-
-Créer :
-
-```python
-X_train
-X_test
-y_train
-y_test
-```
-
-avec :
-
-```python
-test_size=0.2
-random_state=42
-```
-
-### Questions
-
-1. Combien d'observations dans le train ?
-2. Combien d'observations dans le test ?
-
----
-
-# Étape 4 - Créer le modèle
+## Étape 3 - Créer et entraîner le modèle
 
 Importer :
 
 ```python
-LinearRegression
+from sklearn.linear_model import LinearRegression
 ```
 
-Créer :
+Créer le modèle :
 
 ```python
-model
+reg = LinearRegression()
 ```
 
-Puis entraîner le modèle.
+Puis entraîner le modèle avec `X_bmi` et `y`.
 
-### Question
+### Questions
 
-Quelle commande permet d'entraîner le modèle ?
+1. Quelle commande permet d'entraîner le modèle ?
+2. Que signifie `.fit(X_bmi, y)` dans ce cas ?
 
 ---
 
-# Étape 5 - Faire une prédiction
+## Étape 4 - Faire les prédictions
 
-Prédire les valeurs du jeu de test :
-
-```python
-predictions = ...
-```
-
-Afficher :
+Utiliser le modèle entraîné pour prédire la progression du diabète :
 
 ```python
-print(predictions[:10])
+y_pred = ...
 ```
 
 ### Question
 
-Que représentent ces valeurs ?
+Que représentent les valeurs contenues dans `y_pred` ?
 
 ---
 
-# Étape 6 - Évaluer le modèle
+## Étape 5 - Préparer les données pour le graphique
 
-Calculer la MAE :
+Créer un DataFrame contenant :
+
+- le BMI ;
+- la progression réelle du diabète ;
+- la prédiction du modèle.
+
+Structure attendue :
 
 ```python
-from sklearn.metrics import mean_absolute_error
+df = pd.DataFrame({
+    "bmi": ...,
+    "target": ...,
+    "prediction": ...
+}).sort_values("bmi")
 ```
 
 ### Questions
 
-1. Calculer la MAE.
-2. Interpréter le résultat.
-
-Phrase attendue :
-
-> En moyenne, le modèle se trompe de ______ unités sur la progression du diabète.
+1. Pourquoi trie-t-on le DataFrame par `bmi` ?
+2. Quelle colonne servira à tracer les points réels ?
+3. Quelle colonne servira à tracer la droite de régression ?
 
 ---
 
-# Étape 7 - Comparer réel / prédit
+## Étape 6 - Visualiser la droite de régression
 
-Afficher les 10 premières prédictions :
-
-```python
-for real, pred in zip(y_test[:10], predictions[:10]):
-    print(...)
-```
-
-Exemple attendu :
-
-```text
-Réel : 219
-Prédit : 198.5
-```
-
-### Question
-
-Le modèle semble-t-il proche de la réalité ?
-
----
-
-# Étape 8 - Comprendre les coefficients
-
-Afficher :
+Importer :
 
 ```python
-model.coef_
+import matplotlib.pyplot as plt
 ```
-
-Afficher :
-
-```python
-X.columns
-```
-
-### Questions
-
-1. Combien de coefficients possède le modèle ?
-2. Quelle variable possède le coefficient positif le plus élevé ?
-3. Que signifie un coefficient positif ?
-4. Que signifie un coefficient négatif ?
-
----
-
-# Bonus 1
-
-Calculer le score :
-
-```python
-model.score(X_test, y_test)
-```
-
-### Question
-
-Que mesure le coefficient (R^2) ?
-
----
-
-# Bonus 2
 
 Tracer :
 
+- un nuage de points avec `bmi` en abscisse et `target` en ordonnée ;
+- une ligne avec `bmi` en abscisse et `prediction` en ordonnée.
+
+Ajouter :
+
 ```python
-Valeurs réelles
+plt.xlabel("BMI")
+plt.ylabel("Progression du diabète")
+plt.title("Régression linéaire : BMI -> Progression du diabète")
+plt.show()
 ```
 
-contre
+### Questions
+
+1. Que représente chaque point ?
+2. Que représente la droite ?
+3. La droite monte-t-elle ou descend-elle quand le BMI augmente ?
+
+---
+
+## Étape 7 - Lire les résultats du modèle
+
+Afficher :
 
 ```python
-Valeurs prédites
+print("Pente :", ...)
+print("Intercept :", ...)
+print("R² :", ...)
 ```
 
-avec Matplotlib.
+### Questions
 
-### Question
+1. Comment accéder à la pente du modèle ?
+2. Comment accéder à l'intercept ?
+3. Comment calculer le score R² avec Scikit-Learn ?
 
-Que devrait-on observer si le modèle était parfait ?
+---
+
+## Étape 8 - Interpréter
+
+Répondre avec des phrases courtes.
+
+### Questions finales
+
+1. Le BMI a-t-il une relation positive ou négative avec la progression du diabète ?
+2. Que signifie une pente positive ?
+3. Le BMI seul suffit-il à expliquer toute la progression du diabète ?
+4. Que mesure le coefficient R² ?
+5. Pourquoi faudra-t-il utiliser plusieurs variables pour améliorer le modèle ?
+

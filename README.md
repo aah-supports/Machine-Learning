@@ -11,10 +11,14 @@
 ## Exercices pratiques
 
 - [00 - Nettoyage de données : énoncé](notebooks/00_nettoyage_donnees_enonce.ipynb)
-- [01 - Régression linéaire : énoncé](notebooks/01_regression_lineaire_enonce.ipynb)
+- [01 - Régression linéaire BMI : énoncé](notebooks/01_regression_lineaire_enonce.ipynb)
+- [01 bis - Régression presque parfaite : énoncé](02_regression_lineaire/Exercices/05_rg_parfaite_exercice.md)
 - [02 - Train / test split : énoncé](notebooks/02_train_test_split_enonce.ipynb)
 - [03 - KNN avec Iris : énoncé](notebooks/03_knn_iris_enonce.ipynb)
 - [04 - Choisir k et normaliser : énoncé](notebooks/04_knn_k_normalisation_enonce.ipynb)
 - [05 - Régression logistique : énoncé](notebooks/03_regression_logistique_enonce.ipynb)
 
-Les corrections restent dans `notebooks/corrections/` en local et ne sont pas versionnées.
+Corrections accessibles pour le chapitre régression linéaire :
+
+- [Correction BMI et progression du diabète](02_regression_lineaire/Corrections/correction_diabetes.md)
+- [Correction régression presque parfaite](02_regression_lineaire/Corrections/correction_rg_parfaite.md)

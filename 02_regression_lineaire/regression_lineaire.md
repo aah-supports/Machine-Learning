@@ -898,13 +898,20 @@ On le surveille parce que la réalité peut changer.
 
 ## 22. Exercice pratique
 
-Notebook à faire :
+TP à faire :
 
-- [Énoncé : régression linéaire](notebooks/01_regression_lineaire_enonce.ipynb)
+- [Énoncé notebook : BMI et progression du diabète](../notebooks/01_regression_lineaire_enonce.ipynb)
+- [Énoncé markdown : BMI et progression du diabète](Exercices/02_regression_lineaire_exercice.md)
+- [Correction : BMI et progression du diabète](Corrections/correction_diabetes.md)
+
+Exercice à faire ensuite :
+
+- [Énoncé : régression presque parfaite](Exercices/05_rg_parfaite_exercice.md)
+- [Correction : régression presque parfaite](Corrections/correction_rg_parfaite.md)
 
 Exercice complémentaire sur l'évaluation :
 
-- [Énoncé : train / test split](notebooks/02_train_test_split_enonce.ipynb)
+- [Énoncé : train / test split](../notebooks/02_train_test_split_enonce.ipynb)
 
 ---
 
