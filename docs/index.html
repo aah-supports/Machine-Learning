@@ -948,8 +948,8 @@ A redevient proche en surface et pièces</code></pre>
             <p class="pill">Après KNN</p>
             <h2>Régression logistique : classer avec une probabilité</h2>
             <p>
-              KNN classe par proximité. La régression logistique apprend une séparation,
-              puis transforme un score en probabilité entre 0 et 1.
+              KNN classe par proximité. La régression logistique cherche une probabilité
+              de classe 1, puis applique un seuil pour décider.
             </p>
           </div>
           <div class="panel large">
@@ -960,8 +960,10 @@ heures de révision
 présence
 exercices rendus
         ↓
-probabilité de validation</code></pre>
-            <p class="note">On passe d'un vote de voisins à une probabilité interprétable.</p>
+P(Y = 1)
+        ↓
+classe 0 ou 1</code></pre>
+            <p class="note">Le point de départ est la probabilité, pas la sigmoïde.</p>
           </div>
         </div>
       </section>
@@ -970,24 +972,23 @@ probabilité de validation</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Étape 1</p>
-            <h2>On calcule d'abord un score</h2>
+            <h2>Probabilité -> odds</h2>
             <p>
-              La régression logistique ne donne pas directement une classe.
-              Elle commence par un score <code>z</code>, calculé avec des poids et un biais.
+              Les odds comparent les chances de réussite aux chances d'échec.
+              C'est un rapport succès / échec.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>Exemple :
-z = 2 * heures - 6
+            <pre><code>odds = p / (1 - p)
 
-heures = 2 -> z = -2
-heures = 3 -> z = 0
-heures = 5 -> z = 4
+p = 0.5  -> odds = 1
+p = 0.75 -> odds = 3
+p = 0.9  -> odds = 9
 
-z négatif -> plutôt classe 0
-z = 0     -> hésitation
-z positif -> plutôt classe 1</code></pre>
-            <p class="note">z est un score, pas encore une probabilité.</p>
+odds = 3
+-> 3 fois plus de chances de réussir
+   que d'échouer</code></pre>
+            <p class="note">Les odds peuvent dépasser 1, contrairement aux probabilités.</p>
           </div>
         </div>
       </section>
@@ -996,23 +997,22 @@ z positif -> plutôt classe 1</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Étape 2</p>
-            <h2>La sigmoïde transforme le score</h2>
+            <h2>Odds -> log-odds</h2>
             <p>
-              Le score <code>z</code> peut être négatif, positif, petit ou très grand.
-              La sigmoïde le transforme en probabilité entre 0 et 1.
+              Les odds évoluent souvent par multiplication. Le logarithme transforme cette
+              multiplication en addition, donc en relation plus facile à modéliser par une droite.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>p = 1 / (1 + e^(-z))
+            <pre><code>log-odds = log(p / (1 - p))
 
-z = -2 -> p = 0.119 -> 11.9 %
-z = 0  -> p = 0.5   -> 50 %
-z = 4  -> p = 0.982 -> 98.2 %
+p = 0.1 -> log-odds = -2.2
+p = 0.5 -> log-odds = 0
+p = 0.9 -> log-odds = 2.2
 
-score z
-  -> sigmoïde
-  -> probabilité</code></pre>
-            <p class="result">p est toujours entre 0 et 1.</p>
+La régression logistique fait :
+log-odds = w1*x1 + w2*x2 + b</code></pre>
+            <p class="result">La droite est sur le log-odds, pas sur p.</p>
           </div>
         </div>
       </section>
@@ -1020,23 +1020,21 @@ score z
       <section class="slide" id="slide-logistique-intuition" data-title="Intuition sigmoïde">
         <div class="slide-inner two-cols">
           <div>
-            <p class="pill">Intuition</p>
-            <h2>La transition est progressive</h2>
+            <p class="pill">Étape 3</p>
+            <h2>D'où vient la sigmoïde ?</h2>
             <p>
-              Pour des heures de révision, la probabilité de réussite ne passe pas brutalement
-              de 0 à 1. Elle augmente progressivement.
+              Quand on repart du log-odds linéaire pour récupérer une probabilité,
+              la sigmoïde apparaît automatiquement.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>Probabilité
+            <pre><code>log(p / (1 - p)) = z
 
-1.0 |                     *********
-    |                 ****
-0.5 |-------------****
-    |         ****
-0.0 |********
-    +-------------------------
-         heures de révision</code></pre>
+p = 1 / (1 + e^(-z))
+
+z = -2 -> p = 0.119
+z = 0  -> p = 0.5
+z = 4  -> p = 0.982</code></pre>
           </div>
         </div>
       </section>
@@ -1045,20 +1043,19 @@ score z
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Décision</p>
-            <h2>0.5 est la frontière de décision</h2>
+            <h2>Probabilité -> classe</h2>
             <p>
-              Quand z vaut 0, la sigmoïde vaut 0.5. C'est le point où le modèle hésite
-              entre les deux classes.
+              La sortie interprétable est une probabilité. Pour obtenir une classe,
+              on applique ensuite un seuil.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>si p >= 0.5 -> classe 1
-si p < 0.5  -> classe 0
+            <pre><code>variables
+  -> log-odds linéaire z
+  -> probabilité p
 
-z = 0
-p = 1 / (1 + e^0)
-p = 1 / 2
-p = 0.5</code></pre>
+si p >= 0.5 -> classe 1
+si p < 0.5  -> classe 0</code></pre>
           </div>
         </div>
       </section>
@@ -1067,24 +1064,23 @@ p = 0.5</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Géométrie</p>
-            <h2>Pas une valeur, mais une frontière</h2>
+            <h2>La frontière est là où p = 0.5</h2>
             <p>
-              La régression logistique ne prédit pas directement une quantité.
-              Elle calcule un score, le transforme en probabilité, puis choisit une classe.
+              Quand le log-odds vaut 0, les odds valent 1 : autant de chances de réussir
+              que d'échouer. C'est la frontière entre les deux classes.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>Régression linéaire :
-entrée -> nombre
-exemple : prix = 280 000
+            <pre><code>log-odds = 0
+odds = 1
+p = 0.5
 
-Régression logistique :
-entrée -> score z
-z < 0 : plutôt classe 0
-z > 0 : plutôt classe 1
+z < 0 -> p < 0.5 -> classe 0
+z = 0 -> p = 0.5 -> hésitation
+z > 0 -> p > 0.5 -> classe 1
 
-sigmoïde(z) -> probabilité
-p = 0.82 -> classe 1</code></pre>
+coeur du modèle :
+log(p/(1-p)) = droite</code></pre>
           </div>
         </div>
       </section>
