@@ -59,6 +59,89 @@ La réponse est une classe :
 
 On est donc dans un problème de classification.
 
+Le point de départ de la régression logistique est toujours ce type de situation :
+
+```text
+succès / échec
+oui / non
+classe 1 / classe 0
+```
+
+Dans notre exemple :
+
+```text
+succès = l'étudiant valide le module
+échec  = l'étudiant ne valide pas le module
+```
+
+Le modèle ne commence donc pas par chercher une droite abstraite.
+
+Il commence par une question très concrète :
+
+```text
+À partir des informations de l'étudiant, quelle est la probabilité de succès ?
+```
+
+Mathématiquement :
+
+[
+p = P(Y = 1 \mid x)
+]
+
+où :
+
+- `Y = 1` signifie succès ;
+- `Y = 0` signifie échec ;
+- `x` représente les variables connues : heures, présence, exercices rendus, etc.
+
+Concrètement, on part d'un tableau comme celui-ci :
+
+| Heures de révision | Présence | Valide |
+| ------------------ | -------- | ------ |
+| 2                  | 40 %     | 0      |
+| 4                  | 60 %     | 0      |
+| 6                  | 75 %     | 1      |
+| 8                  | 90 %     | 1      |
+
+Les colonnes d'entrée sont :
+
+```text
+heures de révision, présence
+```
+
+La colonne cible est :
+
+```text
+valide
+```
+
+On veut donc apprendre une relation entre les variables d'entrée et la cible.
+
+Le problème est qu'une droite classique peut produire n'importe quelle valeur :
+
+```text
+-0.4
+0.3
+1.2
+2.8
+```
+
+Or ici, on ne veut pas une valeur quelconque.
+
+On veut une probabilité de succès :
+
+```text
+0 <= p <= 1
+```
+
+C'est pour cela que la régression logistique ne modélise pas directement la classe finale.
+
+Elle modélise d'abord :
+
+```text
+la probabilité que l'exemple appartienne à la classe 1
+```
+
 ---
 
 ## 3. Pourquoi une courbe logistique ?
