@@ -588,10 +588,124 @@ Pour le profil ..., le modèle prédit la classe ... avec une probabilité de va
 
 ---
 
-## 15. Exercice pratique
+## 15. Exercices de fin de partie
 
-Exercices :
+### Exercice 1 - Passer d'une probabilité aux odds
 
-- [Exercice 1 : odds, log-odds et sigmoïde](regression_logistique/Exercices/01_log_odds_sigmoide.md)
-- [Exercice 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
-- [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
+On étudie la probabilité qu'un étudiant valide un module.
+
+Pour chaque profil, compléter les colonnes manquantes.
+
+Rappels :
+
+[
+\text{odds}=\frac{p}{1-p}
+]
+
+[
+\text{log-odds}=\log\left(\frac{p}{1-p}\right)
+]
+
+Quelques approximations utiles :
+
+```text
+log(0.25) ≈ -1.39
+log(1)    = 0
+log(3)    ≈ 1.10
+log(9)    ≈ 2.20
+```
+
+| Profil | Probabilité de validation `p` | Odds | Log-odds | Interprétation |
+| ------ | ----------------------------- | ---- | -------- | -------------- |
+| A      | 0.20                          | ...  | ...      | ...            |
+| B      | 0.50                          | ...  | ...      | ...            |
+| C      | 0.75                          | ...  | ...      | ...            |
+| D      | 0.90                          | ...  | ...      | ...            |
+
+Questions :
+
+1. Quel profil est exactement sur la frontière de décision ?
+2. Quel profil a 3 fois plus de chances de valider que de ne pas valider ?
+3. Quel profil a 9 fois plus de chances de valider que de ne pas valider ?
+4. Pourquoi le log-odds est-il négatif quand la probabilité est inférieure à 0.5 ?
+5. Pourquoi le log-odds est-il plus adapté qu'une probabilité pour construire une droite ?
+
+Phrase attendue :
+
+```text
+Pour le profil ..., les odds valent ..., ce qui signifie que l'étudiant a ... fois plus de chances de valider que de ne pas valider.
+```
+
+---
+
+### Exercice 2 - Prendre une décision avec un seuil
+
+Un modèle de régression logistique prédit la probabilité de validation suivante :
+
+[
+p=P(Y=1 \mid x)
+]
+
+| Étudiant | Probabilité de validation |
+| -------- | ------------------------- |
+| A        | 0.42                      |
+| B        | 0.58                      |
+| C        | 0.76                      |
+| D        | 0.91                      |
+
+#### Partie 1 - Seuil classique
+
+Avec un seuil de décision à `0.5`, compléter :
+
+| Étudiant | Probabilité | Classe prédite |
+| -------- | ----------- | -------------- |
+| A        | 0.42        | ...            |
+| B        | 0.58        | ...            |
+| C        | 0.76        | ...            |
+| D        | 0.91        | ...            |
+
+#### Partie 2 - Seuil plus strict
+
+L'école décide maintenant qu'un étudiant est considéré comme "validation probable" seulement si :
+
+[
+p \geq 0.7
+]
+
+Compléter :
+
+| Étudiant | Probabilité | Classe prédite avec seuil 0.7 |
+| -------- | ----------- | ----------------------------- |
+| A        | 0.42        | ...                           |
+| B        | 0.58        | ...                           |
+| C        | 0.76        | ...                           |
+| D        | 0.91        | ...                           |
+
+Questions :
+
+1. Quels étudiants changent de classe quand on passe du seuil `0.5` au seuil `0.7` ?
+2. Pourquoi un établissement pourrait-il choisir un seuil plus strict que `0.5` ?
+3. Quelle différence y a-t-il entre la probabilité prédite et la classe finale ?
+4. Pourquoi `predict_proba` est-il plus riche que `predict` dans ce cas ?
+
+Version Python :
+
+```python
+import numpy as np
+
+probabilites = np.array([0.42, 0.58, 0.76, 0.91])
+
+classes_seuil_05 = (probabilites >= 0.5).astype(int)
+classes_seuil_07 = (probabilites >= 0.7).astype(int)
+
+print(classes_seuil_05)
+print(classes_seuil_07)
+```
+
+---
+
+### Pour aller plus loin
+
+- [Exercice complet 1 : odds, log-odds et sigmoïde](regression_logistique/Exercices/01_log_odds_sigmoide.md)
+- [Exercice complet 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
+- [Énoncé notebook : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
