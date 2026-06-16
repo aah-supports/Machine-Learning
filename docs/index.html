@@ -970,20 +970,24 @@ probabilité de validation</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Étape 1</p>
-            <h2>On commence par une droite</h2>
+            <h2>On calcule d'abord un score</h2>
             <p>
-              La régression logistique calcule d'abord un score linéaire avec des poids
-              et un biais, comme une régression linéaire.
+              La régression logistique ne donne pas directement une classe.
+              Elle commence par un score <code>z</code>, calculé avec des poids et un biais.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>z = w1 * x1 + w2 * x2 + ... + b
+            <pre><code>Exemple :
+z = 2 * heures - 6
 
-x1 = heures de révision
-x2 = taux de présence
+heures = 2 -> z = -2
+heures = 3 -> z = 0
+heures = 5 -> z = 4
 
-z = score linéaire</code></pre>
-            <p class="note">À ce stade, z n'est pas encore une probabilité.</p>
+z négatif -> plutôt classe 0
+z = 0     -> hésitation
+z positif -> plutôt classe 1</code></pre>
+            <p class="note">z est un score, pas encore une probabilité.</p>
           </div>
         </div>
       </section>
@@ -994,16 +998,20 @@ z = score linéaire</code></pre>
             <p class="pill">Étape 2</p>
             <h2>La sigmoïde transforme le score</h2>
             <p>
-              Une droite peut produire des valeurs négatives ou supérieures à 1. La sigmoïde
-              écrase le score pour obtenir une probabilité.
+              Le score <code>z</code> peut être négatif, positif, petit ou très grand.
+              La sigmoïde le transforme en probabilité entre 0 et 1.
             </p>
           </div>
           <div class="panel large">
             <pre><code>p = 1 / (1 + e^(-z))
 
-z très négatif  -> proche de 0
-z = 0           -> 0.5
-z très positif  -> proche de 1</code></pre>
+z = -2 -> p = 0.119 -> 11.9 %
+z = 0  -> p = 0.5   -> 50 %
+z = 4  -> p = 0.982 -> 98.2 %
+
+score z
+  -> sigmoïde
+  -> probabilité</code></pre>
             <p class="result">p est toujours entre 0 et 1.</p>
           </div>
         </div>

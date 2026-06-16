@@ -51,11 +51,13 @@ On est donc dans un problème de classification.
 
 ---
 
-## 3. Point de départ : une formule linéaire
+## 3. Point de départ : un score linéaire
 
-La régression logistique commence comme une régression linéaire.
+La régression logistique ne prédit pas directement la classe au départ.
 
-Elle calcule d'abord un score :
+Elle calcule d'abord un score appelé `z`.
+
+Ce score est obtenu avec une addition pondérée des variables :
 
 ```text
 z = w1 * x1 + w2 * x2 + ... + b
@@ -68,30 +70,60 @@ Avec :
 - `b` : le biais ;
 - `z` : un score linéaire.
 
-Exemple avec les heures de révision :
+Exemple avec une seule variable, les heures de révision :
 
 ```text
 z = w * heures + b
 ```
 
-À ce stade, `z` n'est pas encore une probabilité.
+Supposons que le modèle ait appris :
+
+```text
+z = 2 * heures - 6
+```
+
+On obtient :
+
+| Heures de révision | Calcul          | z  |
+| ------------------ | --------------- | -- |
+| 2                  | `2 * 2 - 6`     | -2 |
+| 3                  | `2 * 3 - 6`     | 0  |
+| 5                  | `2 * 5 - 6`     | 4  |
+
+À ce stade :
+
+- `z` n'est pas une classe ;
+- `z` n'est pas une probabilité ;
+- `z` est seulement un score.
+
+Le score mesure à quel point le modèle penche vers la classe `1` ou vers la classe `0`.
+
+| z   | Interprétation      |
+| --- | ------------------- |
+| -10 | quasiment classe 0  |
+| -1  | plutôt classe 0     |
+| 0   | hésitation          |
+| 1   | plutôt classe 1     |
+| 10  | quasiment classe 1  |
 
 ---
 
-## 4. Pourquoi ne pas garder la droite ?
+## 4. Pourquoi ne pas utiliser directement le score ?
 
-Une droite peut donner n'importe quelle valeur.
+Le score `z` peut prendre n'importe quelle valeur.
 
 Exemple :
 
 ```text
-x = 1   -> 0.2
-x = 10  -> 2.8
-x = 20  -> 7.5
-x = -5  -> -3.2
+z = -3.2
+z = 0.2
+z = 2.8
+z = 7.5
 ```
 
-Ces valeurs peuvent être utiles comme score, mais pas comme probabilité.
+Ces valeurs sont utiles pour situer l'exemple par rapport à la frontière.
+
+Mais elles ne sont pas des probabilités.
 
 Une probabilité doit toujours être comprise entre :
 
@@ -115,13 +147,35 @@ p = 1 / (1 + e^(-z))
 
 La sigmoïde écrase les valeurs :
 
-```text
-z très négatif  -> proche de 0
-z = 0           -> 0.5
-z très positif  -> proche de 1
-```
+| z  | sigmoïde(z) |
+| -- | ----------- |
+| -4 | 0.018       |
+| -2 | 0.119       |
+| 0  | 0.5         |
+| 2  | 0.881       |
+| 4  | 0.982       |
 
 Le résultat `p` peut être interprété comme une probabilité.
+
+Avec l'exemple précédent :
+
+| Heures | z  | Probabilité environ |
+| ------ | -- | ------------------- |
+| 2      | -2 | 11.9 %              |
+| 3      | 0  | 50 %                |
+| 5      | 4  | 98.2 %              |
+
+Le modèle ne dit donc pas :
+
+```text
+5 heures -> réussite certaine
+```
+
+Il dit plutôt :
+
+```text
+Avec ce que j'ai appris, 5 heures donnent une probabilité de réussite très élevée.
+```
 
 ---
 
@@ -197,7 +251,7 @@ si p < 0.5  -> classe 0
 
 ## 8. L'idée géométrique
 
-La régression logistique cherche une droite, ou un hyperplan, qui sépare les classes.
+La régression logistique cherche une frontière qui sépare les classes.
 
 Avec deux variables, cette séparation peut être représentée par une droite.
 
@@ -205,9 +259,15 @@ Avec plus de variables, on parle d'hyperplan.
 
 Attention : la régression logistique n'est pas une régression linéaire qui prédirait un prix ou une quantité.
 
-Elle réutilise une formule linéaire pour calculer un score `z`.
+Elle utilise une formule linéaire pour calculer un score `z`.
 
-Ce score indique de quel côté de la frontière se trouve l'exemple.
+Ce score indique de quel côté de la frontière se trouve l'exemple, et à quelle distance.
+
+```text
+loin côté classe 0 -> z très négatif -> probabilité proche de 0
+sur la frontière   -> z = 0          -> probabilité = 0.5
+loin côté classe 1 -> z très positif -> probabilité proche de 1
+```
 
 La différence avec la régression linéaire est donc l'objectif :
 
@@ -293,13 +353,16 @@ La régression logistique prépare donc naturellement le passage vers :
 
 On dispose d'un petit dataset d'étudiants.
 
+Le dataset n'est pas parfaitement séparé : certains cas sont limites. C'est volontaire, car une régression logistique est surtout utile quand on veut lire une probabilité, pas seulement une classe.
+
 ```python
 import pandas as pd
 
 df = pd.DataFrame({
-    "heures_revision": [1, 2, 3, 4, 5, 6, 7, 8],
-    "presence": [30, 35, 45, 50, 60, 70, 80, 90],
-    "valide": [0, 0, 0, 0, 1, 1, 1, 1]
+    "heures_revision": [1, 2, 2, 3, 4, 4, 5, 5, 6, 7, 7, 8, 9, 10],
+    "presence": [35, 40, 55, 45, 50, 70, 55, 75, 65, 60, 85, 80, 90, 95],
+    "controle_continu": [6, 7, 8, 7, 9, 10, 10, 12, 11, 10, 14, 13, 15, 16],
+    "valide": [0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1]
 })
 ```
 
@@ -314,48 +377,89 @@ Prédire si un étudiant valide le module.
 Créer :
 
 ```python
-X = df[["heures_revision", "presence"]]
+X = df[["heures_revision", "presence", "controle_continu"]]
 y = df["valide"]
 ```
 
 ### Étape 2 - Entraîner le modèle
 
-Compléter :
+On utilise un pipeline pour normaliser les variables avant la régression logistique.
+
+Compléter les `...` :
 
 ```python
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 
-modele = ...
+modele = make_pipeline(
+    StandardScaler(),
+    LogisticRegression()
+)
+
 modele.fit(..., ...)
 ```
 
-### Étape 3 - Tester un nouvel étudiant
+### Étape 3 - Tester deux nouveaux étudiants
 
-On veut prédire le résultat d'un étudiant qui a :
+On veut comparer deux profils.
 
-```text
-6 heures de révision
-65 % de présence
-```
+| Profil | Heures | Présence | Contrôle continu |
+| ------ | ------ | -------- | ---------------- |
+| A      | 4      | 60       | 9                |
+| B      | 8      | 85       | 14               |
 
 Compléter :
 
 ```python
-nouvel_etudiant = pd.DataFrame({
-    "heures_revision": [6],
-    "presence": [65]
+nouveaux_etudiants = pd.DataFrame({
+    "heures_revision": [4, 8],
+    "presence": [60, 85],
+    "controle_continu": [9, 14]
 })
 
-classe = ...
+classes = ...
 probabilites = ...
+```
+
+### Étape 4 - Lire les probabilités
+
+`predict_proba` renvoie une probabilité pour chaque classe.
+
+Afficher les classes dans l'ordre utilisé par le modèle :
+
+```python
+modele.classes_
+```
+
+Puis construire un tableau lisible :
+
+```python
+resultats = pd.DataFrame(
+    probabilites,
+    columns=[f"proba_classe_{c}" for c in modele.classes_]
+)
+
+resultats["classe_predite"] = classes
+resultats
 ```
 
 ### Questions
 
-1. Quelle classe le modèle prédit-il ?
-2. Quelle est la probabilité associée à la classe `1` ?
-3. Si cette probabilité est supérieure à `0.5`, quelle classe choisit-on ?
-4. Pourquoi `predict_proba` donne-t-il plus d'information que `predict` ?
+1. Quelle classe est prédite pour le profil A ?
+2. Quelle est la probabilité de validation du profil A ?
+3. Quelle classe est prédite pour le profil B ?
+4. Quelle est la probabilité de validation du profil B ?
+5. Pourquoi le profil A peut-il être plus incertain que le profil B ?
+6. Pourquoi `predict_proba` est-il plus informatif que `predict` ?
+
+### Phrase attendue
+
+Rédiger une phrase de ce type :
+
+```text
+Pour le profil ..., le modèle prédit la classe ... avec une probabilité de validation d'environ ... %.
+```
 
 ---
 
