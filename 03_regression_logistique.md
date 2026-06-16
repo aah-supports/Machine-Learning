@@ -13,11 +13,20 @@ La régression logistique propose une autre approche.
 
 Elle ne vote pas avec des voisins.
 
-Elle apprend une formule qui transforme les variables en probabilité, mais en passant par une idée intermédiaire importante : les **log-odds**.
+Elle apprend une formule qui estime une probabilité :
+
+```text
+Quelle est la probabilité que la classe soit 1, sachant les variables observées ?
+```
+
+Le mot **régression** peut surprendre, car le modèle sert souvent à classifier.
+
+Il vient du fait que le modèle calcule d'abord une quantité numérique continue, puis la transforme en probabilité. La décision `0` ou `1` vient seulement à la fin.
 
 Objectifs :
 
 - comprendre pourquoi la régression logistique sert à la classification ;
+- comprendre pourquoi on cherche d'abord une probabilité ;
 - comprendre les odds, c'est-à-dire le rapport succès / échec ;
 - comprendre pourquoi le modèle apprend une droite sur le log-odds ;
 - comprendre pourquoi la sigmoïde apparaît ensuite ;
@@ -52,12 +61,100 @@ On est donc dans un problème de classification.
 
 ---
 
-## 3. Point de départ : une probabilité
+## 3. Pourquoi une courbe logistique ?
 
-La régression logistique cherche d'abord une probabilité :
+Historiquement, la fonction logistique apparaît pour modéliser des phénomènes qui ne peuvent pas augmenter indéfiniment.
+
+Exemple intuitif :
 
 ```text
-p = P(Y = 1)
+Au début, une croissance peut être lente.
+Puis elle accélère.
+Puis elle ralentit quand elle approche d'une limite.
+```
+
+Cela donne une courbe en S.
+
+Pour une probabilité, cette forme est utile :
+
+```text
+probabilité proche de 0  -> classe 0 très probable
+probabilité proche de 0.5 -> cas incertain
+probabilité proche de 1  -> classe 1 très probable
+```
+
+La régression logistique utilise cette idée pour transformer un score quelconque en probabilité bornée entre `0` et `1`.
+
+---
+
+## 4. Pourquoi une probabilité est utile ?
+
+Une classe seule peut être insuffisante.
+
+Deux exemples peuvent être prédits en classe `1`, mais avec des niveaux de confiance très différents.
+
+```text
+p = 0.51 -> classe 1, mais décision fragile
+p = 0.95 -> classe 1, décision beaucoup plus solide
+```
+
+### Exemple simple : validation d'un étudiant
+
+On veut prédire si un étudiant valide un module.
+
+```text
+P(validation = 1 | heures=4, présence=60 %) = 0.52
+P(validation = 1 | heures=8, présence=90 %) = 0.94
+```
+
+Avec un seuil à `0.5`, les deux profils sont prédits en classe `1`.
+
+Mais l'usage n'est pas le même :
+
+- `0.52` : cas limite, accompagnement ou vigilance ;
+- `0.94` : validation très probable.
+
+La probabilité donne donc plus d'information qu'une simple étiquette.
+
+### Exemple plus technique : risque de défaut
+
+Une banque peut vouloir estimer le risque qu'un client ne rembourse pas un crédit.
+
+```text
+Y = 1 -> défaut de paiement
+Y = 0 -> remboursement normal
+```
+
+Le modèle peut produire :
+
+```text
+P(défaut = 1 | revenus, dette, historique) = 0.08
+```
+
+Cela signifie :
+
+```text
+risque estimé de défaut : 8 %
+```
+
+Cette probabilité peut ensuite servir à définir une règle métier :
+
+```text
+risque < 5 %      -> dossier faible risque
+5 % à 20 %        -> analyse complémentaire
+risque > 20 %     -> dossier très risqué
+```
+
+La régression logistique est donc utile quand on veut classifier, mais aussi prioriser et interpréter un niveau de risque.
+
+---
+
+## 5. Point de départ : une probabilité
+
+La régression logistique cherche d'abord une probabilité conditionnelle :
+
+```text
+p = P(Y = 1 | x)
 ```
 
 Dans notre exemple :
@@ -65,6 +162,19 @@ Dans notre exemple :
 ```text
 Y = 1 -> l'étudiant valide
 Y = 0 -> l'étudiant ne valide pas
+x     -> les variables de l'étudiant
+```
+
+Par exemple, `x` peut contenir :
+
+```text
+heures de révision, présence, contrôle continu
+```
+
+On cherche donc :
+
+```text
+P(validation = 1 | heures, présence, contrôle continu)
 ```
 
 Une probabilité doit toujours rester entre `0` et `1` :
@@ -83,7 +193,7 @@ On ne peut donc pas modéliser directement `p` avec une droite classique.
 
 ---
 
-## 4. Les odds : rapport succès / échec
+## 6. Les odds : rapport succès / échec
 
 Au lieu de travailler directement avec `p`, on transforme la probabilité en **odds**.
 
@@ -124,7 +234,7 @@ Ce n'est pas une droite : c'est une progression multiplicative.
 
 ---
 
-## 5. Le log-odds : rendre la relation linéaire
+## 7. Le log-odds : rendre la relation linéaire
 
 Les odds vont de `0` à `+infini`.
 
@@ -150,7 +260,7 @@ Donc si les odds évoluent de manière multiplicative, le log-odds peut évoluer
 
 ---
 
-## 6. L'hypothèse fondamentale
+## 8. L'hypothèse fondamentale
 
 La régression logistique fait une hypothèse simple :
 
@@ -184,7 +294,7 @@ le logarithme du rapport succès / échec est une droite
 
 ---
 
-## 7. D'où vient la sigmoïde ?
+## 9. D'où vient la sigmoïde ?
 
 On part de l'hypothèse :
 
@@ -222,7 +332,7 @@ Quelques valeurs :
 
 ---
 
-## 8. Score, probabilité, classe
+## 10. Score, probabilité, classe
 
 Le modèle suit donc cette chaîne :
 
@@ -267,7 +377,62 @@ si p < 0.5  -> classe 0
 
 ---
 
-## 9. Lien avec KNN
+## 11. Version mathématique du modèle
+
+Pour chaque observation `i`, on note :
+
+```text
+x_i = variables de l'observation
+y_i = classe observée, 0 ou 1
+```
+
+La régression logistique suppose que :
+
+```text
+Y_i | x_i suit une loi de Bernoulli(p_i)
+```
+
+Cela signifie :
+
+```text
+P(Y_i = 1 | x_i) = p_i
+P(Y_i = 0 | x_i) = 1 - p_i
+```
+
+Puis elle modélise le log-odds de `p_i` par une fonction linéaire :
+
+```text
+log(p_i / (1 - p_i)) = w^T x_i + b
+```
+
+Donc :
+
+```text
+p_i = 1 / (1 + e^(-(w^T x_i + b)))
+```
+
+L'entraînement consiste à trouver les poids `w` et le biais `b` qui rendent les labels observés les plus probables.
+
+Pour une observation, la probabilité du label observé peut s'écrire :
+
+```text
+p_i^y_i * (1 - p_i)^(1 - y_i)
+```
+
+En pratique, on maximise la vraisemblance, ou de manière équivalente, on minimise la log-loss :
+
+```text
+loss = - [ y_i log(p_i) + (1 - y_i) log(1 - p_i) ]
+```
+
+Intuition :
+
+- si `y_i = 1`, on veut que `p_i` soit proche de `1` ;
+- si `y_i = 0`, on veut que `p_i` soit proche de `0`.
+
+---
+
+## 12. Lien avec KNN
 
 KNN et la régression logistique peuvent tous les deux faire de la classification.
 
@@ -288,7 +453,7 @@ w1, w2, ..., b
 
 ---
 
-## 10. Transition vers le perceptron
+## 13. Transition vers le perceptron
 
 Le perceptron utilise une idée très proche :
 
@@ -309,7 +474,7 @@ La régression logistique prépare donc naturellement le passage vers :
 
 ---
 
-## 11. Mini-exercice : prédire une validation
+## 14. Mini-exercice : prédire une validation
 
 On dispose d'un petit dataset d'étudiants.
 
@@ -423,7 +588,7 @@ Pour le profil ..., le modèle prédit la classe ... avec une probabilité de va
 
 ---
 
-## 12. Exercice pratique
+## 15. Exercice pratique
 
 Notebook :
 

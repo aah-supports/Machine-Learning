@@ -903,6 +903,7 @@ A redevient proche en surface et pièces</code></pre>
           </div>
           <div class="panel large exercise-links">
             <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/01_knn_iris_enonce.ipynb">KNN Iris</a>
+            <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Corrections/CORRECTION.ipynb">Correction KNN Iris</a>
             <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/03_knn/Exercices/02_knn_k_normalisation_enonce.ipynb">k et normalisation</a>
             <p class="note">Le but est de voir comment les voisins changent selon les données et l'échelle.</p>
           </div>
@@ -948,22 +949,20 @@ A redevient proche en surface et pièces</code></pre>
             <p class="pill">Après KNN</p>
             <h2>Régression logistique : classer avec une probabilité</h2>
             <p>
-              KNN classe par proximité. La régression logistique cherche une probabilité
-              de classe 1, puis applique un seuil pour décider.
+              Le modèle ne donne pas seulement une classe. Il estime d'abord
+              une probabilité conditionnelle, puis on décide avec un seuil.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>0 = ne valide pas
-1 = valide
+            <pre><code>x = heures, présence, notes
 
-heures de révision
-présence
-exercices rendus
-        ↓
-P(Y = 1)
-        ↓
-classe 0 ou 1</code></pre>
-            <p class="note">Le point de départ est la probabilité, pas la sigmoïde.</p>
+P(Y = 1 | x)
+
+0.52 -> classe 1, cas limite
+0.94 -> classe 1, cas solide
+
+probabilité -> seuil -> classe</code></pre>
+            <p class="note">La probabilité donne un niveau de confiance, pas seulement une étiquette.</p>
           </div>
         </div>
       </section>
@@ -972,23 +971,21 @@ classe 0 ou 1</code></pre>
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Étape 1</p>
-            <h2>Probabilité -> odds</h2>
+            <h2>Pourquoi une courbe en S ?</h2>
             <p>
-              Les odds comparent les chances de réussite aux chances d'échec.
-              C'est un rapport succès / échec.
+              Une probabilité ne peut pas sortir de l'intervalle 0 à 1.
+              La courbe logistique transforme un score libre en probabilité bornée.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>odds = p / (1 - p)
+            <pre><code>score très négatif -> p proche de 0
+score = 0          -> p = 0.5
+score très positif -> p proche de 1
 
-p = 0.5  -> odds = 1
-p = 0.75 -> odds = 3
-p = 0.9  -> odds = 9
-
-odds = 3
--> 3 fois plus de chances de réussir
-   que d'échouer</code></pre>
-            <p class="note">Les odds peuvent dépasser 1, contrairement aux probabilités.</p>
+0.0 |********
+0.5 |--------****
+1.0 |             ********</code></pre>
+            <p class="note">La transition est progressive, pas brutale.</p>
           </div>
         </div>
       </section>
@@ -997,21 +994,19 @@ odds = 3
         <div class="slide-inner two-cols">
           <div>
             <p class="pill">Étape 2</p>
-            <h2>Odds -> log-odds</h2>
+            <h2>Odds puis log-odds</h2>
             <p>
-              Les odds évoluent souvent par multiplication. Le logarithme transforme cette
-              multiplication en addition, donc en relation plus facile à modéliser par une droite.
+              Pour obtenir une droite, on ne travaille pas directement sur la probabilité.
+              On travaille sur le logarithme du rapport succès / échec.
             </p>
           </div>
           <div class="panel large">
-            <pre><code>log-odds = log(p / (1 - p))
+            <pre><code>odds = p / (1 - p)
 
-p = 0.1 -> log-odds = -2.2
-p = 0.5 -> log-odds = 0
-p = 0.9 -> log-odds = 2.2
+log-odds = log(odds)
 
-La régression logistique fait :
-log-odds = w1*x1 + w2*x2 + b</code></pre>
+coeur du modèle :
+log(p/(1-p)) = w1*x1 + w2*x2 + b</code></pre>
             <p class="result">La droite est sur le log-odds, pas sur p.</p>
           </div>
         </div>
@@ -1055,7 +1050,11 @@ z = 4  -> p = 0.982</code></pre>
   -> probabilité p
 
 si p >= 0.5 -> classe 1
-si p < 0.5  -> classe 0</code></pre>
+si p < 0.5  -> classe 0
+
+entraînement :
+choisir w et b pour rendre
+les vrais labels les plus probables</code></pre>
           </div>
         </div>
       </section>

@@ -872,6 +872,7 @@ Les choses qui se ressemblent sont proches dans un espace mathématique.
 Notebooks :
 
 - [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
+- [Correction : KNN avec Iris, sans normalisation](Corrections/CORRECTION.ipynb)
 - [Énoncé : choisir k et normaliser](notebooks/04_knn_k_normalisation_enonce.ipynb)
 
 ---
