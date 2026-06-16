@@ -805,14 +805,13 @@ puis voter ou moyenner</code></pre>
           </div>
           <div class="table-card">
             <table>
-              <thead><tr><th>Variable</th><th>Écart entre 2 logements</th></tr></thead>
+              <thead><tr><th>Variable</th><th>Écart possible</th></tr></thead>
               <tbody>
-                <tr><td>surface</td><td>5</td></tr>
-                <tr><td>pièces</td><td>1</td></tr>
-                <tr><td>revenu_quartier</td><td>15 000</td></tr>
+                <tr><td>âge</td><td>2, 5, 40</td></tr>
+                <tr><td>salaire</td><td>5 000, 70 000</td></tr>
               </tbody>
             </table>
-            <p class="note">Sans normalisation, 15 000 écrase presque le reste du calcul.</p>
+            <p class="note">Sans normalisation, le salaire peut décider presque seul.</p>
           </div>
         </div>
       </section>
@@ -828,27 +827,22 @@ puis voter ou moyenner</code></pre>
             </p>
           </div>
           <div class="panel large">
-            <pre><code>Nouveau logement :
-surface = 80 m²
-pièces  = 3
-revenu  = 50 000
+            <pre><code>Objectif : prédire "aime le film"
 
-Voisin A :
-surface = 82 m²
-pièces  = 3
-revenu  = 90 000
+A : âge 20, salaire 20 000 -> Oui
+C : âge 60, salaire 100 000 -> Non
 
-Voisin B :
-surface = 120 m²
-pièces  = 6
-revenu  = 51 000
+Nouvelle personne :
+âge 22, salaire 90 000
 
-Distance brute :
-A est pénalisé par 40 000 de revenu
-KNN choisit souvent B
+Sans normalisation :
+d(A) ≈ 70 000
+d(C) ≈ 10 000
+
+KNN choisit C -> prédiction Non
 
 Après normalisation :
-A redevient proche en surface et pièces</code></pre>
+A peut redevenir proche grâce à l'âge</code></pre>
             <p class="note">En pratique : <code>fit_transform</code> sur le train, puis <code>transform</code> sur le test.</p>
           </div>
         </div>
@@ -937,7 +931,11 @@ A redevient proche en surface et pièces</code></pre>
             </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/notebooks/03_regression_logistique_enonce.ipynb">
               <h3>05 · Régression logistique</h3>
-              <p>mini-exercice, probabilité et frontière.</p>
+              <p>odds, probabilités et seuil.</p>
+            </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/regression_logistique/Exercices/02_validation_etudiants_sklearn.md">
+              <h3>05 bis · Logistique pratique</h3>
+              <p>Scikit-Learn, proba et seuil.</p>
             </a>
           </div>
         </div>

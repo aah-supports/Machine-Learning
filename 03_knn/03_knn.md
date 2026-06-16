@@ -496,46 +496,84 @@ KNN utilise des distances.
 
 Donc l'échelle des colonnes a un impact direct.
 
-Exemple :
+Prenons un exemple volontairement simple.
 
-| Variable          | Écart possible |
-| ----------------- | -------------- |
-| surface           | 10             |
-| pièces            | 1              |
-| revenu_quartier   | 15000          |
+On veut prédire si une personne aime un film.
 
-Si on calcule une distance brute, `revenu_quartier` peut dominer.
+Dataset :
 
-Le modèle risque alors de choisir les voisins surtout parce qu'ils ont un revenu de quartier proche, même si la surface ou le nombre de pièces sont différents.
+| Personne | Âge | Salaire (€) | Aime le film |
+| -------- | --- | ----------- | ------------ |
+| A | 20 | 20000 | Oui |
+| B | 25 | 25000 | Oui |
+| C | 60 | 100000 | Non |
 
-Exemple simplifié avec deux logements :
+Nouvelle personne :
 
-| Variable        | Logement A | Logement B | Écart |
-| --------------- | ---------- | ---------- | ----- |
-| surface         | 80         | 85         | 5     |
-| pièces          | 3          | 4          | 1     |
-| revenu_quartier | 45000      | 60000      | 15000 |
+| Âge | Salaire (€) |
+| --- | ----------- |
+| 22 | 90000 |
 
-Dans une distance brute, l'écart `15000` pèse beaucoup plus que `5` ou `1`.
+### Sans normalisation
 
-La distance risque donc de répondre surtout à cette question :
+Distance avec la personne A :
 
 ```text
-Les revenus de quartier sont-ils proches ?
+d(A) = sqrt((22 - 20)^2 + (90000 - 20000)^2)
+d(A) ≈ 70000
 ```
 
-Alors que l'on voulait comparer plusieurs aspects du logement.
-
-Question pratique :
+Distance avec la personne C :
 
 ```text
-Est-ce que je veux vraiment que la colonne avec les plus grands nombres décide presque seule de la proximité ?
+d(C) = sqrt((22 - 60)^2 + (90000 - 100000)^2)
+d(C) ≈ 10000
 ```
 
-Souvent, la réponse est non.
+KNN conclut donc :
 
+```text
+voisin le plus proche -> personne C
+prédiction -> Non
+```
 
-### Exercice 
+Pourtant, en âge, la nouvelle personne ressemble beaucoup plus à A :
+
+```text
+nouvelle personne : 22 ans
+personne A        : 20 ans
+personne C        : 60 ans
+```
+
+Le salaire a écrasé l'âge dans le calcul de distance, simplement parce qu'il est exprimé en grands nombres.
+
+### Après normalisation
+
+Après normalisation, chaque variable est remise sur une échelle comparable.
+
+Exemple de valeurs normalisées :
+
+| Personne | Âge normalisé | Salaire normalisé |
+| -------- | ------------- | ----------------- |
+| A | -0.8 | -0.9 |
+| B | -0.6 | -0.7 |
+| C | 1.4 | 1.3 |
+| Nouvelle | -0.7 | 1.0 |
+
+Maintenant :
+
+- l'âge compte autant que le salaire ;
+- les distances sont plus équilibrées ;
+- le voisin choisi peut changer.
+
+Idée à retenir :
+
+```text
+Sans normalisation, KNN ne cherche pas forcément les voisins les plus ressemblants.
+Il cherche surtout les voisins les plus proches sur les variables qui ont les plus grandes unités.
+```
+
+### Exercice
 
 Avec la méthode du min/max retrouvez la colonne normalisée
 

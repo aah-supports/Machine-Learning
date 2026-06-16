@@ -590,6 +590,8 @@ Pour le profil ..., le modèle prédit la classe ... avec une probabilité de va
 
 ## 15. Exercice pratique
 
-Notebook :
+Exercices :
 
+- [Exercice 1 : odds, log-odds et sigmoïde](regression_logistique/Exercices/01_log_odds_sigmoide.md)
+- [Exercice 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
 - [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
