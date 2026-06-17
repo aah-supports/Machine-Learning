@@ -18,7 +18,7 @@ const courseSections = [
   { title: "Préparer les données", start: 7, end: 10 },
   { title: "Régression linéaire", start: 11, end: 21 },
   { title: "KNN", start: 22, end: 34 },
-  { title: "Régression logistique", start: 35, end: 40 },
+  { title: "Intro régression logistique", start: 35, end: 40 },
   { title: "Exercices", start: 41, end: 41 },
   { title: "Optimisation", start: 42, end: 43 },
 ];

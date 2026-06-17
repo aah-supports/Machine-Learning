@@ -968,3 +968,7 @@ print(classes_seuil_07)
 - [Correction : simulation de deux dés](regression_logistique/Corrections/03_simulation_des_correction.md)
 - [Énoncé : visualiser une loi normale avec Matplotlib](regression_logistique/Exercices/04_loi_normale_matplotlib.md)
 - [Correction : visualiser une loi normale avec Matplotlib](regression_logistique/Corrections/04_loi_normale_matplotlib_correction.md)
+
+### Suite du cours
+
+- [Chapitre suivant : arbre de décision simple](04_arbre_decision.md)

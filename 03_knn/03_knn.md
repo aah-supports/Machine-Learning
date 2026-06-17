@@ -792,6 +792,59 @@ En classification, `score` correspond généralement à l'accuracy :
 proportion de bonnes prédictions
 ```
 
+Exemple :
+
+```text
+100 prédictions
+80 bonnes réponses
+accuracy = 80 / 100 = 0.80
+```
+
+L'accuracy est utile quand :
+
+- la cible est une classe ;
+- les classes sont relativement équilibrées ;
+- toutes les erreurs ont à peu près la même importance.
+
+Exemple raisonnable :
+
+```text
+50 fleurs setosa
+50 fleurs versicolor
+```
+
+Dans ce cas, mesurer la proportion de bonnes réponses a du sens.
+
+Mais l'accuracy peut être trompeuse si les classes sont très déséquilibrées.
+
+Exemple :
+
+```text
+95 % des emails ne sont pas des spams
+5 % des emails sont des spams
+```
+
+Un modèle qui prédit toujours :
+
+```text
+non spam
+```
+
+obtient :
+
+```text
+95 % d'accuracy
+```
+
+Pourtant, il ne détecte aucun spam.
+
+Dans ce cas, il faut regarder aussi :
+
+- la matrice de confusion ;
+- la précision ;
+- le rappel ;
+- le F1-score.
+
 En régression, `score` correspond au coefficient R².
 
 On peut aussi utiliser :
