@@ -582,6 +582,7 @@ Ce sera une suite naturelle après les arbres de décision.
 
 Exercice à faire :
 
+- [Énoncé : arbre simple âge, poids et sport](04_arbre_decision/Exercices/02_arbre_sport_simple.md)
 - [Énoncé : arbre de décision avec `load_wine`](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
 - [Correction : arbre de décision avec `load_wine`](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)
 

@@ -21,8 +21,9 @@
 - [05 - Régression logistique : correction](notebooks/corrections/03_regression_logistique_correction.ipynb)
 - [05 bis - Régression logistique sans entraînement : sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
 - [05 ter - Régression logistique : heures de révision](regression_logistique/Exercices/04_logistique_revision_examen.md)
-- [06 - Arbre de décision avec Wine : énoncé](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
-- [06 - Arbre de décision avec Wine : correction](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)
+- [06 - Arbre simple âge / poids / sport : énoncé](04_arbre_decision/Exercices/02_arbre_sport_simple.md)
+- [06 bis - Arbre de décision avec Wine : énoncé](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
+- [06 bis - Arbre de décision avec Wine : correction](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)
 
 ## Suppléments
 
