@@ -841,6 +841,8 @@ print(classes_seuil_07)
 
 - [Exercice complet 1 : odds, log-odds et sigmoïde](regression_logistique/Exercices/01_log_odds_sigmoide.md)
 - [Exercice complet 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
+- [Exercice complet 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
+- [Correction exercice 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Corrections/03_calcul_sigmoide_reussite_correction.md)
 - [Énoncé notebook : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
 
 ### Supplément : probabilités et simulation

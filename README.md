@@ -17,6 +17,7 @@
 - [03 - KNN avec Iris : énoncé](notebooks/03_knn_iris_enonce.ipynb)
 - [04 - Choisir k et normaliser : énoncé](notebooks/04_knn_k_normalisation_enonce.ipynb)
 - [05 - Régression logistique : énoncé](notebooks/03_regression_logistique_enonce.ipynb)
+- [05 bis - Régression logistique sans entraînement : sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
 
 ## Suppléments
 
