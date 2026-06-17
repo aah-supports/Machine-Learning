@@ -21,17 +21,6 @@ np.random.seed(42)
 
 nb_lancers = 10000
 
-de1 = np.random.randint(1, 7, nb_lancers)
-de2 = np.random.randint(1, 7, nb_lancers)
-
-sommes = de1 + de2
-
-valeurs, frequences = np.unique(sommes, return_counts=True)
-
-for valeur, freq in zip(valeurs, frequences):
-    etoiles = "*" * (freq // 100)
-
-    print(f"{valeur:2d} : {etoiles}")
 ```
 
 ---
