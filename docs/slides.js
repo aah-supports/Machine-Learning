@@ -20,7 +20,8 @@ const courseSections = [
   { title: "KNN", start: 22, end: 34 },
   { title: "Intro régression logistique", start: 35, end: 40 },
   { title: "Exercices", start: 41, end: 41 },
-  { title: "Optimisation", start: 42, end: 43 },
+  { title: "Arbre de décision", start: 42, end: 42 },
+  { title: "Optimisation", start: 43, end: 44 },
 ];
 
 function clampIndex(index) {

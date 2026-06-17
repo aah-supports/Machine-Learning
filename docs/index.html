@@ -1106,6 +1106,41 @@ log(p/(1-p)) = droite</code></pre>
               <h3>Correction · Gauss</h3>
               <p>hypothèses et exemples naturels.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision.md">
+              <h3>06 · Arbre de décision</h3>
+              <p>variables, seuils et branches.</p>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-decision" data-title="Arbre de décision">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Après la logistique</p>
+            <h2>Arbre de décision : poser les bonnes questions</h2>
+            <p>
+              Un arbre choisit automatiquement une variable et un seuil pour séparer
+              les classes le mieux possible, puis recommence dans chaque branche.
+            </p>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision.md">Ouvrir le chapitre</a>
+            </div>
+          </div>
+          <div class="panel large">
+            <pre><code>poids <= 80 ?
+│
+├── Oui
+│   └── âge <= 21 ?
+│       ├── Oui -> Sport
+│       └── Non -> Vérifier autre chose
+│
+└── Non -> Pas sport
+
+Nouvelle personne :
+âge = 25, poids = 90
+-> Pas sport</code></pre>
+            <p class="note">L'arbre cherche à chaque niveau la question qui rend les groupes les plus purs.</p>
           </div>
         </div>
       </section>
