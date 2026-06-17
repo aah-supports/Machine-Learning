@@ -2,8 +2,25 @@
 
 Dans KNN, il faut distinguer :
 
-les variables explicatives (les caractéristiques du vecteur X)
-le label (la réponse y)
+- les variables explicatives : les caractéristiques du vecteur `X` ;
+- le label : la réponse `y`.
+
+Point important :
+
+KNN calcule des distances entre les observations.
+
+Les variables explicatives doivent donc être numériques, ou transformées en nombres avant d'utiliser le modèle.
+
+Mais la cible peut être catégorielle.
+
+Exemple :
+
+```text
+X = longueur du pétale, largeur du pétale, longueur du sépale, largeur du sépale
+y = espèce de fleur
+```
+
+Donc KNN est un algorithme numérique du côté des variables explicatives, mais il peut parfaitement faire de la classification sur une cible catégorielle.
 
 ## 1. Objectif du chapitre
 
