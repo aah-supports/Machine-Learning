@@ -1110,6 +1110,14 @@ log(p/(1-p)) = droite</code></pre>
               <h3>06 · Arbre de décision</h3>
               <p>variables, seuils et branches.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Exercices/01_load_wine_arbre_decision.md">
+              <h3>06 bis · Wine tree</h3>
+              <p>Scikit-Learn, règles et profondeur.</p>
+            </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md">
+              <h3>Correction · Wine tree</h3>
+              <p>scores, règles et variables importantes.</p>
+            </a>
           </div>
         </div>
       </section>
@@ -1141,6 +1149,216 @@ Nouvelle personne :
 âge = 25, poids = 90
 -> Pas sport</code></pre>
             <p class="note">L'arbre cherche à chaque niveau la question qui rend les groupes les plus purs.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-wine-dataset" data-title="Dataset Wine">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Dataset classique</p>
+            <h2>`load_wine` : classer des vins</h2>
+            <p>
+              Chaque ligne représente un vin. Les variables sont des mesures chimiques,
+              et la cible indique la famille de vin à prédire.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>from sklearn.datasets import load_wine
+
+wine = load_wine()
+
+X = mesures chimiques
+y = classe du vin
+
+classes : 0, 1, 2
+
+exemples de variables :
+alcohol
+flavanoids
+color_intensity
+proline</code></pre>
+            <p class="note">L'arbre ne voit pas une intuition humaine : il voit un tableau de nombres.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-choix" data-title="Choix des seuils">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Apprentissage</p>
+            <h2>Ce que l'arbre cherche vraiment</h2>
+            <p>
+              À chaque noeud, l'arbre cherche une question qui crée des groupes
+              les plus homogènes possible. Un groupe homogène contient surtout
+              une seule classe.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Question testée :
+poids <= 80 ?
+
+Gauche :
+Oui, Oui, Oui, Non
+=> presque pur
+
+Droite :
+Non, Non
+=> pur</code></pre>
+            <pre><code>Ce que cherche l'arbre :
+
+avant  -> classes mélangées
+après  -> groupes plus homogènes
+
+bonne question =
+moins de mélange dans les branches</code></pre>
+            <p class="note">Pureté = moins de classes mélangées dans chaque groupe après la coupure.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-sklearn" data-title="DecisionTreeClassifier">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Scikit-Learn</p>
+            <h2>Entraîner un arbre contrôlé</h2>
+            <p>
+              On limite souvent la profondeur pour obtenir un arbre lisible et éviter
+              qu'il mémorise trop précisément le train.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>from sklearn.tree import DecisionTreeClassifier
+
+modele = DecisionTreeClassifier(
+    max_depth=3,
+    random_state=42
+)
+
+modele.fit(X_train, y_train)
+
+score_train = modele.score(X_train, y_train)
+score_test = modele.score(X_test, y_test)</code></pre>
+            <p class="note">On compare toujours train et test pour repérer un éventuel surapprentissage.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-lecture" data-title="Lire l'arbre">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Interprétation</p>
+            <h2>Un arbre peut se lire comme des règles</h2>
+            <p>
+              Contrairement à beaucoup de modèles, l'arbre peut être affiché sous forme
+              de conditions successives.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>from sklearn.tree import export_text
+
+print(export_text(
+    modele,
+    feature_names=list(X.columns)
+))
+
+exemple :
+proline <= 755
+|-- flavanoids <= 1.58 -> classe 2
+|-- flavanoids >  1.58 -> classe 1
+proline > 755 -> classe 0</code></pre>
+            <p class="note">Ces règles rendent le modèle plus facile à expliquer.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-surapprentissage" data-title="Surapprentissage">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Limite principale</p>
+            <h2>Un arbre trop profond peut mémoriser</h2>
+            <p>
+              Si l'arbre n'est pas limité, il peut apprendre des détails très spécifiques
+              du train et moins bien généraliser.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>arbre_libre = DecisionTreeClassifier(
+    random_state=42
+)
+
+arbre_libre.fit(X_train, y_train)
+
+score train -> très élevé
+score test  -> parfois plus faible
+
+paramètres utiles :
+max_depth
+min_samples_leaf
+min_samples_split</code></pre>
+            <p class="note">Un bon arbre n'est pas forcément l'arbre le plus profond.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-random-forest-ouverture" data-title="Ouverture Random Forest">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Ouverture</p>
+            <h2>Pourquoi parler ensuite de Random Forest ?</h2>
+            <p>
+              Un seul arbre est lisible, mais il peut être instable. Une Random Forest
+              entraîne plusieurs arbres différents et les fait voter.
+            </p>
+          </div>
+          <div class="panel large">
+            <pre><code>Arbre seul :
+simple, lisible
+mais parfois fragile
+
+Random Forest :
+arbre 1 -> classe A
+arbre 2 -> classe B
+arbre 3 -> classe A
+arbre 4 -> classe A
+
+vote majoritaire -> classe A
+
+À utiliser quand :
+on veut plus de robustesse
+et une meilleure performance.</code></pre>
+            <p class="note">On gagne souvent en stabilité, mais on perd une partie de la lisibilité d'un arbre seul.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide" id="slide-arbre-exercice" data-title="Exercice arbre">
+        <div class="slide-inner two-cols">
+          <div>
+            <p class="pill">Mise en pratique</p>
+            <h2>Exercice : arbre de décision sur `load_wine`</h2>
+            <p>
+              L'exercice reprend le chemin complet : chargement, split, entraînement,
+              score, règles, visualisation et variables importantes.
+            </p>
+            <div class="hero-actions" style="margin-top: 1rem;">
+              <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Exercices/01_load_wine_arbre_decision.md">Ouvrir l'exercice</a>
+              <a class="button ghost" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md">Correction</a>
+            </div>
+          </div>
+          <div class="panel large">
+            <pre><code>À compléter :
+
+load_wine()
+train_test_split(..., stratify=y)
+DecisionTreeClassifier(max_depth=3)
+modele.score(...)
+export_text(...)
+plot_tree(...)
+feature_importances_
+
+Question finale :
+l'arbre surapprend-il ?</code></pre>
           </div>
         </div>
       </section>

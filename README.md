@@ -20,6 +20,8 @@
 - [05 - Régression logistique : énoncé](notebooks/03_regression_logistique_enonce.ipynb)
 - [05 - Régression logistique : correction](notebooks/corrections/03_regression_logistique_correction.ipynb)
 - [05 bis - Régression logistique sans entraînement : sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
+- [06 - Arbre de décision avec Wine : énoncé](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
+- [06 - Arbre de décision avec Wine : correction](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)
 
 ## Suppléments
 
