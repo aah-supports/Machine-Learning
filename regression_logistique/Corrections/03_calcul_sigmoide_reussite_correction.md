@@ -4,21 +4,21 @@
 
 Le modèle est :
 
-[
+$$
 \text{logit}(p) = -4 + 0.5x
-]
+$$
 
 On note :
 
-[
+$$
 z = -4 + 0.5x
-]
+$$
 
 Puis on transforme ce score avec la sigmoïde :
 
-[
+$$
 p = \frac{1}{1+e^{-z}}
-]
+$$
 
 ---
 
@@ -26,17 +26,17 @@ p = \frac{1}{1+e^{-z}}
 
 Pour un étudiant qui a révisé `10` heures :
 
-[
+$$
 z = -4 + 0.5 \times 10
-]
+$$
 
-[
+$$
 z = -4 + 5
-]
+$$
 
-[
+$$
 z = 1
-]
+$$
 
 Le score vaut donc :
 
@@ -50,29 +50,29 @@ z = 1
 
 On applique la sigmoïde :
 
-[
+$$
 p = \frac{1}{1+e^{-1}}
-]
+$$
 
 On utilise :
 
-[
+$$
 e^{-1}\approx 0.3679
-]
+$$
 
 Donc :
 
-[
+$$
 p=\frac{1}{1+0.3679}
-]
+$$
 
-[
+$$
 p=\frac{1}{1.3679}
-]
+$$
 
-[
+$$
 p \approx 0.731
-]
+$$
 
 La probabilité de réussite est donc environ :
 
@@ -139,39 +139,39 @@ Succès
 
 ### Cas 1 - `x = 4`
 
-[
+$$
 z = -4 + 0.5 \times 4
-]
+$$
 
-[
+$$
 z = -4 + 2
-]
+$$
 
-[
+$$
 z = -2
-]
+$$
 
-[
+$$
 p = \frac{1}{1+e^{-(-2)}}
-]
+$$
 
-[
+$$
 p = \frac{1}{1+e^2}
-]
+$$
 
 Avec :
 
-[
+$$
 e^2 \approx 7.389
-]
+$$
 
-[
+$$
 p = \frac{1}{1+7.389}
-]
+$$
 
-[
+$$
 p \approx 0.119
-]
+$$
 
 Résultat :
 
@@ -183,29 +183,29 @@ Résultat :
 
 ### Cas 2 - `x = 8`
 
-[
+$$
 z = -4 + 0.5 \times 8
-]
+$$
 
-[
+$$
 z = -4 + 4
-]
+$$
 
-[
+$$
 z = 0
-]
+$$
 
-[
+$$
 p = \frac{1}{1+e^0}
-]
+$$
 
-[
+$$
 p = \frac{1}{1+1}
-]
+$$
 
-[
+$$
 p = 0.5
-]
+$$
 
 Résultat :
 
@@ -225,35 +225,35 @@ Mais c'est un cas limite.
 
 ### Cas 3 - `x = 12`
 
-[
+$$
 z = -4 + 0.5 \times 12
-]
+$$
 
-[
+$$
 z = -4 + 6
-]
+$$
 
-[
+$$
 z = 2
-]
+$$
 
-[
+$$
 p = \frac{1}{1+e^{-2}}
-]
+$$
 
 Avec :
 
-[
+$$
 e^{-2} \approx 0.135
-]
+$$
 
-[
+$$
 p = \frac{1}{1+0.135}
-]
+$$
 
-[
+$$
 p \approx 0.881
-]
+$$
 
 Résultat :
 

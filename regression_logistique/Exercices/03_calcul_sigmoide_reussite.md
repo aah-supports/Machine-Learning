@@ -28,9 +28,9 @@ On étudie la réussite à un examen en fonction du nombre d'heures de révision
 
 Le modèle logistique est :
 
-[
+$$
 \text{logit}(p) = -4 + 0.5x
-]
+$$
 
 où :
 
@@ -39,9 +39,9 @@ où :
 
 La probabilité est obtenue grâce à la sigmoïde :
 
-[
+$$
 p = \frac{1}{1+e^{-(-4+0.5x)}}
-]
+$$
 
 On souhaite prédire la probabilité de réussite d'un étudiant ayant révisé `10` heures.
 
@@ -51,9 +51,9 @@ On souhaite prédire la probabilité de réussite d'un étudiant ayant révisé 
 
 Calculer :
 
-[
+$$
 z = -4 + 0.5 \times 10
-]
+$$
 
 ---
 
@@ -61,9 +61,9 @@ z = -4 + 0.5 \times 10
 
 On applique la sigmoïde :
 
-[
+$$
 p = \frac{1}{1+e^{-z}}
-]
+$$
 
 Utiliser :
 

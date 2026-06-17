@@ -84,9 +84,9 @@ Il commence par une question très concrète :
 
 Mathématiquement :
 
-[
+$$
 p = P(Y = 1 \mid x)
-]
+$$
 
 où :
 
@@ -100,9 +100,9 @@ La barre verticale `|` se lit **sachant que**.
 
 Donc :
 
-[
+$$
 P(Y = 1 \mid x)
-]
+$$
 
 se lit :
 
@@ -112,9 +112,9 @@ probabilité que Y vaille 1, sachant que l'on connaît x
 
 Dans notre exemple :
 
-[
+$$
 P(\text{validation}=1 \mid \text{heures}=6, \text{présence}=80\%)
-]
+$$
 
 signifie :
 
@@ -477,36 +477,152 @@ variables
 -> classe 0 ou 1
 ```
 
-Exemple avec les heures de révision :
+Prenons un exemple très simple avec une seule variable : les heures de révision.
+
+Supposons que le modèle appris soit :
+
+$$
+z = 0.8 \times \text{heures} - 4
+$$
+
+Ici, `z` est le score linéaire.
+
+Ce score n'est pas encore une probabilité.
+
+On le transforme ensuite avec la sigmoïde :
+
+$$
+p = \frac{1}{1+e^{-z}}
+$$
+
+### Étudiant A : 2 heures de révision
+
+Calcul du score :
+
+$$
+z = 0.8 \times 2 - 4
+$$
+
+$$
+z = -2.4
+$$
+
+Calcul de la probabilité :
+
+$$
+p = \frac{1}{1+e^{-(-2.4)}}
+$$
+
+$$
+p = \frac{1}{1+e^{2.4}}
+$$
+
+$$
+p \approx 0.083
+$$
+
+Donc :
 
 ```text
-z = 2 * heures - 6
+P(réussite) ≈ 8.3 %
 ```
 
-| Heures | z | Probabilité environ |
-| ------ | -- | ------------------- |
-| 2 | -2 | 11.9 % |
-| 3 | 0 | 50 % |
-| 5 | 4 | 98.2 % |
+### Étudiant B : 5 heures de révision
 
-Le modèle ne dit pas :
+Calcul du score :
+
+$$
+z = 0.8 \times 5 - 4
+$$
+
+$$
+z = 0
+$$
+
+Calcul de la probabilité :
+
+$$
+p = \frac{1}{1+e^0}
+$$
+
+$$
+p = 0.5
+$$
+
+Donc :
 
 ```text
-5 heures -> réussite certaine
+P(réussite) = 50 %
 ```
 
-Il dit plutôt :
+C'est le cas limite : le modèle hésite autant entre échec et réussite.
+
+### Étudiant C : 10 heures de révision
+
+Calcul du score :
+
+$$
+z = 0.8 \times 10 - 4
+$$
+
+$$
+z = 4
+$$
+
+Calcul de la probabilité :
+
+$$
+p = \frac{1}{1+e^{-4}}
+$$
+
+$$
+p \approx 0.982
+$$
+
+Donc :
 
 ```text
-Avec ce que j'ai appris, 5 heures donnent une probabilité de réussite très élevée.
+P(réussite) ≈ 98.2 %
 ```
 
-Puis on applique un seuil :
+On obtient :
+
+| Heures | Score `z` | Probabilité de réussite |
+| ------ | --------- | ----------------------- |
+| 2      | -2.4      | 8.3 %                   |
+| 5      | 0         | 50 %                    |
+| 10     | 4         | 98.2 %                  |
+
+Le mécanisme est toujours :
+
+1. Calcul du score linéaire :
+
+$$
+z = ax + b
+$$
+
+2. Transformation en probabilité :
+
+$$
+p = \sigma(z)
+$$
+
+3. Décision éventuelle :
 
 ```text
-si p >= 0.5 -> classe 1
-si p < 0.5  -> classe 0
+si p < 0.5  -> échec
+si p >= 0.5 -> réussite
 ```
+
+Ce qui est remarquable, c'est que le modèle ne prédit pas directement :
+
+```text
+réussite ou échec
+```
+
+Il prédit d'abord une probabilité de réussite.
+
+Puis on choisit éventuellement une classe à partir de cette probabilité.
 
 ---
 
@@ -731,13 +847,13 @@ Pour chaque profil, compléter les colonnes manquantes.
 
 Rappels :
 
-[
+$$
 \text{odds}=\frac{p}{1-p}
-]
+$$
 
-[
+$$
 \text{log-odds}=\log\left(\frac{p}{1-p}\right)
-]
+$$
 
 Quelques approximations utiles :
 
@@ -775,9 +891,9 @@ Pour le profil ..., les odds valent ..., ce qui signifie que l'étudiant a ... f
 
 Un modèle de régression logistique prédit la probabilité de validation suivante :
 
-[
+$$
 p=P(Y=1 \mid x)
-]
+$$
 
 | Étudiant | Probabilité de validation |
 | -------- | ------------------------- |
@@ -801,9 +917,9 @@ Avec un seuil de décision à `0.5`, compléter :
 
 L'école décide maintenant qu'un étudiant est considéré comme "validation probable" seulement si :
 
-[
+$$
 p \geq 0.7
-]
+$$
 
 Compléter :
 
@@ -844,6 +960,7 @@ print(classes_seuil_07)
 - [Exercice complet 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
 - [Correction exercice 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Corrections/03_calcul_sigmoide_reussite_correction.md)
 - [Énoncé notebook : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
+- [Correction notebook : régression logistique](notebooks/corrections/03_regression_logistique_correction.ipynb)
 
 ### Supplément : probabilités et simulation
 

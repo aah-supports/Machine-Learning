@@ -562,6 +562,7 @@ Exercice pratique :
 - [Énoncé : KNN avec Iris](notebooks/03_knn_iris_enonce.ipynb)
 - [Énoncé : KNN, k et normalisation](notebooks/04_knn_k_normalisation_enonce.ipynb)
 - [Énoncé : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
+- [Correction : régression logistique](notebooks/corrections/03_regression_logistique_correction.ipynb)
 
 ---
 
