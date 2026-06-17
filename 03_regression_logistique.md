@@ -94,6 +94,56 @@ où :
 - `Y = 0` signifie échec ;
 - `x` représente les variables connues : heures, présence, exercices rendus, etc.
 
+### Rappel : probabilité conditionnelle
+
+La barre verticale `|` se lit **sachant que**.
+
+Donc :
+
+[
+P(Y = 1 \mid x)
+]
+
+se lit :
+
+```text
+probabilité que Y vaille 1, sachant que l'on connaît x
+```
+
+Dans notre exemple :
+
+[
+P(\text{validation}=1 \mid \text{heures}=6, \text{présence}=80\%)
+]
+
+signifie :
+
+```text
+probabilité que l'étudiant valide,
+sachant qu'il a révisé 6 heures
+et qu'il a 80 % de présence.
+```
+
+Ce n'est pas la probabilité générale qu'un étudiant valide.
+
+C'est une probabilité adaptée à un profil précis.
+
+#### Mini-exercice
+
+Traduire chaque notation en phrase.
+
+| Notation | Phrase attendue |
+| -------- | --------------- |
+| `P(Y = 1 | heures=4)` | ... |
+| `P(Y = 1 | présence=90%)` | ... |
+| `P(Y = 0 | heures=2, présence=40%)` | ... |
+
+Puis écrire la notation mathématique correspondant aux phrases suivantes :
+
+1. Probabilité qu'un étudiant valide, sachant qu'il a révisé 8 heures.
+2. Probabilité qu'un étudiant ne valide pas, sachant qu'il a 50 % de présence.
+3. Probabilité qu'un étudiant valide, sachant qu'il a révisé 6 heures et qu'il a 80 % de présence.
+
 Concrètement, on part d'un tableau comme celui-ci :
 
 | Heures de révision | Présence | Valide |
@@ -792,3 +842,8 @@ print(classes_seuil_07)
 - [Exercice complet 1 : odds, log-odds et sigmoïde](regression_logistique/Exercices/01_log_odds_sigmoide.md)
 - [Exercice complet 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
 - [Énoncé notebook : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
+
+### Supplément : probabilités et simulation
+
+- [Énoncé : simulation de deux dés](regression_logistique/Exercices/03_simulation_des.md)
+- [Correction : simulation de deux dés](regression_logistique/Corrections/03_simulation_des_correction.md)

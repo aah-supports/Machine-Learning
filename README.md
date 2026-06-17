@@ -18,6 +18,11 @@
 - [04 - Choisir k et normaliser : énoncé](notebooks/04_knn_k_normalisation_enonce.ipynb)
 - [05 - Régression logistique : énoncé](notebooks/03_regression_logistique_enonce.ipynb)
 
+## Suppléments
+
+- [Simulation de deux dés : énoncé](regression_logistique/Exercices/03_simulation_des.md)
+- [Simulation de deux dés : correction](regression_logistique/Corrections/03_simulation_des_correction.md)
+
 Corrections accessibles pour le chapitre régression linéaire :
 
 - [Correction BMI et progression du diabète](02_regression_lineaire/Corrections/correction_diabetes.md)
