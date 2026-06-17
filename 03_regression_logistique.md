@@ -959,6 +959,7 @@ print(classes_seuil_07)
 - [Exercice complet 2 : entraîner une régression logistique avec Scikit-Learn](regression_logistique/Exercices/02_validation_etudiants_sklearn.md)
 - [Exercice complet 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Exercices/03_calcul_sigmoide_reussite.md)
 - [Correction exercice 3 : calculer une probabilité avec la sigmoïde](regression_logistique/Corrections/03_calcul_sigmoide_reussite_correction.md)
+- [Exercice d'entraînement : heures de révision et réussite](regression_logistique/Exercices/04_logistique_revision_examen.md)
 - [Énoncé notebook : régression logistique](notebooks/03_regression_logistique_enonce.ipynb)
 - [Correction notebook : régression logistique](notebooks/corrections/03_regression_logistique_correction.ipynb)
 
