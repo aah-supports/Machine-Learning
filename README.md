@@ -22,6 +22,8 @@
 
 - [Simulation de deux dés : énoncé](regression_logistique/Exercices/03_simulation_des.md)
 - [Simulation de deux dés : correction](regression_logistique/Corrections/03_simulation_des_correction.md)
+- [Loi normale avec Matplotlib : énoncé](regression_logistique/Exercices/04_loi_normale_matplotlib.md)
+- [Loi normale avec Matplotlib : correction](regression_logistique/Corrections/04_loi_normale_matplotlib_correction.md)
 
 Corrections accessibles pour le chapitre régression linéaire :
 
