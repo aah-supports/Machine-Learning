@@ -97,9 +97,7 @@ $$
 Gini_{gauche}
 =
 1
--
 \left(\frac{3}{4}\right)^2
--
 \left(\frac{1}{4}\right)^2
 $$
 
