@@ -313,6 +313,14 @@ Résultat :
 Classe = Chat
 ```
 
+### Visualiser la différence
+
+![Régression à gauche et classification à droite](images/course/regression_vs_classification.png)
+
+À gauche, la sortie est une valeur numérique continue : c'est une régression.
+
+À droite, chaque point appartient à une catégorie : c'est une classification.
+
 ---
 
 ## 7. Le cycle complet d'un projet ML

@@ -718,6 +718,42 @@ p {
   gap: 0.7rem;
 }
 
+.course-figure {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  min-width: 0;
+}
+
+.course-figure img {
+  display: block;
+  width: 100%;
+  max-height: min(62svh, 620px);
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.course-figure figcaption {
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.visual-slide .slide-inner {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.visual-slide .course-figure img {
+  max-height: min(66svh, 650px);
+}
+
+.tree-slide .course-figure img {
+  max-height: min(50svh, 490px);
+}
+
 .panel strong {
   color: var(--emerald-light);
 }

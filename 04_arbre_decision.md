@@ -55,6 +55,16 @@ Puis l'arbre pose une autre question dans la branche où l'on se trouve.
 classe prédite
 ```
 
+### Exemple visuel avec Iris
+
+![Un arbre de décision construit à partir du dataset Iris](images/course/arbre_decision_iris.png)
+
+À gauche, on trouve les variables mesurées et la classe à prédire.
+
+À droite, l'arbre pose successivement des questions sur les variables, puis arrive à une espèce.
+
+Selon la représentation, une question peut être écrite avec `>=` ou `<=` et les branches peuvent être inversées. Le principe reste identique.
+
 ---
 
 ## 3. Exemple minimal avec deux variables
@@ -386,6 +396,14 @@ Groupe impur :
 Classe 0, Classe 1, Classe 2
 ```
 
+![Pureté et impureté dans un arbre de décision Iris](images/course/purete_arbre_iris.png)
+
+Dans l'image :
+
+- `[50, 0, 0]` est un noeud pur : tous les exemples sont des setosa ;
+- `[0, 49, 5]` est impur : deux classes sont encore mélangées ;
+- `[0, 1, 45]` est presque pur : une classe domine très largement.
+
 À chaque découpage, l'arbre cherche une question qui réduit le mélange des classes.
 
 On peut résumer ainsi :
@@ -583,6 +601,7 @@ Ce sera une suite naturelle après les arbres de décision.
 Exercice à faire :
 
 - [Énoncé : arbre simple âge, poids et sport](04_arbre_decision/Exercices/02_arbre_sport_simple.md)
+- [Énoncé : calcul du coût d'un découpage avec Gini](04_arbre_decision/Exercices/03_cout_decoupage_gini.md)
 - [Énoncé : arbre de décision avec `load_wine`](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
 - [Correction : arbre de décision avec `load_wine`](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)
 

@@ -228,6 +228,17 @@ prix = modele.predict(nouveau_logement)</code></pre>
         </div>
       </section>
 
+      <section class="slide visual-slide" id="slide-regression-classification" data-title="Régression ou classification">
+        <div class="slide-inner">
+          <p class="pill">Deux problèmes différents</p>
+          <h2>Régression ou classification ?</h2>
+          <figure class="course-figure">
+            <img src="../images/course/regression_vs_classification.png" alt="À gauche une régression prédit une valeur numérique, à droite une classification sépare des catégories." />
+            <figcaption>Régression : prédire une valeur. Classification : prédire une catégorie.</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section class="slide" id="slide-preparation-donnees" data-title="Données réelles">
         <div class="slide-inner two-cols">
           <div>
@@ -1124,6 +1135,10 @@ log(p/(1-p)) = droite</code></pre>
               <h3>Sport simple</h3>
               <p>âge, poids et premières règles.</p>
             </a>
+            <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Exercices/03_cout_decoupage_gini.md">
+              <h3>Coût Gini</h3>
+              <p>pureté, coût pondéré et gain.</p>
+            </a>
             <a class="panel link-panel" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision/Exercices/01_load_wine_arbre_decision.md">
               <h3>Wine</h3>
               <p>Scikit-Learn, règles et profondeur.</p>
@@ -1149,21 +1164,10 @@ log(p/(1-p)) = droite</code></pre>
               <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/04_arbre_decision.md">Ouvrir le chapitre</a>
             </div>
           </div>
-          <div class="panel large">
-            <pre><code>poids <= 80 ?
-│
-├── Oui
-│   └── âge <= 21 ?
-│       ├── Oui -> Sport
-│       └── Non -> Vérifier autre chose
-│
-└── Non -> Pas sport
-
-Nouvelle personne :
-âge = 25, poids = 90
--> Pas sport</code></pre>
-            <p class="note">L'arbre cherche à chaque niveau la question qui rend les groupes les plus purs.</p>
-          </div>
+          <figure class="course-figure panel">
+            <img src="../images/course/arbre_decision_iris.png" alt="Tableau Iris à gauche et arbre de décision qui sépare les trois espèces à droite." />
+            <figcaption>Les mesures deviennent des questions successives jusqu'à une classe finale.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -1208,26 +1212,10 @@ proline</code></pre>
               une seule classe.
             </p>
           </div>
-          <div class="panel large">
-            <pre><code>Question testée :
-poids <= 80 ?
-
-Gauche :
-Oui, Oui, Oui, Non
-=> presque pur
-
-Droite :
-Non, Non
-=> pur</code></pre>
-            <pre><code>Ce que cherche l'arbre :
-
-avant  -> classes mélangées
-après  -> groupes plus homogènes
-
-bonne question =
-moins de mélange dans les branches</code></pre>
-            <p class="note">Pureté = moins de classes mélangées dans chaque groupe après la coupure.</p>
-          </div>
+          <figure class="course-figure panel">
+            <img src="../images/course/purete_arbre_iris.png" alt="Arbre Iris montrant un noeud pur et deux noeuds impurs par la répartition des classes." />
+            <figcaption><code>[50, 0, 0]</code> est pur ; les autres noeuds contiennent encore plusieurs classes.</figcaption>
+          </figure>
         </div>
       </section>
 
