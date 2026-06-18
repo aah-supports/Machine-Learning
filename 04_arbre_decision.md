@@ -607,7 +607,47 @@ Exercice à faire :
 
 ---
 
-## 19. À retenir
+## 19. Comment choisir un premier modèle ?
+
+Le choix commence par le type de cible :
+
+```text
+valeur numérique -> régression
+catégorie         -> classification
+```
+
+Ensuite, on observe la forme des données et les relations entre les variables.
+
+| Observation | Modèles à envisager |
+| ----------- | -------------------- |
+| Cible numérique, relation approximativement droite | Régression linéaire |
+| Cible numérique, relation non linéaire | Arbre, Random Forest, Gradient Boosting |
+| Classification binaire, frontière simple | Régression logistique |
+| Classification avec proximité locale pertinente | KNN |
+| Frontière complexe et interactions entre variables | Arbre, Random Forest, Gradient Boosting |
+
+Ce tableau donne des pistes, pas des règles absolues.
+
+Il faut garder plusieurs nuances :
+
+- une forte corrélation ne garantit pas qu'une régression linéaire soit adaptée ;
+- la régression logistique n'est pas le seul modèle de classification binaire ;
+- un arbre peut faire de la classification et de la régression ;
+- KNN est pertinent si la notion de proximité a du sens ;
+- le choix final doit être validé sur des données de test.
+
+La bonne démarche est donc :
+
+```text
+comprendre la cible
+observer les données
+tester plusieurs modèles raisonnables
+comparer leurs performances sur le test
+```
+
+---
+
+## 20. À retenir
 
 Un arbre de décision apprend une suite de règles.
 
