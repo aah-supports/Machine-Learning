@@ -754,6 +754,32 @@ p {
   max-height: min(50svh, 490px);
 }
 
+.model-guide-slide .slide-inner {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.model-guide-slide h2 {
+  font-size: clamp(1.9rem, 3.2vw, 2.8rem);
+}
+
+.model-guide-slide .table-card {
+  overflow: hidden;
+}
+
+.model-guide-slide th,
+.model-guide-slide td {
+  padding: 0.55rem 0.7rem;
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+.model-guide-slide .note {
+  margin-top: 0;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
 .panel strong {
   color: var(--emerald-light);
 }

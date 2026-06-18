@@ -21,7 +21,7 @@ const courseSections = [
   { title: "Intro régression logistique", start: 36, end: 41 },
   { title: "Exercices", start: 42, end: 42 },
   { title: "Arbre de décision", start: 43, end: 50 },
-  { title: "Optimisation", start: 51, end: 52 },
+  { title: "Synthèse et réseaux", start: 51, end: 53 },
 ];
 
 function clampIndex(index) {

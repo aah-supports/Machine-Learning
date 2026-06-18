@@ -618,13 +618,15 @@ catégorie         -> classification
 
 Ensuite, on observe la forme des données et les relations entre les variables.
 
-| Observation | Modèles à envisager |
-| ----------- | -------------------- |
-| Cible numérique, relation approximativement droite | Régression linéaire |
-| Cible numérique, relation non linéaire | Arbre, Random Forest, Gradient Boosting |
-| Classification binaire, frontière simple | Régression logistique |
-| Classification avec proximité locale pertinente | KNN |
-| Frontière complexe et interactions entre variables | Arbre, Random Forest, Gradient Boosting |
+| Type de cible | Observation | Premier modèle à tester |
+| ------------- | ----------- | ----------------------- |
+| Numérique | Nuage proche d'une droite | Régression linéaire |
+| Numérique | Courbe simple comme `y = x²` | Régression polynomiale |
+| Numérique | Relation non linéaire complexe | Arbre de régression |
+| Catégorie binaire | Frontière plutôt simple | Régression logistique |
+| Catégorie | Les voisins proches se ressemblent | KNN |
+| Catégorie | Seuils et interactions complexes | Arbre de décision |
+| Numérique ou catégorie | Un arbre seul est instable | Random Forest |
 
 Ce tableau donne des pistes, pas des règles absolues.
 

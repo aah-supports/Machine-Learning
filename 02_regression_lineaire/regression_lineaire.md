@@ -873,7 +873,118 @@ On le surveille parce que la réalité peut changer.
 
 ---
 
-## 21. Résumé
+## 21. Repère : quel modèle de régression envisager ?
+
+Avant de choisir un modèle, on commence par vérifier le type de cible :
+
+```text
+prix, température, chiffre d'affaires
+-> cible numérique
+-> problème de régression
+```
+
+On observe ensuite le nuage de points.
+
+| Observation dans les données | Modèle à envisager |
+| ---------------------------- | ------------------ |
+| Nuage approximativement aligné sur une droite | Régression linéaire |
+| Corrélation forte, par exemple proche de `0.8` ou `0.9`, et forme droite | Régression linéaire |
+| Forme courbe simple, comme une parabole | Régression polynomiale |
+| Relation non linéaire avec plusieurs seuils ou interactions | Arbre de décision |
+| Relation non linéaire plus complexe | Random Forest ou Gradient Boosting |
+
+### Cas 1 : relation linéaire
+
+Exemple :
+
+$$
+prix = 3000 \times surface + bruit
+$$
+
+Le nuage de points ressemble à une droite :
+
+```text
+prix
+  |
+  |             *
+  |          *
+  |       *
+  |    *
+  | *
+  +---------------- surface
+```
+
+Une régression linéaire est une bonne première piste.
+
+Une corrélation proche de `0.8` ou `0.9` indique une forte association linéaire.
+
+Mais la corrélation seule ne suffit pas : il faut aussi regarder le nuage de points.
+
+### Cas 2 : relation courbe
+
+Supposons :
+
+$$
+y = surface^2
+$$
+
+Le nuage de points forme une courbe :
+
+```text
+y
+|
+|                 *
+|             *
+|          *
+|      *
+|   *
+| *
++-------------------- surface
+```
+
+Une simple droite risque de mal représenter cette relation.
+
+On peut alors créer une nouvelle variable :
+
+$$
+surface^2
+$$
+
+et utiliser une régression polynomiale :
+
+```python
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+
+modele = make_pipeline(
+    PolynomialFeatures(degree=2),
+    LinearRegression()
+)
+
+modele.fit(X_train, y_train)
+```
+
+La régression polynomiale reste construite à partir d'une régression linéaire, mais elle ajoute des variables comme :
+
+```text
+surface
+surface²
+```
+
+### Démarche conseillée
+
+```text
+1. Vérifier que la cible est numérique.
+2. Tracer le nuage de points.
+3. Observer si la relation ressemble à une droite ou à une courbe.
+4. Tester un modèle simple.
+5. Comparer les performances sur les données de test.
+```
+
+---
+
+## 22. Résumé
 
 - La régression linéaire sert à prédire une valeur numérique.
 - Elle apprend une formule du type `y = ax + b`.
@@ -896,7 +1007,7 @@ On le surveille parce que la réalité peut changer.
 
 ---
 
-## 22. Exercice pratique
+## 23. Exercice pratique
 
 TP à faire :
 
@@ -915,7 +1026,7 @@ Exercice complémentaire sur l'évaluation :
 
 ---
 
-## 23. Transition vers le chapitre suivant
+## 24. Transition vers le chapitre suivant
 
 La régression linéaire permet de comprendre les bases :
 
