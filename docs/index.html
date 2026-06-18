@@ -1369,6 +1369,32 @@ l'arbre surapprend-il ?</code></pre>
         </div>
       </section>
 
+      <section class="slide model-guide-slide" id="slide-choix-modele" data-title="Choisir un modèle">
+        <div class="slide-inner">
+          <p class="pill">Repère de synthèse</p>
+          <h2>Quel premier modèle envisager ?</h2>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr><th>Type de cible</th><th>Observation</th><th>Premier modèle à tester</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Numérique</td><td>Nuage proche d'une droite</td><td>Régression linéaire</td></tr>
+                <tr><td>Numérique</td><td>Courbe simple comme <code>y = x²</code></td><td>Régression polynomiale</td></tr>
+                <tr><td>Numérique</td><td>Relation non linéaire complexe</td><td>Arbre de régression</td></tr>
+                <tr><td>Catégorie binaire</td><td>Frontière plutôt simple</td><td>Régression logistique</td></tr>
+                <tr><td>Catégorie</td><td>Les voisins proches se ressemblent</td><td>KNN</td></tr>
+                <tr><td>Catégorie</td><td>Seuils et interactions complexes</td><td>Arbre de décision</td></tr>
+                <tr><td>Numérique ou catégorie</td><td>Un arbre seul est instable</td><td>Random Forest</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note">
+            Ordre conseillé : identifier la cible, observer les données, tester un modèle simple, puis comparer sur le jeu de test. Une corrélation de 0.8 ou 0.9 n'indique une régression linéaire que si le nuage ressemble aussi à une droite.
+          </p>
+        </div>
+      </section>
+
       <section class="slide" id="slide-gradient-descent" data-title="Descente de gradient">
         <div class="slide-inner two-cols">
           <div>
@@ -1394,32 +1420,6 @@ w_nouveau = 1.5</code></pre>
               <a class="button primary" href="https://github.com/aah-supports/Machine-Learning/blob/main/02_regression_lineaire/Exercices/03_descente_gradient_enonce.ipynb">Ouvrir le TP</a>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section class="slide model-guide-slide" id="slide-choix-modele" data-title="Choisir un modèle">
-        <div class="slide-inner">
-          <p class="pill">Repère de synthèse</p>
-          <h2>Quel premier modèle envisager ?</h2>
-          <div class="table-card">
-            <table>
-              <thead>
-                <tr><th>Type de cible</th><th>Observation</th><th>Premier modèle à tester</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Numérique</td><td>Nuage proche d'une droite</td><td>Régression linéaire</td></tr>
-                <tr><td>Numérique</td><td>Courbe simple comme <code>y = x²</code></td><td>Régression polynomiale</td></tr>
-                <tr><td>Numérique</td><td>Relation non linéaire complexe</td><td>Arbre de régression</td></tr>
-                <tr><td>Catégorie binaire</td><td>Frontière plutôt simple</td><td>Régression logistique</td></tr>
-                <tr><td>Catégorie</td><td>Les voisins proches se ressemblent</td><td>KNN</td></tr>
-                <tr><td>Catégorie</td><td>Seuils et interactions complexes</td><td>Arbre de décision</td></tr>
-                <tr><td>Numérique ou catégorie</td><td>Un arbre seul est instable</td><td>Random Forest</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <p class="note">
-            Ordre conseillé : identifier la cible, observer les données, tester un modèle simple, puis comparer sur le jeu de test. Une corrélation de 0.8 ou 0.9 n'indique une régression linéaire que si le nuage ressemble aussi à une droite.
-          </p>
         </div>
       </section>
 
