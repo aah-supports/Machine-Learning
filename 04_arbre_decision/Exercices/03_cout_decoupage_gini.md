@@ -104,13 +104,7 @@ $$
 Calculer le Gini de la branche droite :
 
 $$
-Gini_{droite}
-=
-1
--
-\left(\frac{0}{2}\right)^2
--
-\left(\frac{2}{2}\right)^2
+Gini_{droite} = 1 - (0/2)^2 - (2/2)^2
 $$
 
 Pourquoi cette branche est-elle pure ?
@@ -121,13 +115,7 @@ Pourquoi cette branche est-elle pure ?
 
 Le coût du découpage est la moyenne pondérée des impuretés :
 
-$$
-Coût
-=
-\frac{4}{6}Gini_{gauche}
-+
-\frac{2}{6}Gini_{droite}
-$$
+Coût = (4/6) × Gini_gauche + (2/6) × Gini_droite
 
 Calculer ce coût.
 
