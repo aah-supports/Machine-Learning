@@ -702,7 +702,7 @@ w1, w2, ..., b
 
 ---
 
-## 13. Transition vers le perceptron
+## 13. Ouverture future : le perceptron
 
 Le perceptron utilise une idée très proche :
 
@@ -720,6 +720,14 @@ La régression logistique prépare donc naturellement le passage vers :
 - la sigmoïde ;
 - la descente de gradient ;
 - les réseaux de neurones.
+
+Cette ouverture sera reprise plus tard.
+
+Le chapitre suivant introduit d'abord une autre famille de modèles de classification :
+
+```text
+les arbres de décision
+```
 
 ---
 

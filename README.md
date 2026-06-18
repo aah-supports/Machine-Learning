@@ -3,9 +3,9 @@
 ## Progression proposée
 
 1. [Introduction au Machine Learning](01_introduction.md)
-2. [Préparer et nettoyer les données](02_preparation_donnees.md)
-3. [Régression linéaire](02_regression_lineaire.md)
-4. [KNN, voisins et normalisation](03_knn.md)
+2. [Préparer et nettoyer les données](01_preparation_data/01_preparation_donnees.md)
+3. [Régression linéaire](02_regression_lineaire/regression_lineaire.md)
+4. [KNN, voisins et normalisation](03_knn/03_knn.md)
 5. [Introduction à la régression logistique](03_regression_logistique.md)
 6. [Arbre de décision simple](04_arbre_decision.md)
 

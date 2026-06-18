@@ -755,7 +755,7 @@ Erreur = Valeur\ réelle - Valeur\ prédite
 
 Après cette introduction, le prochain chapitre conseillé est :
 
-- [Chapitre 2 : Préparer et nettoyer les données](02_preparation_donnees.md)
+- [Chapitre 2 : Préparer et nettoyer les données](01_preparation_data/01_preparation_donnees.md)
 
 Cette étape permet de comprendre ce qui vient avant le modèle :
 
