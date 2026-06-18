@@ -94,11 +94,7 @@ Soit :
 Calculer le Gini de la branche gauche :
 
 $$
-Gini_{gauche}
-=
-1
-\left(\frac{3}{4}\right)^2
-\left(\frac{1}{4}\right)^2
+Gini_{gauche} = 1 - (3/4)^2 - (1/4)^2
 $$
 
 ---
