@@ -601,6 +601,7 @@ Ce sera une suite naturelle après les arbres de décision.
 Exercice à faire :
 
 - [Énoncé : arbre simple âge, poids et sport](04_arbre_decision/Exercices/02_arbre_sport_simple.md)
+- [Correction : arbre simple âge, poids et sport](04_arbre_decision/Corrections/02_arbre_sport_simple_correction.md)
 - [Énoncé : calcul du coût d'un découpage avec Gini](04_arbre_decision/Exercices/03_cout_decoupage_gini.md)
 - [Énoncé : arbre de décision avec `load_wine`](04_arbre_decision/Exercices/01_load_wine_arbre_decision.md)
 - [Correction : arbre de décision avec `load_wine`](04_arbre_decision/Corrections/01_load_wine_arbre_decision_correction.md)

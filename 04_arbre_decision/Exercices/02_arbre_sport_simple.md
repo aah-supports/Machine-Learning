@@ -138,3 +138,7 @@ Compléter :
 Un arbre de décision cherche à poser des questions du type ...
 Il choisit la question qui rend les groupes ...
 ```
+
+---
+
+[Voir la correction](../Corrections/02_arbre_sport_simple_correction.md)
